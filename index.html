@@ -172,11 +172,7 @@ footer a { color: #e94560; text-decoration: none; }
 
   <!-- Links rápidos -->
   <div class="section-title">🔗 Links Rápidos</div>
-  <div class="links-grid">
-    <a class="link-item" href="https://docs.google.com/spreadsheets/d/1Y60DrMPeepBqAfeuhQQK8WA14dzdXMagaoMFMJGYIMo" target="_blank">
-      <span class="icon">📊</span>
-      <div class="info"><div class="name">Planilha</div><div class="desc">Controle geral</div></div>
-    </a>
+  <div class="links-grid" id="links-grid">
     <a class="link-item" href="https://drive.google.com/drive/folders/1TiZdbyXbuhBjBPr8ZFoP7Xmfe1s3aWuB" target="_blank">
       <span class="icon">📁</span>
       <div class="info"><div class="name">Drive</div><div class="desc">Documentos e fotos</div></div>
@@ -192,6 +188,10 @@ footer a { color: #e94560; text-decoration: none; }
     <a class="link-item" href="https://drive.google.com/drive/folders/1Mp3K4raQylVZiCS6syKTQWsvW1mdibIm" target="_blank">
       <span class="icon">📋</span>
       <div class="info"><div class="name">Atas de Reunião</div><div class="desc">Ata 01 - 02/08</div></div>
+    </a>
+    <a class="link-item" href="https://docs.google.com/spreadsheets/d/1Y60DrMPeepBqAfeuhQQK8WA14dzdXMagaoMFMJGYIMo" target="_blank" id="link-planilha">
+      <span class="icon">📊</span>
+      <div class="info"><div class="name">Planilha</div><div class="desc">Controle geral</div></div>
     </a>
   </div>
 
@@ -342,6 +342,12 @@ function renderDashboard() {
     <div class="stat-card"><div class="num">${allPending.length}</div><div class="label">Tarefas da Campanha</div></div>
     <div class="stat-card"><div class="num">7</div><div class="label">Eventos em 18/08</div></div>
   `;
+
+  // Links - planilha só pra Ever e Tiana
+  const linkPlanilha = document.getElementById('link-planilha');
+  if (linkPlanilha) {
+    linkPlanilha.style.display = (usuarioAtual === 'Ever Maria' || usuarioAtual === 'Tiana Cauton') ? 'flex' : 'none';
+  }
 
   // Minhas tarefas
   const myTasksDiv = document.getElementById('my-tasks');
