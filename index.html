@@ -1051,8 +1051,11 @@ function renderDashboard() {
     }));
     // Junta e ordena por urgência
     return [...deTarefas, ...deProducao].sort((a, b) => {
+      // Ordem de prioridade: urgent (0), soon (1), normal (2), continuous (3)
       const ordem = { urgent: 0, soon: 1, normal: 2, continuous: 3 };
-      return (ordem[a.urg] || 99) - (ordem[b.urg] || 99);
+      const prioA = ordem[a.urg] !== undefined ? ordem[a.urg] : 99;
+      const prioB = ordem[b.urg] !== undefined ? ordem[b.urg] : 99;
+      return prioA - prioB;
     });
   }
 
@@ -1111,7 +1114,9 @@ function renderDashboard() {
     }));
     return [...TAREFAS, ...deProducao].sort((a, b) => {
       const ordem = { urgent: 0, soon: 1, normal: 2, continuous: 3 };
-      return (ordem[a.urg] || 99) - (ordem[b.urg] || 99);
+      const prioA = ordem[a.urg] !== undefined ? ordem[a.urg] : 99;
+      const prioB = ordem[b.urg] !== undefined ? ordem[b.urg] : 99;
+      return prioA - prioB;
     });
   }
 
@@ -1544,12 +1549,13 @@ function taskCard(t) {
   const rotuloPrazo = t.urg === 'continuous' ? '🔄 Contínuo' : `📅 ${t.prazo}`;
   const isMine = usuarioAtual && t.responsaveis.includes(usuarioAtual);
   const borderColor = isMine ? 'border-left:4px solid #e94560;' : '';
+  const urgBadge = t.urg === 'urgent' ? '<span style="font-size:0.65em;background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px;">🔴 URGENTE</span>' : '';
   const safeText = t.texto.replace(/'/g, "\\'");
 
   return `
     <div class="task-card ${checked}" onclick="toggleTask(this, '${safeText}')" style="${borderColor}">
       <div class="task-header">
-        <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong></div>
+        <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong>${urgBadge}</div>
         <span class="task-prazo ${prazoClass}">${rotuloPrazo}</span>
       </div>
       <div class="task-responsaveis">👥 ${t.responsaveis.join(', ')}</div>
