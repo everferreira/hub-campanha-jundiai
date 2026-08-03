@@ -1159,15 +1159,15 @@ function renderCountdown() {
 
   document.getElementById('countdown-bar').innerHTML = `
     <div class="countdown-item ${dInicio <= 0 ? 'passed' : 'highlight'}">
-      <div class="days">${dInicio <= 0 ? '✅ Hoje!' : dInicio + ' dias'}</div>
+      <div class="days">${dInicio <= 0 ? '✅ Hoje!' : 'Faltam ' + dInicio + ' dias'}</div>
       <div class="label">Início Oficial<br>16 de Agosto</div>
     </div>
     <div class="countdown-item ${dVisita <= 0 ? 'passed' : ''}">
-      <div class="days">${dVisita <= 0 ? '✅ Hoje!' : dVisita + ' dias'}</div>
+      <div class="days">${dVisita <= 0 ? '✅ Hoje!' : 'Faltam ' + dVisita + ' dias'}</div>
       <div class="label">Visita Erika em Jundiaí<br>18 de Agosto</div>
     </div>
     <div class="countdown-item ${dEleicao <= 0 ? 'passed' : ''}">
-      <div class="days">${dEleicao <= 0 ? '✅ Hoje!' : dEleicao + ' dias'}</div>
+      <div class="days">${dEleicao <= 0 ? '✅ Hoje!' : 'Faltam ' + dEleicao + ' dias'}</div>
       <div class="label">1º Turno Eleição<br>4 de Outubro</div>
     </div>
     <div class="countdown-item">
