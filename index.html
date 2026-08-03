@@ -522,12 +522,6 @@ function toggleTask(el, texto) {
   localStorage.setItem('done_' + texto, done);
 }
 
-// Auto-login se já escolheu antes
-const saved = localStorage.getItem('hub_user');
-if (saved && EQUIPE.some(p => p.nome === saved)) {
-  entrar(saved);
-}
-
 init();
 </script>
 </body>
