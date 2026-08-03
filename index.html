@@ -652,7 +652,6 @@ function renderDashboard() {
   document.getElementById('user-avatar-sm').textContent = p.iniciais;
   document.getElementById('user-name-bar').textContent = p.nome;
   document.getElementById('user-role-bar').textContent = p.role;
-    const hoje = new Date();
   // Saudação
   const horas = hoje.getHours();
   const saud = horas < 12 ? 'Bom dia' : horas < 18 ? 'Boa tarde' : 'Boa noite';
