@@ -1035,7 +1035,28 @@ function renderDashboard() {
   // Saudação
   const horas = hoje.getHours();
   const saud = horas < 12 ? 'Bom dia' : horas < 18 ? 'Boa tarde' : 'Boa noite';
-  const userTasks = TAREFAS.filter(t => t.responsaveis.includes(usuarioAtual));
+  
+  // Unifica tarefas: TAREFAS + PRODUCAO, filtrando pelo usuário
+  function getUserTasks(nome) {
+    const deTarefas = TAREFAS.filter(t => t.responsaveis.includes(nome));
+    const deProducao = PRODUCAO.filter(t => {
+      // "Eva 🎨" ou "Kawa 🎬" - extrai só o nome antes do emoji
+      const resp = t.responsavel.split(' ')[0];
+      return resp === nome;
+    }).map(t => ({
+      texto: t.tarefa,
+      prazo: t.prazo,
+      responsaveis: [t.responsavel],
+      urg: t.urgencia
+    }));
+    // Junta e ordena por urgência
+    return [...deTarefas, ...deProducao].sort((a, b) => {
+      const ordem = { urgent: 0, soon: 1, normal: 2, continuous: 3 };
+      return (ordem[a.urg] || 99) - (ordem[b.urg] || 99);
+    });
+  }
+
+  const userTasks = getUserTasks(usuarioAtual);
   const myUrgent = userTasks.filter(t => t.urg === 'urgent');
   const urgMsg = myUrgent.length > 0
     ? `🔴 Você tem <strong>${myUrgent.length} tarefa(s) urgente(s)</strong> para hoje/dia 05/08!`
@@ -1080,12 +1101,27 @@ function renderDashboard() {
     myTasksDiv.innerHTML = userTasks.map(t => taskCard(t)).join('');
   }
 
-  // Todas as tarefas (restrito: só Ever e Tiana veem)
-  const allTasksContainer = document.getElementById('all-tasks-content');
-  if (pode('geral')) {
-    document.getElementById('all-tasks-section').style.display = 'block';
-    document.getElementById('all-tasks-count').textContent = TAREFAS.length;
-    allTasksContainer.innerHTML = `<div class="tasks-grid">${TAREFAS.map(t => taskCard(t)).join('')}</div>`;
+  // Unifica tarefas: TAREFAS + PRODUCAO
+  function getUnifiedTasks() {
+    const deProducao = PRODUCAO.map(t => ({
+      texto: t.tarefa,
+      prazo: t.prazo,
+      responsaveis: [t.responsavel],
+      urg: t.urgencia
+    }));
+    return [...TAREFAS, ...deProducao].sort((a, b) => {
+      const ordem = { urgent: 0, soon: 1, normal: 2, continuous: 3 };
+      return (ordem[a.urg] || 99) - (ordem[b.urg] || 99);
+    });
+  }
+
+  const allTasks = pode('geral') ? getUnifiedTasks() : [];
+    // Todas as tarefas (restrito: só Ever e Tiana veem)
+    const allTasksContainer = document.getElementById('all-tasks-content');
+    if (pode('geral')) {
+      document.getElementById('all-tasks-section').style.display = 'block';
+      document.getElementById('all-tasks-count').textContent = allTasks.length;
+      allTasksContainer.innerHTML = '<div class="tasks-grid">' + allTasks.map(t => taskCard(t)).join('') + '</div>';
   } else {
     document.getElementById('all-tasks-section').style.display = 'none';
   }
