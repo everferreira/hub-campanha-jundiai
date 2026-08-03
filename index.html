@@ -268,12 +268,15 @@ footer a { color: #e94560; text-decoration: none; }
 }
 .tab-nav::-webkit-scrollbar { display: none; }
 .tab-btn {
-  background: transparent; border: none; color: #555; padding: 8px 14px;
-  border-radius: 8px; cursor: pointer; font-size: 0.75em; font-weight: 500;
-  white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
+  background: transparent; border: none; color: #555; padding: 10px 18px;
+  border-radius: 8px; cursor: pointer; font-size: 0.8em; font-weight: 500;
+  white-space: nowrap; transition: all 0.2s; flex-shrink: 0; border: 1px solid transparent;
 }
-.tab-btn:hover { color: #e0e0e0; background: #1a1a2e; }
-.tab-btn.active { color: #e94560; background: #2a1a1a; font-weight: 600; }
+.tab-btn:hover { color: #e0e0e0; background: #1a1a2e; border-color: #2a2a4a; }
+.tab-btn.active { 
+  color: #fff; background: #e94560; font-weight: 700; border-color: #e94560;
+  box-shadow: 0 2px 8px rgba(233,69,96,0.3);
+}
 
 .tab-section { display: none; }
 .tab-section.active { display: block; }
@@ -362,24 +365,16 @@ footer a { color: #e94560; text-decoration: none; }
     <!-- COUNTDOWN -->
     <div class="countdown-bar" id="countdown-bar"></div>
 
-    <!-- NEWS FEED -->
-    <div id="news-section" style="display:none;">
-      <div class="section-title">📰 Notícias da Campanha</div>
-      <div class="news-feed" id="news-feed"></div>
-    </div>
+    <!-- MY TASKS -->
+    <div class="section-title">⭐ Minhas Tarefas <span class="count" id="my-tasks-count">0</span></div>
+    <div class="tasks-grid" id="my-tasks"></div>
 
-    <!-- STATS -->
+    <!-- STATS + PROGRESS -->
     <div class="stats-grid" id="stats-grid"></div>
-
-    <!-- PROGRESS -->
     <div id="progress-section">
       <div class="section-title">📊 Progresso da Pré-Campanha</div>
       <div id="progress-bar-container"></div>
     </div>
-
-    <!-- MY TASKS -->
-    <div class="section-title">⭐ Minhas Tarefas <span class="count" id="my-tasks-count">0</span></div>
-    <div class="tasks-grid" id="my-tasks"></div>
 
     <!-- ALL TASKS (restricted) -->
     <div id="all-tasks-section">
@@ -387,19 +382,9 @@ footer a { color: #e94560; text-decoration: none; }
       <div id="all-tasks-content"></div>
     </div>
 
-    <!-- ELECTORAL PANEL (restricted) -->
-    <div id="eleitoral-section" style="display:none;">
-      <div class="section-title">📊 Painel Eleitoral de Jundiaí</div>
-      <div class="eleitoral-grid" id="eleitoral-grid"></div>
-    </div>
-
-    <!-- EMENDAS (restricted) -->
-    <div id="emendas-section" style="display:none;">
-      <div class="section-title">💰 Emendas de Erika em Jundiaí</div>
-      <div class="emendas-grid" id="emendas-grid"></div>
-    </div>
-
-    <!-- PARTNERS -->
+    <!-- PRODUÇÃO -->
+    <div class="section-title">📦 Produzir (Eva 🎨 / Kawa 🎬)</div>
+    <div class="tasks-grid" id="producao-grid"></div>
     <div class="section-title">🤝 Parceiros da Campanha</div>
     <div id="partners-area"></div>
 
@@ -417,6 +402,9 @@ footer a { color: #e94560; text-decoration: none; }
     <!-- 🔄 ENGAJAMENTO DIÁRIO -->
     <div class="section-title">🔄 Engajamento Diário</div>
     <div class="tasks-grid" id="engajamento-grid"></div>
+
+    <!-- NEWS (mais abaixo) -->
+    <div id="news-section-acoes"></div>
     </div><!-- /tab-acoes -->
 
     <!-- ABA: ESTRATÉGIA (Ever/Tiana + quem pode ver) -->
@@ -1178,8 +1166,7 @@ function renderCountdown() {
 }
 
 function renderNews() {
-  document.getElementById('news-section').style.display = 'block';
-  document.getElementById('news-feed').innerHTML = NOTICIAS.map(n => `
+  const newsHtml = NOTICIAS.map(n => `
     <div class="news-card">
       <div class="news-title">${n.titulo}</div>
       <div class="news-source">${n.fonte}</div>
@@ -1187,6 +1174,19 @@ function renderNews() {
       <a href="${n.url}" target="_blank" class="news-link">🔗 Ler mais →</a>
     </div>
   `).join('');
+
+  // Na aba Estratégia (Ever/Tiana)
+  const section = document.getElementById('news-section');
+  if (section) {
+    section.style.display = 'block';
+    section.innerHTML = '<div class="section-title">📰 Notícias da Campanha</div><div class="news-feed">' + newsHtml + '</div>';
+  }
+
+  // Na aba Ações (todos, mais abaixo)
+  const sectionAcoes = document.getElementById('news-section-acoes');
+  if (sectionAcoes) {
+    sectionAcoes.innerHTML = '<div class="section-title">📰 Notícias da Campanha</div><div class="news-feed">' + newsHtml + '</div>';
+  }
 }
 
 function renderEleitoral() {
@@ -1318,10 +1318,7 @@ function renderTabNav() {
     `<button class="tab-btn" id="tabbtn-${t.id}" onclick="switchTab('${t.id}')">${t.label}</button>`
   ).join('');
   const nivel = pessoa(usuarioAtual).nivel;
-  let defaultTab = 'acoes';
-  if (nivel >= 5) defaultTab = 'estrategia';
-  if (nivel <= 2) defaultTab = 'conteudo';
-  switchTab(defaultTab);
+  switchTab('acoes');
 }
 
 function switchTab(tabId) {
