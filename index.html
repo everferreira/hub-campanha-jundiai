@@ -517,6 +517,7 @@ const EMENDAS = [
 // ═══════════════════════════════════════════════════════════
 
 // 📦 PRODUÇÃO — o que criar (responsável + prazo)
+// Regra: eventos = produzir 20 dias antes. Histórico = flexível.
 const PRODUCAO = [
   // 🔴 EMERGÊNCIA — Bandeiraço 16/08 + Visita 18/08
   { tarefa: "Card convocação Bandeiraço 16/08", responsavel: "Eva 🎨", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência" },
@@ -535,26 +536,68 @@ const PRODUCAO = [
   { tarefa: "Card 'Erika na Parada LGBT+ Jundiaí'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3" },
   { tarefa: "Card 'Meta 5.000 votos' (1.944→5.000)", responsavel: "Eva 🎨", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3" },
   { tarefa: "Reels 'Por que votar em Erika?'", responsavel: "Kawa 🎬", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3" },
+  // 🔵 LOTE 4 — Pós-visita 18/08
+  { tarefa: "Edição melhores momentos visita (fotos+vídeos)", responsavel: "Kawa 🎬", prazo: "19/08", urgencia: "soon", lote: "🔵 Pós-visita" },
+  { tarefa: "Cards 'Melhores momentos' (3-4 cards)", responsavel: "Eva 🎨", prazo: "19/08", urgencia: "soon", lote: "🔵 Pós-visita" },
+  { tarefa: "Reels com depoimentos da visita", responsavel: "Kawa 🎬", prazo: "21/08", urgencia: "normal", lote: "🔵 Pós-visita" },
+  // 🟣 LOTE 5 — Semanas temáticas (Fase 3: 26/08 a 20/09)
+  { tarefa: "Cards 'Erika e as pautas de Jundiaí' (saúde, educação, direitos)", responsavel: "Eva 🎨", prazo: "24/08", urgencia: "normal", lote: "🟣 Semana 1" },
+  { tarefa: "Cards 'Apoios locais' (lideranças, comerciantes)", responsavel: "Eva 🎨", prazo: "31/08", urgencia: "normal", lote: "🟣 Semana 2" },
+  { tarefa: "Cards 'Prestação de contas' (resultados das emendas)", responsavel: "Eva 🎨", prazo: "07/09", urgencia: "normal", lote: "🟣 Semana 3" },
+  { tarefa: "Cards 'Caravanas e mobilização'", responsavel: "Eva 🎨", prazo: "13/09", urgencia: "normal", lote: "🟣 Semana 4" },
+  { tarefa: "Reels temáticos (1 por semana)", responsavel: "Kawa 🎬", prazo: "24/08, 31/08, 07/09, 13/09", urgencia: "normal", lote: "🟣 Semanal" },
+  // ⚫ LOTE 6 — Reta final (21/09 a 04/10)
+  { tarefa: "Gravação depoimentos apoiadores (testemunhais)", responsavel: "Kawa 🎬", prazo: "18/09", urgencia: "normal", lote: "⚫ Reta Final" },
+  { tarefa: "Cards 'Motivos pra votar em Erika' (série)", responsavel: "Eva 🎨", prazo: "25/09", urgencia: "normal", lote: "⚫ Reta Final" },
+  { tarefa: "Card 'Amanhã é dia de votar!'", responsavel: "Eva 🎨", prazo: "02/10", urgencia: "urgent", lote: "⚫ Reta Final" },
+  { tarefa: "Card agradecimento pós-eleição", responsavel: "Eva 🎨", prazo: "04/10", urgencia: "urgent", lote: "⚫ Reta Final" },
 ];
 
-// 📢 PUBLICAÇÃO — quando postar
+// 📢 PUBLICAÇÃO — quando postar (até 04/10 — eleição)
 const PUBLICACAO = [
-  { data: "07/08", dia: "Sex", horario: "13h", tema: "🚩 Bandeiraço 16/08 — CONVOCAÇÃO", formato: "Card", pronto: false },
-  { data: "07/08", dia: "Sex", horario: "15h", tema: "🎬 Reels: Vem pro Bandeiraço!", formato: "Reels", pronto: false },
-  { data: "08/08", dia: "Sáb", horario: "15h", tema: "📸 Quem é Erika Hilton? (carrossel)", formato: "Carrossel", pronto: false },
-  { data: "09/08", dia: "Dom", horario: "13h", tema: "🏆 Duas vezes melhor deputada do Brasil", formato: "Card", pronto: false },
-  { data: "10/08", dia: "Seg", horario: "15h", tema: "⚧️ Presidente Comissão da Mulher", formato: "Post", pronto: false },
-  { data: "11/08", dia: "Ter", horario: "13h", tema: "🏳️‍🌈 Erika na Parada LGBT+ de Jundiaí", formato: "Card", pronto: false },
-  { data: "12/08", dia: "Qua", horario: "15h", tema: "💰 R$ 4,6 milhões em Jundiaí", formato: "Card", pronto: false },
-  { data: "13/08", dia: "Qui", horario: "13h", tema: "🏥 R$ 2 milhões na Saúde de Jundiaí", formato: "Card", pronto: false },
-  { data: "13/08", dia: "Qui", horario: "15h", tema: "📅 Erika vem a Jundiaí! — ANÚNCIO", formato: "Card", pronto: false },
-  { data: "14/08", dia: "Sex", horario: "13h", tema: "📋 Agenda 18/08 — cards individuais", formato: "Cards", pronto: false },
-  { data: "14/08", dia: "Sex", horario: "15h", tema: "🎬 Reels: Agenda da Erika em Jundiaí", formato: "Reels", pronto: false },
-  { data: "15/08", dia: "Sáb", horario: "13h", tema: "🎯 Meta: 5.000 votos em Jundiaí", formato: "Card", pronto: false },
-  { data: "15/08", dia: "Sáb", horario: "15h", tema: "🎬 Por que votar em Erika?", formato: "Reels", pronto: false },
-  { data: "16/08", dia: "Dom", horario: "🔴 Ao vivo", tema: "🚀 Bandeiraço + Lançamento oficial", formato: "Cobertura", pronto: false },
-  { data: "17/08", dia: "Seg", horario: "13h", tema: "⏰ Amanhã: Erika em Jundiaí!", formato: "Story+Post", pronto: false },
-  { data: "18/08", dia: "Ter", horario: "🔴 Ao vivo", tema: "🎯 VISITA DA ERIKA — cobertura total", formato: "Cobertura", pronto: false },
+  // 🔹 FASE 1: PRÉ-CAMPANHA
+  { data: "07/08", dia: "Sex", horario: "13h", tema: "🚩 Bandeiraço 16/08 — CONVOCAÇÃO", formato: "Card", fase: "Pré-campanha" },
+  { data: "07/08", dia: "Sex", horario: "15h", tema: "🎬 Reels: Vem pro Bandeiraço!", formato: "Reels", fase: "Pré-campanha" },
+  { data: "08/08", dia: "Sáb", horario: "15h", tema: "📸 Quem é Erika Hilton? (carrossel)", formato: "Carrossel", fase: "Pré-campanha" },
+  { data: "09/08", dia: "Dom", horario: "13h", tema: "🏆 Duas vezes melhor deputada do Brasil", formato: "Card", fase: "Pré-campanha" },
+  { data: "10/08", dia: "Seg", horario: "15h", tema: "⚧️ Presidente Comissão da Mulher", formato: "Post", fase: "Pré-campanha" },
+  { data: "11/08", dia: "Ter", horario: "13h", tema: "🏳️‍🌈 Erika na Parada LGBT+ de Jundiaí", formato: "Card", fase: "Pré-campanha" },
+  { data: "12/08", dia: "Qua", horario: "15h", tema: "💰 R$ 4,6 milhões em Jundiaí", formato: "Card", fase: "Pré-campanha" },
+  { data: "13/08", dia: "Qui", horario: "13h", tema: "🏥 R$ 2 milhões na Saúde de Jundiaí", formato: "Card", fase: "Pré-campanha" },
+  { data: "13/08", dia: "Qui", horario: "15h", tema: "📅 Erika vem a Jundiaí! — ANÚNCIO", formato: "Card", fase: "Pré-campanha" },
+  { data: "14/08", dia: "Sex", horario: "13h", tema: "📋 Agenda 18/08 — cards individuais", formato: "Cards", fase: "Pré-campanha" },
+  { data: "14/08", dia: "Sex", horario: "15h", tema: "🎬 Reels: Agenda da Erika em Jundiaí", formato: "Reels", fase: "Pré-campanha" },
+  { data: "15/08", dia: "Sáb", horario: "13h", tema: "🎯 Meta: 5.000 votos em Jundiaí", formato: "Card", fase: "Pré-campanha" },
+  { data: "15/08", dia: "Sáb", horario: "15h", tema: "🎬 Por que votar em Erika?", formato: "Reels", fase: "Pré-campanha" },
+
+  // 🔹 FASE 2: LANÇAMENTO OFICIAL
+  { data: "16/08", dia: "Dom", horario: "🔴 Ao vivo", tema: "🚀 Bandeiraço + Lançamento oficial", formato: "Cobertura", fase: "Lançamento" },
+  { data: "17/08", dia: "Seg", horario: "13h", tema: "⏰ Amanhã: Erika em Jundiaí!", formato: "Story+Post", fase: "Lançamento" },
+  { data: "18/08", dia: "Ter", horario: "🔴 Ao vivo", tema: "🎯 VISITA DA ERIKA — cobertura total", formato: "Cobertura", fase: "Lançamento" },
+  { data: "19/08", dia: "Qua", horario: "13h", tema: "📸 Melhores momentos da visita (fotos)", formato: "Cards", fase: "Pós-visita" },
+  { data: "20/08", dia: "Qui", horario: "15h", tema: "🎤 O que Erika disse na Coletiva", formato: "Card", fase: "Pós-visita" },
+  { data: "21/08", dia: "Sex", horario: "13h", tema: "🎬 Reels: Depoimentos da visita", formato: "Reels", fase: "Pós-visita" },
+  { data: "22/08", dia: "Sáb", horario: "15h", tema: "🤝 Encontro de lideranças — resumo", formato: "Card", fase: "Pós-visita" },
+  { data: "23/08", dia: "Dom", horario: "13h", tema: "📍 Erika + Jundiaí = parceria que dá certo", formato: "Post", fase: "Pós-visita" },
+  { data: "24/08", dia: "Seg", horario: "15h", tema: "🗓️ O que vem por aí na campanha", formato: "Card", fase: "Pós-visita" },
+  { data: "25/08", dia: "Ter", horario: "13h", tema: "🙏 Agradecimento pela receptividade", formato: "Post", fase: "Pós-visita" },
+
+  // 🔹 FASE 3: CORPO DA CAMPANHA (alinhado com campanha estadual — Sofia Favaro)
+  // Conteúdo semanal, podendo ser ajustado conforme direcionamento estadual
+  { data: "26/08-01/09", dia: "Semana 1", horario: "13/15h", tema: "📍 Erika e as pautas de Jundiaí (saúde, educação, direitos)", formato: "3-4 posts", fase: "Campanha" },
+  { data: "02-07/09", dia: "Semana 2", horario: "13/15h", tema: "💪 Apoios locais — lideranças e comerciantes", formato: "3-4 posts", fase: "Campanha" },
+  { data: "08-14/09", dia: "Semana 3", horario: "13/15h", tema: "🔍 Prestação de contas — resultados das emendas", formato: "3-4 posts", fase: "Campanha" },
+  { data: "15-20/09", dia: "Semana 4", horario: "13/15h", tema: "🚐 Caravanas e mobilização", formato: "3-4 posts", fase: "Campanha" },
+
+  // 🔹 FASE 4: RETA FINAL
+  { data: "21-27/09", dia: "Semana 5", horario: "13/15h", tema: "🎤 Testemunhais — apoiadores gravam por que votam em Erika", formato: "Reels", fase: "Reta Final" },
+  { data: "28/09", dia: "Seg", horario: "15h", tema: "⏳ Faltam 6 dias — motivo #1", formato: "Card", fase: "Reta Final" },
+  { data: "29/09", dia: "Ter", horario: "13h", tema: "⏳ Faltam 5 dias — motivo #2", formato: "Card", fase: "Reta Final" },
+  { data: "30/09", dia: "Qua", horario: "15h", tema: "⏳ Faltam 4 dias — motivo #3", formato: "Card", fase: "Reta Final" },
+  { data: "01/10", dia: "Qui", horario: "13h", tema: "⏳ Faltam 3 dias — motivo #4", formato: "Card", fase: "Reta Final" },
+  { data: "02/10", dia: "Sex", horario: "15h", tema: "⏳ Faltam 2 dias — motivo #5", formato: "Card", fase: "Reta Final" },
+  { data: "03/10", dia: "Sáb", horario: "13h", tema: "⏳ Amanhã é dia de votar!", formato: "Card", fase: "Reta Final" },
+  { data: "04/10", dia: "Dom", horario: "🗳️", tema: "Votou? Compartilha! + Agradecimento", formato: "Story+Post", fase: "Reta Final" },
 ];
 
 // 🔄 ENGAJAMENTO DIÁRIO
@@ -932,9 +975,9 @@ function renderContentSchedule() {
       <div class="task-card ${done}" onclick="togglePub(this, '${safeKey}')">
         <div class="task-header">
           <div class="task-text"><strong>${p.tema}</strong></div>
-          <span class="task-prazo ${p.horario.includes('vivo') ? 'urgent' : 'normal'}">🕐 ${p.horario}</span>
+          <span class="task-prazo ${p.horario.includes('vivo') || p.horario.includes('🗳️') ? 'urgent' : 'normal'}">🕐 ${p.horario}</span>
         </div>
-        <div class="task-responsaveis">📅 ${p.data} (${p.dia}) • ${p.formato}</div>
+        <div class="task-responsaveis">📅 ${p.data} (${p.dia}) • ${p.formato} • <span style="color:#e94560;">${p.fase}</span></div>
       </div>
     `;
   }).join('');
