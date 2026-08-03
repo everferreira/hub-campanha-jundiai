@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campanha Erika Hilton 2026 — Jundiaí</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #e0e0e0; min-height: 100vh; }
+.container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+/* LOGIN SCREEN */
+#login-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  min-height: 100vh; padding: 20px; gap: 32px;
+}
+#login-screen .logo {
+  text-align: center;
+}
+#login-screen .logo h1 { font-size: 2em; color: #e94560; font-weight: 800; }
+#login-screen .logo h1 span { color: #fff; }
+#login-screen .logo p { color: #888; font-size: 0.9em; margin-top: 4px; }
+#login-screen .logo .subtitle { color: #666; font-size: 0.8em; }
+.people-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; max-width: 600px; width: 100%; }
+.person-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  padding: 20px 12px; border-radius: 12px; border: 1px solid #2a2a4a;
+  background: #1a1a2e; cursor: pointer; transition: all 0.2s;
+  text-align: center;
+}
+.person-btn:hover { border-color: #e94560; transform: translateY(-2px); background: #1e1e3a; }
+.person-btn .avatar {
+  width: 48px; height: 48px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.3em; font-weight: 700; color: #fff;
+}
+.person-btn .pname { font-size: 0.85em; font-weight: 600; }
+.person-btn .prole { font-size: 0.7em; color: #888; }
+
+/* DASHBOARD */
+#dashboard { display: none; }
+header {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  padding: 20px; border-radius: 12px; margin-bottom: 20px;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+}
+header h1 { font-size: 1.3em; color: #e94560; font-weight: 700; }
+header h1 span { color: #fff; }
+header .user-info { display: flex; align-items: center; gap: 12px; }
+header .user-info .avatar-sm { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: 700; color: #fff; }
+header .user-info .uname { font-size: 0.85em; font-weight: 600; }
+header .user-info .urole { font-size: 0.7em; color: #888; }
+header .switch-btn {
+  background: #e94560; color: #fff; border: none; padding: 8px 16px;
+  border-radius: 8px; cursor: pointer; font-size: 0.8em; font-weight: 600; transition: opacity 0.2s;
+}
+header .switch-btn:hover { opacity: 0.8; }
+header .badge { background: #e94560; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
+header .badge.green { background: #1a6b3c; }
+
+.greeting {
+  background: #1a1a2e; border-radius: 12px; padding: 20px;
+  border: 1px solid #2a2a4a; margin-bottom: 20px;
+}
+.greeting h2 { font-size: 1.15em; margin-bottom: 6px; }
+.greeting p { color: #888; font-size: 0.85em; line-height: 1.5; }
+
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+.stat-card {
+  background: #1a1a2e; border-radius: 10px; padding: 16px;
+  border: 1px solid #2a2a4a; text-align: center;
+}
+.stat-card .num { font-size: 1.6em; font-weight: 700; color: #e94560; }
+.stat-card .label { font-size: 0.75em; color: #888; margin-top: 4px; }
+.stat-card.highlight { border-color: #e94560; }
+
+.section-title {
+  font-size: 1em; font-weight: 600; color: #fff;
+  margin: 20px 0 10px; display: flex; align-items: center; gap: 8px;
+}
+.section-title .count { background: #2a2a4a; color: #888; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; }
+
+.tasks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.task-card {
+  background: #1a1a2e; border-radius: 10px; padding: 14px 16px;
+  border: 1px solid #2a2a4a; transition: all 0.2s; cursor: pointer;
+}
+.task-card:hover { border-color: #555; }
+.task-card.done { opacity: 0.55; border-color: #2a5a2a; }
+.task-card.done .task-text { text-decoration: line-through; }
+.task-card .task-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.task-card .task-text { flex: 1; font-size: 0.85em; line-height: 1.4; }
+.task-card .task-prazo {
+  font-size: 0.7em; padding: 2px 8px; border-radius: 6px;
+  white-space: nowrap; font-weight: 600;
+}
+.task-card .task-prazo.urgent { background: #5a1a1a; color: #ff6b6b; }
+.task-card .task-prazo.soon { background: #5a4a1a; color: #ffc107; }
+.task-card .task-prazo.normal { background: #1a3a5a; color: #64b5f6; }
+.task-card .task-prazo.continuous { background: #1a4a2a; color: #81c784; }
+.task-card .task-responsaveis { font-size: 0.7em; color: #888; margin-top: 6px; }
+
+.agenda-table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-bottom: 20px; }
+.agenda-table th { background: #2a2a4a; padding: 10px; text-align: left; color: #e94560; font-weight: 600; }
+.agenda-table td { padding: 10px; border-bottom: 1px solid #2a2a4a; }
+.agenda-table tr:hover td { background: #1e1e3a; }
+.agenda-table .highlight { color: #e94560; font-weight: 600; }
+.agenda-table .spotlight { color: #ffc107; }
+
+.links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; }
+.link-item {
+  display: flex; align-items: center; gap: 10px;
+  background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 8px;
+  padding: 12px 14px; text-decoration: none; color: #e0e0e0; transition: all 0.2s;
+}
+.link-item:hover { border-color: #e94560; background: #1e1e3a; }
+.link-item .icon { font-size: 1.3em; }
+.link-item .info .name { font-weight: 600; font-size: 0.85em; }
+.link-item .info .desc { font-size: 0.7em; color: #888; }
+
+footer { text-align: center; padding: 20px; color: #555; font-size: 0.75em; border-top: 1px solid #222; margin-top: 40px; }
+footer a { color: #e94560; text-decoration: none; }
+
+@media (max-width: 600px) {
+  header { flex-direction: column; text-align: center; }
+  .people-grid { grid-template-columns: repeat(2, 1fr); }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="login-screen">
+  <div class="logo">
+    <h1>ERIKA HILTON <span>2026</span></h1>
+    <p>Painel de Coordenação Municipal — Jundiaí</p>
+    <div class="subtitle">👤 Selecione quem está acessando</div>
+  </div>
+  <div class="people-grid" id="people-grid">
+    <!-- gerado por JS -->
+  </div>
+  <div style="font-size:0.75em;color:#555;">Pré-campanha • Início 16/08/2026</div>
+</div>
+
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <header>
+    <div>
+      <h1>ERIKA HILTON <span>2026</span></h1>
+      <p style="color:#888;font-size:0.8em;margin-top:2px;">Jundiaí</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
+      <div class="user-info" id="user-info-bar">
+        <div class="avatar-sm" id="user-avatar-sm"></div>
+        <div><div class="uname" id="user-name-bar"></div><div class="urole" id="user-role-bar"></div></div>
+      </div>
+      <span class="badge">Pré-campanha</span>
+      <span class="badge green" id="data-badge">Início 16/08</span>
+      <button class="switch-btn" onclick="showLogin()">🔄 Trocar</button>
+    </div>
+  </header>
+
+  <!-- Saudação -->
+  <div class="greeting" id="greeting-area"></div>
+
+  <!-- Stats rápidos -->
+  <div class="stats-grid" id="stats-grid"></div>
+
+  <!-- Links rápidos -->
+  <div class="section-title">🔗 Links Rápidos</div>
+  <div class="links-grid">
+    <a class="link-item" href="https://docs.google.com/spreadsheets/d/1Y60DrMPeepBqAfeuhQQK8WA14dzdXMagaoMFMJGYIMo" target="_blank">
+      <span class="icon">📊</span>
+      <div class="info"><div class="name">Planilha</div><div class="desc">Controle geral</div></div>
+    </a>
+    <a class="link-item" href="https://drive.google.com/drive/folders/1TiZdbyXbuhBjBPr8ZFoP7Xmfe1s3aWuB" target="_blank">
+      <span class="icon">📁</span>
+      <div class="info"><div class="name">Drive</div><div class="desc">Documentos e fotos</div></div>
+    </a>
+    <a class="link-item" href="https://notion.so/3ae6bd5dbb788131ba9ddc2c6d0c1d59" target="_blank">
+      <span class="icon">📘</span>
+      <div class="info"><div class="name">Notion</div><div class="desc">Estratégico</div></div>
+    </a>
+    <a class="link-item" href="https://docs.google.com/document/d/1XUGnaSIS5dKUqlJMUPMS-6eXi0UWC_IAS4g7JllOQTc/edit" target="_blank">
+      <span class="icon">📄</span>
+      <div class="info"><div class="name">Painel (Google Doc)</div><div class="desc">Visão completa</div></div>
+    </a>
+    <a class="link-item" href="https://drive.google.com/drive/folders/1Mp3K4raQylVZiCS6syKTQWsvW1mdibIm" target="_blank">
+      <span class="icon">📋</span>
+      <div class="info"><div class="name">Atas de Reunião</div><div class="desc">Ata 01 - 02/08</div></div>
+    </a>
+  </div>
+
+  <!-- MINHAS TAREFAS -->
+  <div class="section-title" id="my-tasks-title">📋 Minhas Tarefas <span class="count" id="my-tasks-count"></span></div>
+  <div class="tasks-grid" id="my-tasks"></div>
+
+  <!-- TAREFAS COLETIVAS -->
+  <div class="section-title">🤝 Todas as Tarefas da Campanha <span class="count" id="all-tasks-count"></span></div>
+  <div class="tasks-grid" id="all-tasks"></div>
+
+  <!-- AGENDA 18/08 -->
+  <div class="section-title">📅 Agenda 18/08 — Visita Erika Hilton</div>
+  <div style="background:#1a1a2e;border-radius:12px;padding:4px;border:1px solid #2a2a4a;margin-bottom:20px;overflow-x:auto;">
+  <table class="agenda-table">
+    <tr><th style="border-radius:12px 0 0 0;">Horário</th><th>Atividade</th><th style="border-radius:0 12px 0 0;">Local</th></tr>
+    <tr><td>11:00-11:40</td><td>Visita PA Vila Progresso</td><td>Verba destinada por Erika</td></tr>
+    <tr><td>12:00-13:00</td><td>Instituto Luís Braile</td><td>Com Movimento Cardume</td></tr>
+    <tr><td>13:30-14:30</td><td>Visita Centro TEA</td><td>Centro Integrado Girassóis</td></tr>
+    <tr><td>15:00-16:30</td><td>Almoço</td><td></td></tr>
+    <tr><td class="spotlight">16:30-17:00</td><td class="spotlight">🎤 Coletiva de Imprensa</td><td></td></tr>
+    <tr><td class="highlight">17:30</td><td>🤝 Encontro com Lideranças</td><td><strong>Bancários</strong></td></tr>
+    <tr><td class="highlight">19:00</td><td class="highlight">🎉 Encontro Aberto</td><td class="highlight"><strong>Clube 28 de Setembro</strong></td></tr>
+  </table>
+  </div>
+
+  <footer>
+    Painel interativo — Campanha Erika Hilton 2026 · Coordenação Jundiaí<br>
+    <a href="https://wa.me/5511945774193" target="_blank">📱 Fale com Ever Maria no WhatsApp</a>
+    <br><span style="color:#444;font-size:0.85em;">Atualizado em 02/08/2026</span>
+  </footer>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DADOS DA CAMPANHA
+// ═══════════════════════════════════════════════
+
+const EQUIPE = [
+  { nome: 'Ever Maria', role: 'Coordenadora Municipal', cor: '#e94560', iniciais: 'EM' },
+  { nome: 'Tiana Cauton', role: 'Assessora', cor: '#9c27b0', iniciais: 'TC' },
+  { nome: 'Junior Arcanjo', role: 'Mobilizador de Rua', cor: '#ff6b35', iniciais: 'JA' },
+  { nome: 'Hoanny', role: 'Eventos', cor: '#2196f3', iniciais: 'HO' },
+  { nome: 'João', role: 'Financeiro', cor: '#4caf50', iniciais: 'JO' },
+  { nome: 'Kawa', role: 'Redes Sociais', cor: '#00bcd4', iniciais: 'KA' },
+  { nome: 'Eva', role: 'Redes Sociais', cor: '#ff80ab', iniciais: 'EV' },
+];
+
+function pessoa(nome) {
+  return EQUIPE.find(p => p.nome === nome) || { nome, role: 'Equipe', cor: '#888', iniciais: nome.slice(0,2).toUpperCase() };
+}
+
+const TAREFAS = [
+  { texto: 'Disparar convites para grupo WhatsApp', prazo: '05/08', responsaveis: ['Junior Arcanjo'], urg: 'urgent' },
+  { texto: 'Lista de lideranças Jundiaí e região metropolitana', prazo: '05/08', responsaveis: ['Junior Arcanjo'], urg: 'urgent' },
+  { texto: 'Listar bares da região para divulgação', prazo: '05/08', responsaveis: ['Junior Arcanjo'], urg: 'urgent' },
+  { texto: 'Mobilizar grupo de apoiadores', prazo: '05/08', responsaveis: ['Ever Maria', 'Hoanny'], urg: 'urgent' },
+  { texto: 'Cronograma semanal postagens grupos (vakinha, manifesta, posts Erika/Sofia)', prazo: '05/08', responsaveis: ['Ever Maria', 'Hoanny'], urg: 'urgent' },
+  { texto: 'Coletiva de Imprensa (Cardume)', prazo: '05/08', responsaveis: ['Cardume'], urg: 'urgent' },
+  { texto: 'Enxoval da campanha', prazo: '06/08', responsaveis: ['Junior Arcanjo'], urg: 'soon' },
+  { texto: 'Plano de campanha no Drive', prazo: '07/08', responsaveis: ['Ever Maria', 'Hoanny', 'João', 'Tiana Cauton'], urg: 'soon' },
+  { texto: 'Finanças de gasto equipe', prazo: '07/08', responsaveis: ['João'], urg: 'soon' },
+  { texto: 'Encontro lideranças + Coletiva imprensa', prazo: '10/08', responsaveis: ['Hoanny', 'Tiana Cauton'], urg: 'soon' },
+  { texto: 'Lista de Lideranças (Cardume)', prazo: '10/08', responsaveis: ['Cardume'], urg: 'soon' },
+  { texto: 'Agenda Erika Hilton (Cardume)', prazo: '10/08', responsaveis: ['Tiana Cauton', 'Cardume'], urg: 'soon' },
+  { texto: 'Plano encontro aberto Clube 28 (19h, 18/08) + Adesivaço', prazo: '12/08', responsaveis: ['Ever Maria', 'Junior Arcanjo'], urg: 'normal' },
+  { texto: 'Contatar Dona Edna — verificar planos Clube 28', prazo: '12/08', responsaveis: ['Ever Maria'], urg: 'normal' },
+  { texto: 'Organizar voluntários da campanha', prazo: '14/08', responsaveis: ['Tiana Cauton'], urg: 'normal' },
+  { texto: 'Organizar bandeiraço 16/08 (domingo)', prazo: '14/08', responsaveis: ['Ever Maria', 'Tiana Cauton'], urg: 'normal' },
+  { texto: '1 post/dia + stories diários + responder comentários', prazo: 'Contínuo', responsaveis: ['Kawa', 'Eva'], urg: 'continuous' },
+  { texto: 'Responder todos os comentários do Instagram', prazo: 'Contínuo', responsaveis: ['Kawa', 'Eva'], urg: 'continuous' },
+  { texto: 'Comentar nas publicações da Erika, Sofia e Amanda', prazo: 'Contínuo', responsaveis: ['Kawa', 'Eva'], urg: 'continuous' },
+  { texto: '1 post/dia + stories diários + responder comentários (Ever/Tiana)', prazo: 'Contínuo', responsaveis: ['Ever Maria', 'Tiana Cauton'], urg: 'continuous' },
+];
+
+const AGENDA_18 = [
+  { hora: '11:00-11:40', atividade: 'Visita PA Vila Progresso', local: 'Verba destinada por Erika' },
+  { hora: '12:00-13:00', atividade: 'Instituto Luís Braile', local: 'Com Movimento Cardume' },
+  { hora: '13:30-14:30', atividade: 'Visita Centro TEA', local: 'Centro Integrado Girassóis' },
+  { hora: '15:00-16:30', atividade: 'Almoço', local: '' },
+  { hora: '16:30-17:00', atividade: '🎤 Coletiva de Imprensa', local: '', destaque: true },
+  { hora: '17:30', atividade: '🤝 Encontro com Lideranças', local: 'Bancários', destaque: true },
+  { hora: '19:00', atividade: '🎉 Encontro Aberto', local: 'Clube 28 de Setembro', destaque: true },
+];
+
+// ═══════════════════════════════════════════════
+// LÓGICA
+// ═══════════════════════════════════════════════
+
+let usuarioAtual = null;
+
+function init() {
+  renderLogin();
+}
+
+function renderLogin() {
+  const grid = document.getElementById('people-grid');
+  grid.innerHTML = EQUIPE.map(p => `
+    <div class="person-btn" onclick="entrar('${p.nome}')">
+      <div class="avatar" style="background:${p.cor}">${p.iniciais}</div>
+      <div class="pname">${p.nome}</div>
+      <div class="prole">${p.role}</div>
+    </div>
+  `).join('');
+}
+
+function entrar(nome) {
+  usuarioAtual = nome;
+  localStorage.setItem('hub_user', nome);
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  renderDashboard();
+}
+
+function showLogin() {
+  usuarioAtual = null;
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+}
+
+function renderDashboard() {
+  const p = pessoa(usuarioAtual);
+  const userTasks = TAREFAS.filter(t => t.responsaveis.includes(usuarioAtual));
+  const myUrgent = userTasks.filter(t => t.urg === 'urgent');
+  const allPending = TAREFAS.filter(t => t.urg !== 'continuous');
+
+  // Barra do usuário
+  document.getElementById('user-avatar-sm').style.background = p.cor;
+  document.getElementById('user-avatar-sm').textContent = p.iniciais;
+  document.getElementById('user-name-bar').textContent = p.nome;
+  document.getElementById('user-role-bar').textContent = p.role;
+
+  // Saudação
+  const hoje = new Date();
+  const saud = hoje.getHours() < 12 ? 'Bom dia' : hoje.getHours() < 18 ? 'Boa tarde' : 'Boa noite';
+  const urgMsg = myUrgent.length > 0
+    ? `🔴 Você tem <strong>${myUrgent.length} tarefa(s) urgente(s)</strong> para hoje/dia 05/08!`
+    : '✅ Tudo em dia com os prazos urgentes!';
+  document.getElementById('greeting-area').innerHTML = `
+    <h2>${saud}, ${usuarioAtual}! 💛</h2>
+    <p>${p.role} na campanha Erika Hilton em Jundiaí.<br>${urgMsg}</p>
+  `;
+
+  // Stats
+  document.getElementById('stats-grid').innerHTML = `
+    <div class="stat-card highlight"><div class="num">${userTasks.length}</div><div class="label">Minhas Tarefas</div></div>
+    <div class="stat-card"><div class="num">${myUrgent.length}</div><div class="label">Urgentes (05/08)</div></div>
+    <div class="stat-card"><div class="num">${allPending.length}</div><div class="label">Tarefas da Campanha</div></div>
+    <div class="stat-card"><div class="num">7</div><div class="label">Eventos em 18/08</div></div>
+  `;
+
+  // Minhas tarefas
+  const myTasksDiv = document.getElementById('my-tasks');
+  document.getElementById('my-tasks-count').textContent = userTasks.length;
+  if (userTasks.length === 0) {
+    myTasksDiv.innerHTML = '<p style="color:#888;font-size:0.85em;padding:12px;">Nenhuma tarefa atribuída diretamente a você.</p>';
+  } else {
+    myTasksDiv.innerHTML = userTasks.map(t => taskCard(t)).join('');
+  }
+
+  // Todas as tarefas (coletivas, exceto as que já aparecem em "minhas")
+  const allTasksDiv = document.getElementById('all-tasks');
+  document.getElementById('all-tasks-count').textContent = TAREFAS.length;
+  allTasksDiv.innerHTML = TAREFAS.map(t => taskCard(t)).join('');
+}
+
+function taskCard(t) {
+  const checked = localStorage.getItem('done_' + t.texto) === 'true' ? 'done' : '';
+  const prazoClass = t.urg === 'urgent' ? 'urgent' : t.urg === 'soon' ? 'soon' : t.urg === 'normal' ? 'normal' : 'continuous';
+  const rotuloPrazo = t.urg === 'continuous' ? '🔄 Contínuo' : `📅 ${t.prazo}`;
+  const isMine = usuarioAtual && t.responsaveis.includes(usuarioAtual);
+  const borderColor = isMine ? 'border-left:4px solid #e94560;' : '';
+
+  return `
+    <div class="task-card ${checked}" onclick="toggleTask(this, '${t.texto.replace(/'/g, "\\'")}')" style="${borderColor}">
+      <div class="task-header">
+        <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong></div>
+        <span class="task-prazo ${prazoClass}">${rotuloPrazo}</span>
+      </div>
+      <div class="task-responsaveis">👥 ${t.responsaveis.join(', ')}</div>
+    </div>
+  `;
+}
+
+function toggleTask(el, texto) {
+  el.classList.toggle('done');
+  const done = el.classList.contains('done');
+  localStorage.setItem('done_' + texto, done);
+}
+
+// Auto-login se já escolheu antes
+const saved = localStorage.getItem('hub_user');
+if (saved && EQUIPE.some(p => p.nome === saved)) {
+  entrar(saved);
+}
+
+init();
+</script>
+</body>
+</html>
