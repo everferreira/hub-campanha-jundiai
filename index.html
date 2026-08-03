@@ -368,6 +368,9 @@ footer a { color: #e94560; text-decoration: none; }
     <!-- INSTA SCHEDULE -->
     <div class="section-title">📱 Cronograma Instagram</div>
     <div class="insta-grid" id="insta-grid"></div>
+    <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.78em;color:#888;">
+      ⏳ <strong>Postagens começam em breve</strong> — dando tempo pra preparar as imagens. Horários alternados entre 13h e 15h (janela de melhor alcance).
+    </div>
 
     <!-- BIO -->
     <div class="section-title">👤 Quem é Erika Hilton</div>
@@ -502,13 +505,13 @@ const EMENDAS = [
 ];
 
 const CRONOGRAMA_INSTA = [
-  { dia: 'Seg', tema: 'Quem é Erika?', formato: 'Carrossel biográfico' },
-  { dia: 'Ter', tema: 'Atuação em Jundiaí', formato: 'Post + legenda política' },
-  { dia: 'Qua', tema: 'Pauta social LGBTQIAPN+', formato: 'Carrossel com dados' },
-  { dia: 'Qui', tema: 'Propostas e bandeiras', formato: 'Post + chamada pra ação' },
-  { dia: 'Sex', tema: 'Bastidores da equipe', formato: 'Reels / Vídeo curto' },
-  { dia: 'Sáb', tema: 'Agenda do fds', formato: 'Stories + Post' },
-  { dia: 'Dom', tema: 'Mobilização pré-bandeiraço', formato: 'Post convocatório' },
+  { dia: 'Seg', tema: 'Quem é Erika?', formato: 'Carrossel biográfico', horario: '13h' },
+  { dia: 'Ter', tema: 'Atuação em Jundiaí', formato: 'Post + legenda política', horario: '15h' },
+  { dia: 'Qua', tema: 'Pauta social LGBTQIAPN+', formato: 'Carrossel com dados', horario: '13h' },
+  { dia: 'Qui', tema: 'Propostas e bandeiras', formato: 'Post + chamada pra ação', horario: '15h' },
+  { dia: 'Sex', tema: 'Bastidores da equipe', formato: 'Reels / Vídeo curto', horario: '13h' },
+  { dia: 'Sáb', tema: 'Agenda do fds', formato: 'Stories + Post', horario: '15h' },
+  { dia: 'Dom', tema: 'Mobilização pré-bandeiraço', formato: 'Post convocatório', horario: '13h' },
 ];
 
 const PARCEIROS = [
@@ -860,6 +863,7 @@ function renderInstaSchedule() {
       <div class="dia">${d.dia} ${d.dia === diaSemana ? '📌' : ''}</div>
       <div class="tema">${d.tema}</div>
       <div class="formato">${d.formato}</div>
+      <div style="font-size:0.7em;color:#e94560;margin-top:4px;font-weight:600;">🕐 ${d.horario}</div>
     </div>
   `).join('');
 }
