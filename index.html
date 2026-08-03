@@ -143,6 +143,40 @@ footer a { color: #e94560; text-decoration: none; }
   <div class="people-grid" id="people-grid">
     <!-- gerado por JS -->
   </div>
+  <!-- SENHA -->
+  <div id="senha-area" style="display:none;width:100%;max-width:320px;">
+    <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:0.9em;margin-bottom:12px;">🔐 <strong id="senha-label">Digite a senha</strong></div>
+      <input type="password" id="senha-input" placeholder="Senha"
+        style="width:100%;padding:12px;border-radius:8px;border:1px solid #2a2a4a;background:#0f0f0f;color:#e0e0e0;font-size:1em;text-align:center;outline:none;"
+        onkeydown="if(event.key==='Enter')verificarSenha()">
+      <div id="senha-erro" style="color:#e94560;font-size:0.8em;margin-top:8px;display:none;"></div>
+      <div style="display:flex;gap:8px;margin-top:12px;">
+        <button onclick="verificarSenha()" style="flex:1;background:#e94560;color:#fff;border:none;padding:10px;border-radius:8px;font-weight:600;cursor:pointer;">Entrar</button>
+        <button onclick="cancelarSenha()" style="background:#2a2a4a;color:#888;border:none;padding:10px;border-radius:8px;cursor:pointer;">Voltar</button>
+      </div>
+      <div style="margin-top:10px;font-size:0.7em;color:#555;">
+        🔑 <a href="#" onclick="mostrarMudarSenha();return false;" style="color:#e94560;">Mudar minha senha</a>
+      </div>
+    </div>
+  </div>
+  <!-- MUDAR SENHA -->
+  <div id="mudar-senha-area" style="display:none;width:100%;max-width:320px;">
+    <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:20px;text-align:center;">
+      <div style="font-size:0.9em;margin-bottom:12px;">🔑 <strong>Mudar senha</strong></div>
+      <input type="password" id="senha-antiga" placeholder="Senha atual"
+        style="width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a4a;background:#0f0f0f;color:#e0e0e0;font-size:0.9em;text-align:center;outline:none;margin-bottom:8px;">
+      <input type="password" id="senha-nova" placeholder="Nova senha"
+        style="width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a4a;background:#0f0f0f;color:#e0e0e0;font-size:0.9em;text-align:center;outline:none;margin-bottom:8px;">
+      <input type="password" id="senha-confirmar" placeholder="Confirmar nova senha"
+        style="width:100%;padding:10px;border-radius:8px;border:1px solid #2a2a4a;background:#0f0f0f;color:#e0e0e0;font-size:0.9em;text-align:center;outline:none;margin-bottom:8px;">
+      <div id="mudar-senha-erro" style="color:#e94560;font-size:0.8em;margin-top:4px;display:none;"></div>
+      <div style="display:flex;gap:8px;margin-top:8px;">
+        <button onclick="salvarNovaSenha()" style="flex:1;background:#4caf50;color:#fff;border:none;padding:10px;border-radius:8px;font-weight:600;cursor:pointer;">Salvar</button>
+        <button onclick="cancelarMudarSenha()" style="background:#2a2a4a;color:#888;border:none;padding:10px;border-radius:8px;cursor:pointer;">Voltar</button>
+      </div>
+    </div>
+  </div>
   <div style="font-size:0.75em;color:#555;">Pré-campanha • Início 16/08/2026</div>
 </div>
 
@@ -277,20 +311,26 @@ const AGENDA_18 = [
   { hora: '19:00', atividade: '🎉 Encontro Aberto', local: 'Clube 28 de Setembro', destaque: true },
 ];
 
+const SENHA_PADRAO = 'erika2026';
+
 // ═══════════════════════════════════════════════
 // LÓGICA
 // ═══════════════════════════════════════════════
 
 let usuarioAtual = null;
+let usuarioPendente = null;
 
 function init() {
   renderLogin();
 }
 
 function renderLogin() {
+  document.getElementById('senha-area').style.display = 'none';
+  document.getElementById('mudar-senha-area').style.display = 'none';
   const grid = document.getElementById('people-grid');
+  grid.style.display = 'grid';
   grid.innerHTML = EQUIPE.map(p => `
-    <div class="person-btn" onclick="entrar('${p.nome}')">
+    <div class="person-btn" onclick="selecionarPessoa('${p.nome}')">
       <div class="avatar" style="background:${p.cor}">${p.iniciais}</div>
       <div class="pname">${p.nome}</div>
       <div class="prole">${p.role}</div>
@@ -298,9 +338,100 @@ function renderLogin() {
   `).join('');
 }
 
+function selecionarPessoa(nome) {
+  usuarioPendente = nome;
+  const p = pessoa(nome);
+  document.getElementById('people-grid').style.display = 'none';
+  document.getElementById('senha-label').textContent = `🔐 Senha — ${p.nome}`;
+  document.getElementById('senha-input').value = '';
+  document.getElementById('senha-erro').style.display = 'none';
+  document.getElementById('senha-area').style.display = 'block';
+  document.getElementById('senha-input').focus();
+}
+
+function verificarSenha() {
+  const senha = document.getElementById('senha-input').value.trim();
+  if (!senha) {
+    mostrarErro('Digite uma senha');
+    return;
+  }
+  const senhaSalva = localStorage.getItem('senha_' + usuarioPendente) || SENHA_PADRAO;
+  if (senha === senhaSalva) {
+    entrar(usuarioPendente);
+  } else {
+    mostrarErro('❌ Senha incorreta');
+    document.getElementById('senha-input').value = '';
+    document.getElementById('senha-input').focus();
+  }
+}
+
+function mostrarErro(msg) {
+  const el = document.getElementById('senha-erro');
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+function cancelarSenha() {
+  usuarioPendente = null;
+  document.getElementById('senha-area').style.display = 'none';
+  document.getElementById('senha-erro').style.display = 'none';
+  document.getElementById('people-grid').style.display = 'grid';
+}
+
+function mostrarMudarSenha() {
+  document.getElementById('senha-area').style.display = 'none';
+  document.getElementById('mudar-senha-area').style.display = 'block';
+  document.getElementById('senha-antiga').value = '';
+  document.getElementById('senha-nova').value = '';
+  document.getElementById('senha-confirmar').value = '';
+  document.getElementById('mudar-senha-erro').style.display = 'none';
+}
+
+function cancelarMudarSenha() {
+  document.getElementById('mudar-senha-area').style.display = 'none';
+  document.getElementById('senha-area').style.display = 'block';
+  document.getElementById('senha-input').focus();
+}
+
+function salvarNovaSenha() {
+  const antiga = document.getElementById('senha-antiga').value.trim();
+  const nova = document.getElementById('senha-nova').value.trim();
+  const conf = document.getElementById('senha-confirmar').value.trim();
+  const errEl = document.getElementById('mudar-senha-erro');
+
+  if (!antiga || !nova || !conf) {
+    errEl.textContent = 'Preencha todos os campos';
+    errEl.style.display = 'block';
+    return;
+  }
+  const senhaAtual = localStorage.getItem('senha_' + usuarioPendente) || SENHA_PADRAO;
+  if (antiga !== senhaAtual) {
+    errEl.textContent = 'Senha atual incorreta';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (nova !== conf) {
+    errEl.textContent = 'Nova senha e confirmação não conferem';
+    errEl.style.display = 'block';
+    return;
+  }
+  if (nova.length < 4) {
+    errEl.textContent = 'A senha deve ter no mínimo 4 caracteres';
+    errEl.style.display = 'block';
+    return;
+  }
+  localStorage.setItem('senha_' + usuarioPendente, nova);
+  errEl.style.color = '#4caf50';
+  errEl.textContent = '✅ Senha alterada com sucesso!';
+  errEl.style.display = 'block';
+  setTimeout(() => {
+    cancelarMudarSenha();
+    errEl.style.color = '#e94560';
+  }, 1500);
+}
+
 function entrar(nome) {
   usuarioAtual = nome;
-  localStorage.setItem('hub_user', nome);
   document.getElementById('login-screen').style.display = 'none';
   document.getElementById('dashboard').style.display = 'block';
   renderDashboard();
@@ -310,6 +441,9 @@ function showLogin() {
   usuarioAtual = null;
   document.getElementById('login-screen').style.display = 'flex';
   document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('senha-area').style.display = 'none';
+  document.getElementById('mudar-senha-area').style.display = 'none';
+  document.getElementById('people-grid').style.display = 'grid';
 }
 
 function renderDashboard() {
