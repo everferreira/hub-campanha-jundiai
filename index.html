@@ -449,6 +449,30 @@ footer a { color: #e94560; text-decoration: none; }
       </div>
     </div>
 
+    <!-- 📝 CONTEÚDO PRONTO -->
+    <div class="section-title">📝 Conteúdo Pronto</div>
+    <div style="font-size:0.78em;color:#888;margin:-6px 0 12px;">Legendas, hashtags e roteiros prontos pra usar — é só copiar e colar!</div>
+
+    <!-- Legendas -->
+    <div class="section-title" style="font-size:0.9em;">📄 Legendas para cada post</div>
+    <div class="task-card" onclick="this.classList.toggle('done')" style="margin-bottom:10px;">
+      <div class="task-header"><strong>Clique num post abaixo pra ver a legenda</strong></div>
+      <div class="task-responsaveis">Copiar e colar na hora de publicar</div>
+    </div>
+    <div id="legendas-container" style="display:grid;gap:8px;margin-bottom:20px;"></div>
+
+    <!-- Hashtags -->
+    <div class="section-title" style="font-size:0.9em;">🏷️ Hashtags por tema</div>
+    <div id="hashtags-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;"></div>
+
+    <!-- Reels Scripts -->
+    <div class="section-title" style="font-size:0.9em;">🎬 Scripts de Reels</div>
+    <div id="reels-container" style="display:grid;gap:10px;margin-bottom:20px;"></div>
+
+    <!-- Guia Visual -->
+    <div class="section-title" style="font-size:0.9em;">🎨 Guia Visual</div>
+    <div id="guia-container" style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:16px;margin-bottom:20px;"></div>
+
     <footer>
       Hub Interno — Campanha Erika Hilton 2026 • Jundiaí-SP<br>
       <a href="#" onclick="showLogin();return false;">🔐 Trocar de pessoa</a>
@@ -663,6 +687,128 @@ const ENGAJAMENTO = [
   { tarefa: "Compartilhar posts oficiais (Erika+Sofia) nos stories", responsavel: "Ambos", feito: false },
   { tarefa: "Verificar engajamento e salvar stories em destaque", responsavel: "Ambos", feito: false },
 ];
+
+// ═══════════════════════════════════════════════════════════
+// CONTEÚDO PRONTO — Legendas, Hashtags, Roteiros
+// ═══════════════════════════════════════════════════════════
+
+// 📄 LEGENDAS PRONTAS para cada post do calendário
+const LEGENDAS = {
+  "bandeiraco": "🚩 Vem pro Bandeiraço de abertura da campanha!\n\nNo domingo, 16 de agosto, vamos ocupar as ruas de Jundiaí pra mostrar que a cidade está com Erika Hilton! 💛🏳️‍⚧️\n\n📍 Local e horário: em breve\n\n#ErikaHilton #Jundiaí #Eleições2026 #Bandeiraço #PSOL",
+  
+  "quem_e_erika": "📸 Conhece a história de Erika Hilton?\n\nDeputada federal pelo PSOL/SP, Erika é a primeira mulher trans a presidir a Comissão de Defesa dos Direitos da Mulher na Câmara. Eleita a MELHOR deputada do Brasil em 2024 e 2025 pelo Prêmio Congresso em Foco. Reconhecida pela BBC como uma das 100 mulheres mais influentes do mundo.\n\nEm Jundiaí, já destinou R$ 4,6 milhões em emendas. E queremos mais! 🎯\n\n#ErikaHilton #MelhorDeputada #Jundiaí #PSOL #MulheresNaPolítica",
+  
+  "melhor_deputada": "🏆 Duas vezes seguida: Erika Hilton é a MELHOR deputada do Brasil!\n\nEm 2024 e 2025, foi eleita pelo Prêmio Congresso em Foco como a deputada federal mais bem avaliada do país. Reconhecimento do trabalho incansável pelas pautas sociais, direitos humanos e justiça.\n\nJundiaí merece uma representante que honre a cidade. Essa é Erika! 💛\n\n#MelhorDeputada #ErikaHilton #PrêmioCongressoeFoco #Jundiaí",
+  
+  "comissao_mulher": "⚧️ Primeira mulher trans a presidir a Comissão da Mulher na Câmara!\n\nEm 11 de março de 2026, Erika Hilton fez história ao ser eleita presidente da Comissão de Defesa dos Direitos da Mulher. Já apresentou 26 propostas em defesa das mulheres, incluindo a Lei Keron Ravache, que tipifica o transfeminicídio.\n\nRepresentatividade que salva vidas. 🙌\n\n#ComissãoDaMulher #ErikaHilton #Transfeminicídio #LeiKeronRavache",
+  
+  "parada_lgbt": "🏳️‍🌈 Erika Hilton na 20ª Parada LGBT+ de Jundiaí!\n\nA deputada marcou presença na celebração dos 20 anos da Parada do Orgulho LGBT+ de Jundiaí, no Espaço Expressa. Discurso emocionante que reforçou a luta por direitos e visibilidade.\n\nJundiaí é cidade de orgulho, não de preconceito! ✊🏳️‍🌈\n\n#ParadaLGBT #Jundiaí #Orgulho #ErikaHilton #LGBTQIA+",
+  
+  "emendas_total": "💰 Erika Hilton é a deputada que MAIS destinou recursos para Jundiaí!\n\nR$ 4,6 milhões em emendas parlamentares no biênio 2025-2026 — mais que qualquer outro deputado. Esse dinheiro está fortalecendo a saúde da nossa cidade.\n\nIsso é trabalho de verdade! 👏\n\n#ErikaHilton #Jundiaí #Emendas #SaúdePública",
+  
+  "emendas_saude": "🏥 R$ 2 milhões para a saúde de Jundiaí!\n\nAs emendas de Erika Hilton estão fazendo a diferença:\n✅ R$ 680 mil — oftalmologia infantil (zerar fila de crianças com óculos)\n✅ R$ 320 mil — Centro de Diagnóstico do TEA (autismo)\n✅ R$ 1 milhão — CTA (testagem HIV, sífilis, hepatites)\n\nSaúde é prioridade! ❤️\n\n#Saúde #Jundiaí #ErikaHilton #Emendas #SUS",
+  
+  "anuncio_visita": "📅 É amanhã! Erika Hilton vem a Jundiaí!\n\nDia 18 de agosto, a deputada estará na cidade para uma agenda completa:\n📍 PA Vila Progresso\n📍 Instituto Luís Braile\n📍 Centro TEA Girassóis\n📍 Coletiva de Imprensa\n📍 Encontro com Lideranças\n📍 Encontro Aberto — Clube 28 de Setembro (19h)\n\nVenha participar! 🎯\n\n#ErikaHilton #Jundiaí #Visita #Política",
+  
+  "agenda_18": "📋 A agenda da Erika em Jundiaí está cheia!\n\nCada parada tem um motivo especial. Acompanhe pelos stories ao longo do dia! 🔴\n\n⏰ 11h — PA Vila Progresso\n⏰ 12h — Instituto Luís Braile\n⏰ 13h30 — Centro TEA\n⏰ 15h — Almoço\n⏰ 16h30 — Coletiva de Imprensa 🎤\n⏰ 17h30 — Encontro Lideranças 🤝\n⏰ 19h — Encontro Aberto — Clube 28 🎉\n\n#ErikaHilton #Jundiaí #Agenda",
+  
+  "meta_votos": "🎯 Em 2022, Erika teve 1.944 votos em Jundiaí. Em 2026, a meta é 5.000!\n\nJundiaí pode e deve ser a cidade com MAIS votos para Erika fora da capital. Cada voto importa — bora fazer história! 🗳️💛\n\n#Eleições2026 #Jundiaí #ErikaHilton #Meta5Mil",
+  
+  "por_que_votar": "🎬 Por que votar em Erika Hilton?\n\n✅ Melhor deputada do Brasil (2024/2025)\n✅ 26 propostas pelas mulheres\n✅ R$ 4,6 milhões para Jundiaí\n✅ Primeira trans na Comissão da Mulher\n✅ Luta incansável por direitos\n\nVoto consciente é voto em quem trabalha. 🗳️✨\n\n#ErikaHilton #VotoConsciente #Eleições2026",
+  
+  "coletiva": "🎤 O que Erika disse na coletiva de imprensa em Jundiaí?\n\nA deputada falou sobre os investimentos na cidade, as próximas ações e respondeu perguntas da imprensa local. Vem ver! 📰\n\n#ErikaHilton #Coletiva #Jundiaí #Imprensa",
+};
+
+// 🏷️ HASHTAGS ORGANIZADAS por tema
+const HASHTAGS = {
+  "geral": ["#ErikaHilton", "#Jundiaí", "#PSOL", "#Eleições2026"],
+  "atuacao": ["#DeputadaFederal", "#MelhorDeputada", "#MulheresNaPolítica", "#CamaraDosDeputados"],
+  "emendas": ["#Emendas", "#SaúdePública", "#Recursos", "#Investimento"],
+  "lgbtqia": ["#Orgulho", "#ParadaLGBT", "#DireitosHumanos", "#LGBTQIA+", "#Visibilidade"],
+  "eleicao": ["#VotaErika", "#JundiaíDecide", "#VotoConsciente", "#04DeOutubro"],
+  "mulher": ["#ComissãoDaMulher", "#DireitosDasMulheres", "#Transfeminicídio", "#LeiKeronRavache"],
+  "visita": ["#ErikaEmJundiaí", "#AgendaErika", "#VisitaErika"],
+};
+
+// 🎬 SCRIPTS DE REELS (roteiro básico)
+const REELS_SCRIPTS = {
+  "bandeiraco": {
+    titulo: "Reels: Vem pro Bandeiraço!",
+    duracao: "15-20 segundos",
+    trilha: "Música animada/empolgante (estilo campanha)",
+    cenas: [
+      "0-3s: Erika com a mão no ar, sorrindo",
+      "3-7s: Texto na tela: 'DOMINGO - 16/08'",
+      "7-12s: Imagens de arquivo de bandeiraços anteriores",
+      "12-15s: Texto: 'Vamos ocupar as ruas de Jundiaí!'",
+      "15-18s: Chamada final: 'Te esperamos lá!'",
+    ]
+  },
+  "por_que_votar": {
+    titulo: "Reels: Por que votar em Erika?",
+    duracao: "30-40 segundos",
+    trilha: "Música inspiradora, crescente",
+    cenas: [
+      "0-5s: Erika falando no plenário (imagem poderosa)",
+      "5-10s: Texto: 'Melhor deputada do Brasil - 2024 e 2025'",
+      "10-15s: Imagem: R$ 4,6M em emendas pra Jundiaí",
+      "15-22s: Erika na Parada LGBT+ de Jundiaí",
+      "22-28s: Texto: 'Jundiaí merece quem trabalha'",
+      "28-35s: Erika acenando + 'Vota Erika 50??'",
+    ]
+  },
+  "agenda_visita": {
+    titulo: "Reels: Agenda da Erika em Jundiaí",
+    duracao: "20-25 segundos",
+    trilha: "Música leve e informativa",
+    cenas: [
+      "0-3s: Erika chegando em Jundiaí",
+      "3-8s: Texto: '18 de agosto - Erika em Jundiaí'",
+      "8-12s: Mosaico rápido: PA, Instituto Braile, Centro TEA",
+      "12-18s: Texto: '19h - Encontro Aberto (Clube 28)'",
+      "18-22s: 'Vem participar! Agenda nos stories'",
+    ]
+  },
+  "depoimentos_visita": {
+    titulo: "Reels: Melhores momentos da visita",
+    duracao: "30-45 segundos",
+    trilha: "Música emocionante",
+    cenas: [
+      "0-5s: Erika abraçando crianças no PA Vila Progresso",
+      "5-12s: Discurso na coletiva de imprensa (melhor frase)",
+      "12-20s: Encontro com lideranças - apertos de mão",
+      "20-30s: Encontro aberto - multidão, bandeiras, energia",
+      "30-35s: Texto: 'Jundiaí recebeu Erika de braços abertos!'",
+      "35-40s: Erika agradecendo + logo da campanha",
+    ]
+  },
+};
+
+// 🎨 GUIA VISUAL
+const GUIA_VISUAL = {
+  cores: {
+    primaria: "#e94560 (vermelho campanha)",
+    secundaria: "#9c27b0 (roxo)",
+    fundo: "#0f0f0f (preto)",
+    texto: "#e0e0e0 (cinza claro)",
+    destaque: "#ffc107 (dourado)",
+  },
+  fontes: "Inter (gratuita, Google Fonts)",
+  formatos: {
+    carrossel: "1080x1080 px (quadrado) - 3 a 5 slides",
+    card_unico: "1080x1080 px (quadrado)",
+    story: "1080x1920 px (vertical, 9:16)",
+    reels: "1080x1920 px (vertical, 9:16) - max 60s",
+    post_legenda: "1080x1080 px (quadrado) ou 1080x1350 px (retrato 4:5)",
+  },
+  dicas: [
+    "Usar fotos oficiais de alta resolução (Câmara, Instagram oficial)",
+    "Manter a paleta vermelha + roxa + branca da campanha",
+    "Textos legíveis, fontes grandes em cards",
+    "Sempre incluir a logo da campanha no canto",
+    "Stories: usar template padrao com moldura vermelha",
+  ],
+};
 
 const PARCEIROS = [
   {
@@ -890,6 +1036,9 @@ function renderDashboard() {
   // Biografia
   renderBio();
 
+  // Conteudo Pronto (legendas, hashtags, scripts, guia)
+  renderConteudoPronto();
+
   // Agenda
   renderAgenda();
 
@@ -1056,6 +1205,99 @@ function renderContentSchedule() {
 function toggleProd(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('prod_' + tarefa, el.classList.contains('done')); }
 function togglePub(el, key) { el.classList.toggle('done'); localStorage.setItem('pub_' + key, el.classList.contains('done')); }
 function toggleEng(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('eng_' + tarefa, el.classList.contains('done')); }
+
+// 📝 CONTEÚDO PRONTO
+function renderConteudoPronto() {
+  // Legendas
+  const keys = Object.keys(LEGENDAS);
+  const nomes = {
+    bandeiraco: "🚩 Bandeiraço", quem_e_erika: "📸 Quem é Erika",
+    melhor_deputada: "🏆 Melhor Deputada", comissao_mulher: "⚧️ Comissão da Mulher",
+    parada_lgbt: "🏳️‍🌈 Parada LGBT", emendas_total: "💰 R$ 4,6M em Jundiaí",
+    emendas_saude: "🏥 R$ 2M na Saúde", anuncio_visita: "📅 Anúncio Visita",
+    agenda_18: "📋 Agenda 18/08", meta_votos: "🎯 Meta 5.000",
+    por_que_votar: "🎬 Por que votar", coletiva: "🎤 Coletiva"
+  };
+  document.getElementById('legendas-container').innerHTML = keys.map(k => `
+    <div class="task-card" onclick="mostrarLegenda('${k}')">
+      <div class="task-header"><div class="task-text"><strong>${nomes[k] || k}</strong></div></div>
+      <div class="task-responsaveis">👆 Clique pra ver a legenda completa</div>
+    </div>
+  `).join('');
+
+  // Hashtags
+  document.getElementById('hashtags-container').innerHTML = Object.entries(HASHTAGS).map(([tema, tags]) => `
+    <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px;">
+      <div style="font-size:0.75em;color:#e94560;font-weight:600;margin-bottom:4px;">${tema.toUpperCase()}</div>
+      <div style="font-size:0.78em;color:#888;">${tags.join(' ')}</div>
+    </div>
+  `).join('');
+
+  // Reels Scripts
+  document.getElementById('reels-container').innerHTML = Object.entries(REELS_SCRIPTS).map(([k, s]) => `
+    <div class="task-card" onclick="this.classList.toggle('done')">
+      <div class="task-header"><div class="task-text"><strong>${s.titulo}</strong></div>
+        <span style="font-size:0.7em;color:#888;">⏱️ ${s.duracao} 🎵 ${s.trilha}</span>
+      </div>
+      <div style="font-size:0.78em;color:#aaa;margin-top:6px;line-height:1.6;">
+        ${s.cenas.map(c => `🎬 ${c}`).join('<br>')}
+      </div>
+    </div>
+  `).join('');
+
+  // Guia Visual
+  document.getElementById('guia-container').innerHTML = `
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+      <div>
+        <div style="font-size:0.75em;color:#e94560;font-weight:600;margin-bottom:6px;">🎨 CORES</div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          ${Object.entries(GUIA_VISUAL.cores).map(([nome, cor]) => `
+            <div style="display:flex;align-items:center;gap:8px;font-size:0.78em;">
+              <span style="width:16px;height:16px;border-radius:4px;background:${cor.split(' ')[0]};border:1px solid #444;display:inline-block;"></span>
+              <span style="color:#aaa;">${nome}:</span> <span style="color:#e0e0e0;">${cor}</span>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      <div>
+        <div style="font-size:0.75em;color:#e94560;font-weight:600;margin-bottom:6px;">📐 FORMATOS</div>
+        ${Object.entries(GUIA_VISUAL.formatos).map(([nome, desc]) => `
+          <div style="font-size:0.78em;color:#888;margin-bottom:3px;"><strong style="color:#aaa;">${nome}:</strong> ${desc}</div>
+        `).join('')}
+      </div>
+      <div>
+        <div style="font-size:0.75em;color:#e94560;font-weight:600;margin-bottom:6px;">💡 DICAS</div>
+        ${GUIA_VISUAL.dicas.map(d => `<div style="font-size:0.78em;color:#888;">• ${d}</div>`).join('')}
+      </div>
+    </div>
+    <div style="margin-top:10px;font-size:0.8em;color:#555;border-top:1px solid #2a2a4a;padding-top:10px;">
+      🔤 <strong>Fonte:</strong> ${GUIA_VISUAL.fontes}
+    </div>
+  `;
+}
+
+function mostrarLegenda(key) {
+  const legenda = LEGENDAS[key];
+  // Create a popup/modal
+  const overlay = document.createElement('div');
+  overlay.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:999;padding:20px;';
+  overlay.onclick = () => document.body.removeChild(overlay);
+  
+  const modal = document.createElement('div');
+  modal.style.cssText = 'background:#1a1a2e;border:1px solid #e94560;border-radius:12px;padding:20px;max-width:500px;width:100%;max-height:80vh;overflow-y:auto;';
+  modal.onclick = (e) => e.stopPropagation();
+  
+  modal.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <strong style="color:#e94560;font-size:0.9em;">📄 Legenda</strong>
+      <button onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)" style="background:#2a2a4a;border:none;color:#888;padding:4px 12px;border-radius:6px;cursor:pointer;">✕ Fechar</button>
+    </div>
+    <div style="background:#0f0f0f;border:1px solid #2a2a4a;border-radius:8px;padding:14px;font-size:0.82em;color:#e0e0e0;line-height:1.6;white-space:pre-wrap;">${legenda}</div>
+    <div style="margin-top:10px;font-size:0.72em;color:#555;">👆 Clique fora pra fechar. Copie o texto e cole no Instagram.</div>
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+}
 
 function renderBio() {
   document.getElementById('bio-card').innerHTML = `
