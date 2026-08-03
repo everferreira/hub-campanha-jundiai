@@ -147,9 +147,12 @@ footer a { color: #e94560; text-decoration: none; }
   <div id="senha-area" style="display:none;width:100%;max-width:320px;">
     <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:12px;padding:20px;text-align:center;">
       <div style="font-size:0.9em;margin-bottom:12px;">🔐 <strong id="senha-label">Digite a senha</strong></div>
-      <input type="password" id="senha-input" placeholder="Senha"
-        style="width:100%;padding:12px;border-radius:8px;border:1px solid #2a2a4a;background:#0f0f0f;color:#e0e0e0;font-size:1em;text-align:center;outline:none;"
-        onkeydown="if(event.key==='Enter')verificarSenha()">
+      <div style="position:relative;">
+        <input type="password" id="senha-input" placeholder="Senha"
+          style="width:100%;padding:12px;border-radius:8px;border:1px solid #2a2a4a;background:#0f0f0f;color:#e0e0e0;font-size:1em;text-align:center;outline:none;padding-right:40px;"
+          onkeydown="if(event.key==='Enter')verificarSenha()">
+        <span id="senha-olho" onclick="toggleSenha()" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;color:#888;font-size:1.1em;user-select:none;">👁️</span>
+      </div>
       <div id="senha-erro" style="color:#e94560;font-size:0.8em;margin-top:8px;display:none;"></div>
       <div style="display:flex;gap:8px;margin-top:12px;">
         <button onclick="verificarSenha()" style="flex:1;background:#e94560;color:#fff;border:none;padding:10px;border-radius:8px;font-weight:600;cursor:pointer;">Entrar</button>
@@ -376,6 +379,18 @@ function cancelarSenha() {
   document.getElementById('senha-area').style.display = 'none';
   document.getElementById('senha-erro').style.display = 'none';
   document.getElementById('people-grid').style.display = 'grid';
+}
+
+function toggleSenha() {
+  const input = document.getElementById('senha-input');
+  const olho = document.getElementById('senha-olho');
+  if (input.type === 'password') {
+    input.type = 'text';
+    olho.textContent = '🙈';
+  } else {
+    input.type = 'password';
+    olho.textContent = '👁️';
+  }
 }
 
 function mostrarMudarSenha() {
