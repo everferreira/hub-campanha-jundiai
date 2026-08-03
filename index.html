@@ -10,26 +10,20 @@
 body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #e0e0e0; min-height: 100vh; }
 .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
 
-/* LOGIN SCREEN */
+/* LOGIN */
 #login-screen {
-  display: flex;
-  flex-direction: column;
-  align-items: center; justify-content: center;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
   min-height: 100vh; padding: 20px; gap: 32px;
 }
-#login-screen .logo {
-  text-align: center;
-}
+#login-screen .logo { text-align: center; }
 #login-screen .logo h1 { font-size: 2em; color: #e94560; font-weight: 800; }
 #login-screen .logo h1 span { color: #fff; }
 #login-screen .logo p { color: #888; font-size: 0.9em; margin-top: 4px; }
-#login-screen .logo .subtitle { color: #666; font-size: 0.8em; }
 .people-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; max-width: 600px; width: 100%; }
 .person-btn {
   display: flex; flex-direction: column; align-items: center; gap: 8px;
   padding: 20px 12px; border-radius: 12px; border: 1px solid #2a2a4a;
-  background: #1a1a2e; cursor: pointer; transition: all 0.2s;
-  text-align: center;
+  background: #1a1a2e; cursor: pointer; transition: all 0.2s; text-align: center;
 }
 .person-btn:hover { border-color: #e94560; transform: translateY(-2px); background: #1e1e3a; }
 .person-btn .avatar {
@@ -39,6 +33,9 @@ body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #e0e0e0; mi
 }
 .person-btn .pname { font-size: 0.85em; font-weight: 600; }
 .person-btn .prole { font-size: 0.7em; color: #888; }
+.person-btn .nivel {
+  font-size: 0.6em; color: #555; margin-top: 2px;
+}
 
 /* DASHBOARD */
 #dashboard { display: none; }
@@ -53,14 +50,14 @@ header .user-info { display: flex; align-items: center; gap: 12px; }
 header .user-info .avatar-sm { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: 700; color: #fff; }
 header .user-info .uname { font-size: 0.85em; font-weight: 600; }
 header .user-info .urole { font-size: 0.7em; color: #888; }
+header .user-info .ubadge { font-size: 0.6em; color: #e94560; background: #2a1a1a; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
 header .switch-btn {
   background: #e94560; color: #fff; border: none; padding: 8px 16px;
   border-radius: 8px; cursor: pointer; font-size: 0.8em; font-weight: 600; transition: opacity 0.2s;
 }
 header .switch-btn:hover { opacity: 0.8; }
-header .badge { background: #e94560; color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 0.75em; font-weight: 600; }
-header .badge.green { background: #1a6b3c; }
 
+/* GREETING */
 .greeting {
   background: #1a1a2e; border-radius: 12px; padding: 20px;
   border: 1px solid #2a2a4a; margin-bottom: 20px;
@@ -68,21 +65,39 @@ header .badge.green { background: #1a6b3c; }
 .greeting h2 { font-size: 1.15em; margin-bottom: 6px; }
 .greeting p { color: #888; font-size: 0.85em; line-height: 1.5; }
 
-.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 20px; }
+/* COUNTDOWN */
+.countdown-bar {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+.countdown-item {
+  background: #1a1a2e; border-radius: 10px; padding: 14px; text-align: center;
+  border: 1px solid #2a2a4a;
+}
+.countdown-item .days { font-size: 1.8em; font-weight: 800; color: #e94560; line-height: 1; }
+.countdown-item .label { font-size: 0.7em; color: #888; margin-top: 4px; }
+.countdown-item.highlight { border-color: #e94560; }
+.countdown-item.passed { opacity: 0.4; }
+.countdown-item.passed .days { color: #4caf50; font-size: 1.2em; }
+
+/* STATS */
+.stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 20px; }
 .stat-card {
-  background: #1a1a2e; border-radius: 10px; padding: 16px;
+  background: #1a1a2e; border-radius: 10px; padding: 14px;
   border: 1px solid #2a2a4a; text-align: center;
 }
-.stat-card .num { font-size: 1.6em; font-weight: 700; color: #e94560; }
-.stat-card .label { font-size: 0.75em; color: #888; margin-top: 4px; }
+.stat-card .num { font-size: 1.4em; font-weight: 700; color: #e94560; }
+.stat-card .label { font-size: 0.7em; color: #888; margin-top: 4px; }
 .stat-card.highlight { border-color: #e94560; }
 
+/* SECTIONS */
 .section-title {
   font-size: 1em; font-weight: 600; color: #fff;
   margin: 20px 0 10px; display: flex; align-items: center; gap: 8px;
 }
 .section-title .count { background: #2a2a4a; color: #888; font-size: 0.7em; padding: 2px 8px; border-radius: 10px; }
 
+/* TASKS */
 .tasks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; margin-bottom: 16px; }
 .task-card {
   background: #1a1a2e; border-radius: 10px; padding: 14px 16px;
@@ -103,13 +118,111 @@ header .badge.green { background: #1a6b3c; }
 .task-card .task-prazo.continuous { background: #1a4a2a; color: #81c784; }
 .task-card .task-responsaveis { font-size: 0.7em; color: #888; margin-top: 6px; }
 
+/* PROGRESS BAR */
+.progress-bar-bg {
+  background: #2a2a4a; border-radius: 10px; height: 20px; overflow: hidden; margin: 8px 0 16px;
+}
+.progress-bar-fill {
+  height: 100%; border-radius: 10px; background: linear-gradient(90deg, #e94560, #ff6b6b);
+  transition: width 0.5s; display: flex; align-items: center; justify-content: center;
+  font-size: 0.7em; font-weight: 600; color: #fff; min-width: fit-content; padding: 0 8px;
+}
+
+/* AGENDA */
 .agenda-table { width: 100%; border-collapse: collapse; font-size: 0.82em; margin-bottom: 20px; }
 .agenda-table th { background: #2a2a4a; padding: 10px; text-align: left; color: #e94560; font-weight: 600; }
 .agenda-table td { padding: 10px; border-bottom: 1px solid #2a2a4a; }
 .agenda-table tr:hover td { background: #1e1e3a; }
 .agenda-table .highlight { color: #e94560; font-weight: 600; }
-.agenda-table .spotlight { color: #ffc107; }
 
+/* NEWS */
+.news-feed { display: grid; gap: 10px; margin-bottom: 16px; }
+.news-card {
+  background: #1a1a2e; border-radius: 10px; padding: 14px 16px;
+  border: 1px solid #2a2a4a; transition: all 0.2s;
+}
+.news-card:hover { border-color: #555; }
+.news-card .news-title { font-size: 0.9em; font-weight: 600; color: #fff; }
+.news-card .news-source { font-size: 0.7em; color: #e94560; margin-top: 2px; }
+.news-card .news-desc { font-size: 0.8em; color: #888; margin-top: 6px; line-height: 1.4; }
+.news-card .news-link { display: inline-block; margin-top: 6px; font-size: 0.75em; color: #64b5f6; text-decoration: none; }
+
+/* ELECTORAL PANEL */
+.eleitoral-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.eleitoral-card {
+  background: #1a1a2e; border-radius: 10px; padding: 16px; text-align: center;
+  border: 1px solid #2a2a4a;
+}
+.eleitoral-card .big-num { font-size: 1.6em; font-weight: 800; color: #e94560; }
+.eleitoral-card .big-num.green { color: #81c784; }
+.eleitoral-card .big-num.gold { color: #ffc107; }
+.eleitoral-card .desc { font-size: 0.7em; color: #888; margin-top: 4px; }
+.eleitoral-card .sub { font-size: 0.65em; color: #555; margin-top: 2px; }
+.eleitoral-card.thermometer { border-color: #e94560; position: relative; overflow: hidden; }
+
+/* Thermometer visual */
+.thermo-track {
+  width: 100%; height: 8px; background: #2a2a4a; border-radius: 4px; margin: 10px 0 6px;
+  overflow: hidden;
+}
+.thermo-fill {
+  height: 100%; border-radius: 4px; background: linear-gradient(90deg, #e94560, #ffc107, #81c784);
+  transition: width 1s;
+}
+
+/* EMBEDDED MEDIA */
+.emendas-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.emenda-card {
+  background: #1a1a2e; border-radius: 10px; padding: 16px;
+  border: 1px solid #2a2a4a; text-align: center;
+}
+.emenda-card .valor { font-size: 1.3em; font-weight: 800; color: #ffc107; }
+.emenda-card .destino { font-size: 0.8em; color: #e0e0e0; margin-top: 4px; }
+.emenda-card .articulacao { font-size: 0.7em; color: #888; margin-top: 2px; }
+
+/* INSTA SCHEDULE */
+.insta-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 16px; }
+.insta-day {
+  background: #1a1a2e; border-radius: 10px; padding: 12px; text-align: center;
+  border: 1px solid #2a2a4a;
+}
+.insta-day .dia { font-size: 0.7em; color: #e94560; font-weight: 600; text-transform: uppercase; }
+.insta-day .tema { font-size: 0.78em; color: #e0e0e0; margin-top: 4px; line-height: 1.3; }
+.insta-day .formato { font-size: 0.65em; color: #888; margin-top: 4px; }
+.insta-day.today { border-color: #e94560; background: #1e1e3a; }
+
+/* PARTNERS */
+.partner-card {
+  background: #1a1a2e; border-radius: 10px; padding: 14px 16px;
+  border: 1px solid #2a2a4a; margin-bottom: 10px;
+}
+.partner-card .partner-name { font-size: 0.9em; font-weight: 600; color: #fff; }
+.partner-card .partner-desc { font-size: 0.8em; color: #888; margin-top: 4px; }
+.partner-card .partner-tasks { font-size: 0.75em; margin-top: 8px; }
+.partner-card .partner-tasks span { display: inline-block; background: #2a2a4a; padding: 2px 8px; border-radius: 6px; margin: 2px; }
+
+/* BIO */
+.bio-card {
+  background: #1a1a2e; border-radius: 12px; padding: 20px;
+  border: 1px solid #2a2a4a; margin-bottom: 16px;
+}
+.bio-card .bio-header { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.bio-card .bio-avatar {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, #e94560, #9c27b0);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5em; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.bio-card .bio-name { font-size: 1.1em; font-weight: 700; }
+.bio-card .bio-role { font-size: 0.8em; color: #888; }
+.bio-card .bio-text { font-size: 0.82em; color: #ccc; line-height: 1.6; }
+.bio-card .bio-highlights { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.bio-card .bio-highlights span {
+  background: #2a2a4a; padding: 6px 12px; border-radius: 8px;
+  font-size: 0.75em; color: #e0e0e0;
+}
+
+/* LINKS */
 .links-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 20px; }
 .link-item {
   display: flex; align-items: center; gap: 10px;
@@ -121,13 +234,24 @@ header .badge.green { background: #1a6b3c; }
 .link-item .info .name { font-weight: 600; font-size: 0.85em; }
 .link-item .info .desc { font-size: 0.7em; color: #888; }
 
+/* RESTRICTED SECTION OVERLAY */
+.restricted-msg {
+  background: #1a1a2e; border: 1px dashed #5a3a3a; border-radius: 10px;
+  padding: 20px; text-align: center; color: #666; font-size: 0.85em; margin-bottom: 16px;
+}
+.restricted-msg .lock-icon { font-size: 1.5em; margin-bottom: 8px; }
+
+/* FOOTER */
 footer { text-align: center; padding: 20px; color: #555; font-size: 0.75em; border-top: 1px solid #222; margin-top: 40px; }
 footer a { color: #e94560; text-decoration: none; }
 
+/* RESPONSIVE */
 @media (max-width: 600px) {
   header { flex-direction: column; text-align: center; }
   .people-grid { grid-template-columns: repeat(2, 1fr); }
   .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .eleitoral-grid { grid-template-columns: repeat(2, 1fr); }
+  .insta-grid { grid-template-columns: repeat(2, 1fr); }
 }
 </style>
 </head>
@@ -138,10 +262,10 @@ footer a { color: #e94560; text-decoration: none; }
   <div class="logo">
     <h1>ERIKA HILTON <span>2026</span></h1>
     <p>Painel de Coordenação Municipal — Jundiaí</p>
-    <div class="subtitle">👤 Selecione quem está acessando</div>
+    <div style="color:#555;font-size:0.75em;">👤 Selecione quem está acessando</div>
   </div>
   <div class="people-grid" id="people-grid">
-    <!-- gerado por JS -->
+    <!-- generated by JS -->
   </div>
   <!-- SENHA -->
   <div id="senha-area" style="display:none;width:100%;max-width:320px;">
@@ -180,105 +304,123 @@ footer a { color: #e94560; text-decoration: none; }
       </div>
     </div>
   </div>
-  <div style="font-size:0.75em;color:#555;">Pré-campanha • Início 16/08/2026</div>
+  <div style="font-size:0.75em;color:#555;">Pré-campanha • Início 16/08/2026 • Eleição 04/10/2026</div>
 </div>
 
 <!-- DASHBOARD -->
 <div id="dashboard">
   <header>
-    <div>
-      <h1>ERIKA HILTON <span>2026</span></h1>
-      <p style="color:#888;font-size:0.8em;margin-top:2px;">Jundiaí</p>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
-      <div class="user-info" id="user-info-bar">
-        <div class="avatar-sm" id="user-avatar-sm"></div>
-        <div><div class="uname" id="user-name-bar"></div><div class="urole" id="user-role-bar"></div></div>
+    <h1>ERIKA HILTON <span>2026</span></h1>
+    <div class="user-info">
+      <div class="avatar-sm" id="user-avatar-sm">EM</div>
+      <div>
+        <div class="uname" id="user-name-bar">Ever Maria</div>
+        <div class="urole" id="user-role-bar">Coordenadora</div>
       </div>
-      <span class="badge">Pré-campanha</span>
-      <span class="badge green" id="data-badge">Início 16/08</span>
+      <span class="ubadge" id="user-badge">👑 Nível 5</span>
       <button class="switch-btn" onclick="showLogin()">🔄 Trocar</button>
     </div>
   </header>
 
-  <!-- Saudação -->
-  <div class="greeting" id="greeting-area"></div>
+  <div class="container" style="padding-top:0;">
 
-  <!-- Stats rápidos -->
-  <div class="stats-grid" id="stats-grid"></div>
+    <!-- GREETING -->
+    <div class="greeting" id="greeting-area"></div>
 
-  <!-- Links rápidos -->
-  <div class="section-title">🔗 Links Rápidos</div>
-  <div class="links-grid" id="links-grid">
-    <a class="link-item" href="https://drive.google.com/drive/folders/1TiZdbyXbuhBjBPr8ZFoP7Xmfe1s3aWuB" target="_blank">
-      <span class="icon">📁</span>
-      <div class="info"><div class="name">Drive</div><div class="desc">Documentos e fotos</div></div>
-    </a>
-    <a class="link-item" href="https://notion.so/3ae6bd5dbb788131ba9ddc2c6d0c1d59" target="_blank">
-      <span class="icon">📘</span>
-      <div class="info"><div class="name">Notion</div><div class="desc">Estratégico</div></div>
-    </a>
-    <a class="link-item" href="https://docs.google.com/document/d/1XUGnaSIS5dKUqlJMUPMS-6eXi0UWC_IAS4g7JllOQTc/edit" target="_blank">
-      <span class="icon">📄</span>
-      <div class="info"><div class="name">Painel (Google Doc)</div><div class="desc">Visão completa</div></div>
-    </a>
-    <a class="link-item" href="https://drive.google.com/drive/folders/1Mp3K4raQylVZiCS6syKTQWsvW1mdibIm" target="_blank">
-      <span class="icon">📋</span>
-      <div class="info"><div class="name">Atas de Reunião</div><div class="desc">Ata 01 - 02/08</div></div>
-    </a>
-    <a class="link-item" href="https://docs.google.com/spreadsheets/d/1Y60DrMPeepBqAfeuhQQK8WA14dzdXMagaoMFMJGYIMo" target="_blank" id="link-planilha">
-      <span class="icon">📊</span>
-      <div class="info"><div class="name">Planilha</div><div class="desc">Controle geral</div></div>
-    </a>
+    <!-- COUNTDOWN -->
+    <div class="countdown-bar" id="countdown-bar"></div>
+
+    <!-- NEWS FEED -->
+    <div id="news-section" style="display:none;">
+      <div class="section-title">📰 Notícias da Campanha</div>
+      <div class="news-feed" id="news-feed"></div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-grid" id="stats-grid"></div>
+
+    <!-- PROGRESS -->
+    <div id="progress-section">
+      <div class="section-title">📊 Progresso da Pré-Campanha</div>
+      <div id="progress-bar-container"></div>
+    </div>
+
+    <!-- MY TASKS -->
+    <div class="section-title">⭐ Minhas Tarefas <span class="count" id="my-tasks-count">0</span></div>
+    <div class="tasks-grid" id="my-tasks"></div>
+
+    <!-- ALL TASKS (restricted) -->
+    <div id="all-tasks-section">
+      <div class="section-title">📋 Todas as Tarefas da Campanha <span class="count" id="all-tasks-count">0</span></div>
+      <div id="all-tasks-content"></div>
+    </div>
+
+    <!-- ELECTORAL PANEL (restricted) -->
+    <div id="eleitoral-section" style="display:none;">
+      <div class="section-title">📊 Painel Eleitoral de Jundiaí</div>
+      <div class="eleitoral-grid" id="eleitoral-grid"></div>
+    </div>
+
+    <!-- EMENDAS (restricted) -->
+    <div id="emendas-section" style="display:none;">
+      <div class="section-title">💰 Emendas de Erika em Jundiaí</div>
+      <div class="emendas-grid" id="emendas-grid"></div>
+    </div>
+
+    <!-- PARTNERS -->
+    <div class="section-title">🤝 Parceiros da Campanha</div>
+    <div id="partners-area"></div>
+
+    <!-- INSTA SCHEDULE -->
+    <div class="section-title">📱 Cronograma Instagram</div>
+    <div class="insta-grid" id="insta-grid"></div>
+
+    <!-- BIO -->
+    <div class="section-title">👤 Quem é Erika Hilton</div>
+    <div class="bio-card" id="bio-card"></div>
+
+    <!-- AGENDA 18/08 -->
+    <div class="section-title">📅 Agenda 18/08 — Visita de Erika em Jundiaí</div>
+    <div style="overflow-x:auto;">
+      <table class="agenda-table" id="agenda-table"></table>
+    </div>
+
+    <!-- LINKS -->
+    <div class="section-title">🔗 Links Rápidos</div>
+    <div class="links-grid" id="links-grid"></div>
+
+    <footer>
+      Hub Interno — Campanha Erika Hilton 2026 • Jundiaí-SP<br>
+      <a href="#" onclick="showLogin();return false;">🔐 Trocar de pessoa</a>
+    </footer>
   </div>
-
-  <!-- MINHAS TAREFAS -->
-  <div class="section-title" id="my-tasks-title">📋 Minhas Tarefas <span class="count" id="my-tasks-count"></span></div>
-  <div class="tasks-grid" id="my-tasks"></div>
-
-  <!-- TAREFAS COLETIVAS -->
-  <div class="section-title">🤝 Todas as Tarefas da Campanha <span class="count" id="all-tasks-count"></span></div>
-  <div class="tasks-grid" id="all-tasks"></div>
-
-  <!-- AGENDA 18/08 -->
-  <div class="section-title">📅 Agenda 18/08 — Visita Erika Hilton</div>
-  <div style="background:#1a1a2e;border-radius:12px;padding:4px;border:1px solid #2a2a4a;margin-bottom:20px;overflow-x:auto;">
-  <table class="agenda-table">
-    <tr><th style="border-radius:12px 0 0 0;">Horário</th><th>Atividade</th><th style="border-radius:0 12px 0 0;">Local</th></tr>
-    <tr><td>11:00-11:40</td><td>Visita PA Vila Progresso</td><td>Verba destinada por Erika</td></tr>
-    <tr><td>12:00-13:00</td><td>Instituto Luís Braile</td><td>Com Movimento Cardume</td></tr>
-    <tr><td>13:30-14:30</td><td>Visita Centro TEA</td><td>Centro Integrado Girassóis</td></tr>
-    <tr><td>15:00-16:30</td><td>Almoço</td><td></td></tr>
-    <tr><td class="spotlight">16:30-17:00</td><td class="spotlight">🎤 Coletiva de Imprensa</td><td></td></tr>
-    <tr><td class="highlight">17:30</td><td>🤝 Encontro com Lideranças</td><td><strong>Bancários</strong></td></tr>
-    <tr><td class="highlight">19:00</td><td class="highlight">🎉 Encontro Aberto</td><td class="highlight"><strong>Clube 28 de Setembro</strong></td></tr>
-  </table>
-  </div>
-
-  <footer>
-    Painel interativo — Campanha Erika Hilton 2026 · Coordenação Jundiaí<br>
-    <a href="https://wa.me/5511945774193" target="_blank">📱 Fale com Ever Maria no WhatsApp</a>
-    <br><span style="color:#444;font-size:0.85em;">Atualizado em 02/08/2026</span>
-  </footer>
 </div>
 
 <script>
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 // DADOS DA CAMPANHA
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 
+// Níveis de acesso: 5=Coordenadora, 4=Assessora, 3=Líder, 2=Equipe
 const EQUIPE = [
-  { nome: 'Ever Maria', role: 'Coordenadora Municipal', cor: '#e94560', iniciais: 'EM' },
-  { nome: 'Tiana Cauton', role: 'Assessora', cor: '#9c27b0', iniciais: 'TC' },
-  { nome: 'Junior Arcanjo', role: 'Mobilizador de Rua', cor: '#ff6b35', iniciais: 'JA' },
-  { nome: 'Hoanny', role: 'Eventos', cor: '#2196f3', iniciais: 'HO' },
-  { nome: 'João', role: 'Financeiro', cor: '#4caf50', iniciais: 'JO' },
-  { nome: 'Kawa', role: 'Redes Sociais', cor: '#00bcd4', iniciais: 'KA' },
-  { nome: 'Eva', role: 'Redes Sociais', cor: '#ff80ab', iniciais: 'EV' },
+  { nome: 'Ever Maria', role: 'Coordenadora Municipal', cor: '#e94560', iniciais: 'EM', nivel: 5, badge: '👑' },
+  { nome: 'Tiana Cauton', role: 'Assessora', cor: '#9c27b0', iniciais: 'TC', nivel: 5, badge: '👑' },
+  { nome: 'Junior Arcanjo', role: 'Mobilizador de Rua', cor: '#ff6b35', iniciais: 'JA', nivel: 3, badge: '🟠' },
+  { nome: 'Hoanny', role: 'Eventos', cor: '#2196f3', iniciais: 'HO', nivel: 3, badge: '🔵' },
+  { nome: 'João', role: 'Financeiro', cor: '#4caf50', iniciais: 'JO', nivel: 3, badge: '🟢' },
+  { nome: 'Kawa', role: 'Redes Sociais', cor: '#00bcd4', iniciais: 'KA', nivel: 2, badge: '📱' },
+  { nome: 'Eva', role: 'Redes Sociais', cor: '#ff80ab', iniciais: 'EV', nivel: 2, badge: '📱' },
 ];
 
 function pessoa(nome) {
-  return EQUIPE.find(p => p.nome === nome) || { nome, role: 'Equipe', cor: '#888', iniciais: nome.slice(0,2).toUpperCase() };
+  return EQUIPE.find(p => p.nome === nome) || { nome, role: 'Equipe', cor: '#888', iniciais: nome.slice(0,2).toUpperCase(), nivel: 0, badge: '' };
+}
+
+function nivelMin(nivel) {
+  return function(tipo) {
+    const req = { planilha: 5, geral: 5, eleitoral: 5, emendas: 3, financas: 3 };
+    return nivel >= (req[tipo] || 0);
+  };
 }
 
 const TAREFAS = [
@@ -307,25 +449,102 @@ const TAREFAS = [
 const AGENDA_18 = [
   { hora: '11:00-11:40', atividade: 'Visita PA Vila Progresso', local: 'Verba destinada por Erika' },
   { hora: '12:00-13:00', atividade: 'Instituto Luís Braile', local: 'Com Movimento Cardume' },
-  { hora: '13:30-14:30', atividade: 'Visita Centro TEA', local: 'Centro Integrado Girassóis' },
+  { hora: '13:30-14:30', atividade: 'Visita Centro TEA (Girassóis)', local: 'Centro Integrado Girassóis' },
   { hora: '15:00-16:30', atividade: 'Almoço', local: '' },
   { hora: '16:30-17:00', atividade: '🎤 Coletiva de Imprensa', local: '', destaque: true },
   { hora: '17:30', atividade: '🤝 Encontro com Lideranças', local: 'Bancários', destaque: true },
   { hora: '19:00', atividade: '🎉 Encontro Aberto', local: 'Clube 28 de Setembro', destaque: true },
 ];
 
+// Notícias reais coletadas via Tavily em 03/08/2026
+const NOTICIAS = [
+  {
+    titulo: 'Erika Hilton destina R$ 2 milhões para Saúde de Jundiaí',
+    fonte: 'Tribuna de Jundiaí',
+    descricao: 'Emendas articuladas pelo Coletivo Cardume (Henrique Parra) e por Tiana Cauton. Recursos para oftalmologia infantil, Centro TEA e CTA (testagem HIV).',
+    url: 'https://tribunadejundiai.com.br/politica/erika-hilton-emendas-para-jundiai'
+  },
+  {
+    titulo: 'Erika Hilton é eleita presidente da Comissão da Mulher na Câmara',
+    fonte: 'CNN Brasil — 11/03/2026',
+    descricao: 'Primeira mulher trans a presidir a Comissão de Defesa dos Direitos da Mulher. Eleição ocorreu apesar de campanha contrária do Partido Liberal.',
+    url: 'https://pt.wikipedia.org/wiki/Erika_Hilton'
+  },
+  {
+    titulo: 'R$ 4,6 milhões em emendas de Erika em Jundiaí (biênio 2025-2026)',
+    fonte: 'Portal da Transparência',
+    descricao: 'Erika Hilton é a deputada que mais destinou recursos para Jundiaí no biênio, com R$ 4.639.036,00 em emendas parlamentares.',
+    url: 'https://deolhoemvoce.com.br/cidades/3525904/jundiai-sp'
+  },
+  {
+    titulo: 'Alvo de ataques transfóbicos, Erika tem 26 propostas sobre mulheres',
+    fonte: 'Adiadorim — 03/2026',
+    descricao: 'PL 665/2026 institui Política Nacional de Prevenção ao Transfeminicídio. PL 292/2026 (Lei Keron Ravache) tipifica transfeminicídio.',
+    url: 'https://adiadorim.org/noticias/2026/03/alvo-de-ataques-transfobicos-erika-hilton-tem-26-propostas-sobre-mulheres'
+  },
+  {
+    titulo: 'Jundiaí celebra 20 anos da Parada LGBT+ com presença de Erika Hilton',
+    fonte: 'Instagram — @erikahiltonjundiai',
+    descricao: 'Deputada foi convidada especial da 20ª Parada do Orgulho LGBT+ de Jundiaí, realizada no Espaço Expressa (Complexo Fepasa).',
+    url: 'https://www.instagram.com/p/DPKYd5SCejz'
+  },
+];
+
+// Dados eleitorais e emendas
+const DADOS_ELEITORAIS = {
+  votos2022: 1944,
+  meta2026: 5000,
+  eleitores: 327491,
+  zonas: ['065', '281', '424'],
+  boulosRef: 6375,
+  emendasTotal: 4639036,
+  emendas2026: 2700000,
+};
+
+const EMENDAS = [
+  { valor: 'R$ 680 mil', destino: 'Oftalmologia infantil (zerar fila de crianças com óculos)', articulacao: 'Cardume / Henrique Parra' },
+  { valor: 'R$ 320 mil', destino: 'Centro de Diagnóstico do TEA (Autismo)', articulacao: 'Cardume / Henrique Parra' },
+  { valor: 'R$ 1 milhão', destino: 'CTA — Testagem HIV, sífilis, hepatites', articulacao: 'Tiana Cauton' },
+];
+
+const CRONOGRAMA_INSTA = [
+  { dia: 'Seg', tema: 'Quem é Erika?', formato: 'Carrossel biográfico' },
+  { dia: 'Ter', tema: 'Atuação em Jundiaí', formato: 'Post + legenda política' },
+  { dia: 'Qua', tema: 'Pauta social LGBTQIAPN+', formato: 'Carrossel com dados' },
+  { dia: 'Qui', tema: 'Propostas e bandeiras', formato: 'Post + chamada pra ação' },
+  { dia: 'Sex', tema: 'Bastidores da equipe', formato: 'Reels / Vídeo curto' },
+  { dia: 'Sáb', tema: 'Agenda do fds', formato: 'Stories + Post' },
+  { dia: 'Dom', tema: 'Mobilização pré-bandeiraço', formato: 'Post convocatório' },
+];
+
+const PARCEIROS = [
+  {
+    nome: 'Coletivo Cardume',
+    descricao: 'Movimento social parceiro, representado pelo vereador Henrique Parra (PSOL). Articulou R$ 1M em emendas para Jundiaí.',
+    tarefas: ['Coletiva de Imprensa — 05/08', 'Lista de Lideranças — 10/08'],
+  },
+  {
+    nome: 'Henrique Parra',
+    descricao: 'Vereador (PSOL) — 5.939 votos. Parceiro na articulação de emendas e mobilização em Jundiaí.',
+    tarefas: [],
+  },
+  {
+    nome: 'Dona Edna — Clube 28 de Setembro',
+    descricao: 'Espaço do Encontro Aberto com a Erika em 18/08 (19h). Ever Maria fará contato até 12/08.',
+    tarefas: ['Contatar Dona Edna — 12/08'],
+  },
+];
+
 const SENHA_PADRAO = 'erika2026';
 
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 // LÓGICA
-// ═══════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════
 
 let usuarioAtual = null;
 let usuarioPendente = null;
 
-function init() {
-  renderLogin();
-}
+function init() { renderLogin(); }
 
 function renderLogin() {
   document.getElementById('senha-area').style.display = 'none';
@@ -337,6 +556,7 @@ function renderLogin() {
       <div class="avatar" style="background:${p.cor}">${p.iniciais}</div>
       <div class="pname">${p.nome}</div>
       <div class="prole">${p.role}</div>
+      <div class="nivel">${p.badge} Nível ${p.nivel}</div>
     </div>
   `).join('');
 }
@@ -354,14 +574,10 @@ function selecionarPessoa(nome) {
 
 function verificarSenha() {
   const senha = document.getElementById('senha-input').value.trim();
-  if (!senha) {
-    mostrarErro('Digite uma senha');
-    return;
-  }
+  if (!senha) { mostrarErro('Digite uma senha'); return; }
   const senhaSalva = localStorage.getItem('senha_' + usuarioPendente) || SENHA_PADRAO;
-  if (senha === senhaSalva) {
-    entrar(usuarioPendente);
-  } else {
+  if (senha === senhaSalva) { entrar(usuarioPendente); }
+  else {
     mostrarErro('❌ Senha incorreta');
     document.getElementById('senha-input').value = '';
     document.getElementById('senha-input').focus();
@@ -370,8 +586,7 @@ function verificarSenha() {
 
 function mostrarErro(msg) {
   const el = document.getElementById('senha-erro');
-  el.textContent = msg;
-  el.style.display = 'block';
+  el.textContent = msg; el.style.display = 'block';
 }
 
 function cancelarSenha() {
@@ -384,13 +599,8 @@ function cancelarSenha() {
 function toggleSenha() {
   const input = document.getElementById('senha-input');
   const olho = document.getElementById('senha-olho');
-  if (input.type === 'password') {
-    input.type = 'text';
-    olho.textContent = '🙈';
-  } else {
-    input.type = 'password';
-    olho.textContent = '👁️';
-  }
+  if (input.type === 'password') { input.type = 'text'; olho.textContent = '🙈'; }
+  else { input.type = 'password'; olho.textContent = '👁️'; }
 }
 
 function mostrarMudarSenha() {
@@ -413,36 +623,14 @@ function salvarNovaSenha() {
   const nova = document.getElementById('senha-nova').value.trim();
   const conf = document.getElementById('senha-confirmar').value.trim();
   const errEl = document.getElementById('mudar-senha-erro');
-
-  if (!antiga || !nova || !conf) {
-    errEl.textContent = 'Preencha todos os campos';
-    errEl.style.display = 'block';
-    return;
-  }
+  if (!antiga || !nova || !conf) { errEl.textContent = 'Preencha todos os campos'; errEl.style.display = 'block'; return; }
   const senhaAtual = localStorage.getItem('senha_' + usuarioPendente) || SENHA_PADRAO;
-  if (antiga !== senhaAtual) {
-    errEl.textContent = 'Senha atual incorreta';
-    errEl.style.display = 'block';
-    return;
-  }
-  if (nova !== conf) {
-    errEl.textContent = 'Nova senha e confirmação não conferem';
-    errEl.style.display = 'block';
-    return;
-  }
-  if (nova.length < 4) {
-    errEl.textContent = 'A senha deve ter no mínimo 4 caracteres';
-    errEl.style.display = 'block';
-    return;
-  }
+  if (antiga !== senhaAtual) { errEl.textContent = 'Senha atual incorreta'; errEl.style.display = 'block'; return; }
+  if (nova !== conf) { errEl.textContent = 'Nova senha e confirmação não conferem'; errEl.style.display = 'block'; return; }
+  if (nova.length < 4) { errEl.textContent = 'A senha deve ter no mínimo 4 caracteres'; errEl.style.display = 'block'; return; }
   localStorage.setItem('senha_' + usuarioPendente, nova);
-  errEl.style.color = '#4caf50';
-  errEl.textContent = '✅ Senha alterada com sucesso!';
-  errEl.style.display = 'block';
-  setTimeout(() => {
-    cancelarMudarSenha();
-    errEl.style.color = '#e94560';
-  }, 1500);
+  errEl.style.color = '#4caf50'; errEl.textContent = '✅ Senha alterada com sucesso!'; errEl.style.display = 'block';
+  setTimeout(() => { cancelarMudarSenha(); errEl.style.color = '#e94560'; }, 1500);
 }
 
 function entrar(nome) {
@@ -463,19 +651,21 @@ function showLogin() {
 
 function renderDashboard() {
   const p = pessoa(usuarioAtual);
-  const userTasks = TAREFAS.filter(t => t.responsaveis.includes(usuarioAtual));
-  const myUrgent = userTasks.filter(t => t.urg === 'urgent');
-  const allPending = TAREFAS.filter(t => t.urg !== 'continuous');
+  const pode = nivelMin(p.nivel);
+  const hoje = new Date();
 
   // Barra do usuário
   document.getElementById('user-avatar-sm').style.background = p.cor;
   document.getElementById('user-avatar-sm').textContent = p.iniciais;
   document.getElementById('user-name-bar').textContent = p.nome;
   document.getElementById('user-role-bar').textContent = p.role;
+  document.getElementById('user-badge').textContent = `${p.badge} Nível ${p.nivel}`;
 
   // Saudação
-  const hoje = new Date();
-  const saud = hoje.getHours() < 12 ? 'Bom dia' : hoje.getHours() < 18 ? 'Boa tarde' : 'Boa noite';
+  const horas = hoje.getHours();
+  const saud = horas < 12 ? 'Bom dia' : horas < 18 ? 'Boa tarde' : 'Boa noite';
+  const userTasks = TAREFAS.filter(t => t.responsaveis.includes(usuarioAtual));
+  const myUrgent = userTasks.filter(t => t.urg === 'urgent');
   const urgMsg = myUrgent.length > 0
     ? `🔴 Você tem <strong>${myUrgent.length} tarefa(s) urgente(s)</strong> para hoje/dia 05/08!`
     : '✅ Tudo em dia com os prazos urgentes!';
@@ -484,19 +674,31 @@ function renderDashboard() {
     <p>${p.role} na campanha Erika Hilton em Jundiaí.<br>${urgMsg}</p>
   `;
 
+  // Contagem regressiva
+  renderCountdown();
+
+  // Notícias (todos veem)
+  renderNews();
+
   // Stats
+  const allPending = TAREFAS.filter(t => t.urg !== 'continuous');
+  const doneCount = TAREFAS.filter(t => localStorage.getItem('done_' + t.texto) === 'true').length;
   document.getElementById('stats-grid').innerHTML = `
     <div class="stat-card highlight"><div class="num">${userTasks.length}</div><div class="label">Minhas Tarefas</div></div>
     <div class="stat-card"><div class="num">${myUrgent.length}</div><div class="label">Urgentes (05/08)</div></div>
-    <div class="stat-card"><div class="num">${allPending.length}</div><div class="label">Tarefas da Campanha</div></div>
-    <div class="stat-card"><div class="num">7</div><div class="label">Eventos em 18/08</div></div>
+    <div class="stat-card"><div class="num">${allPending.length}</div><div class="label">Tarefas Ativas</div></div>
+    <div class="stat-card"><div class="num">${doneCount}</div><div class="label">Concluídas</div></div>
   `;
 
-  // Links - planilha só pra Ever e Tiana
-  const linkPlanilha = document.getElementById('link-planilha');
-  if (linkPlanilha) {
-    linkPlanilha.style.display = (usuarioAtual === 'Ever Maria' || usuarioAtual === 'Tiana Cauton') ? 'flex' : 'none';
-  }
+  // Progresso
+  const total = TAREFAS.length;
+  const pct = Math.round((doneCount / total) * 100);
+  document.getElementById('progress-bar-container').innerHTML = `
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" style="width:${pct}%">${pct}%</div>
+    </div>
+    <div style="font-size:0.75em;color:#888;margin-bottom:12px;">${doneCount} de ${total} tarefas concluídas</div>
+  `;
 
   // Minhas tarefas
   const myTasksDiv = document.getElementById('my-tasks');
@@ -507,21 +709,240 @@ function renderDashboard() {
     myTasksDiv.innerHTML = userTasks.map(t => taskCard(t)).join('');
   }
 
-  // Todas as tarefas (coletivas, exceto as que já aparecem em "minhas")
-  const allTasksDiv = document.getElementById('all-tasks');
-  document.getElementById('all-tasks-count').textContent = TAREFAS.length;
-  allTasksDiv.innerHTML = TAREFAS.map(t => taskCard(t)).join('');
+  // Todas as tarefas (restrito: só Ever e Tiana veem)
+  const allTasksContainer = document.getElementById('all-tasks-content');
+  if (pode('geral')) {
+    document.getElementById('all-tasks-section').style.display = 'block';
+    document.getElementById('all-tasks-count').textContent = TAREFAS.length;
+    allTasksContainer.innerHTML = `<div class="tasks-grid">${TAREFAS.map(t => taskCard(t)).join('')}</div>`;
+  } else {
+    document.getElementById('all-tasks-section').style.display = 'none';
+  }
+
+  // Painel eleitoral (restrito: Ever e Tiana)
+  const eleitoralSection = document.getElementById('eleitoral-section');
+  if (pode('eleitoral')) {
+    eleitoralSection.style.display = 'block';
+    renderEleitoral();
+  } else {
+    eleitoralSection.style.display = 'none';
+  }
+
+  // Emendas (restrito: Ever, Tiana e João)
+  const emendasSection = document.getElementById('emendas-section');
+  if (pode('emendas')) {
+    emendasSection.style.display = 'block';
+    renderEmendas();
+  } else {
+    emendasSection.style.display = 'none';
+  }
+
+  // Parceiros (todos veem)
+  renderPartners();
+
+  // Instagram (todos veem, mas destaca se é Kawa/Eva)
+  renderInstaSchedule();
+
+  // Biografia
+  renderBio();
+
+  // Agenda
+  renderAgenda();
+
+  // Links
+  renderLinks(pode);
+}
+
+function renderCountdown() {
+  const hoje = new Date();
+  const inicio = new Date(2026, 7, 16); // 16/08
+  const visita = new Date(2026, 7, 18); // 18/08
+  const eleicao = new Date(2026, 9, 4);  // 04/10
+
+  function diff(d) {
+    const diff = Math.ceil((d - hoje) / (1000 * 60 * 60 * 24));
+    return diff;
+  }
+
+  const dInicio = diff(inicio);
+  const dVisita = diff(visita);
+  const dEleicao = diff(eleicao);
+
+  document.getElementById('countdown-bar').innerHTML = `
+    <div class="countdown-item ${dInicio <= 0 ? 'passed' : 'highlight'}">
+      <div class="days">${dInicio <= 0 ? '✅ Hoje!' : dInicio}</div>
+      <div class="label">Início Oficial<br>16 de Agosto</div>
+    </div>
+    <div class="countdown-item ${dVisita <= 0 ? 'passed' : ''}">
+      <div class="days">${dVisita <= 0 ? '✅ Hoje!' : dVisita}</div>
+      <div class="label">Visita Erika em Jundiaí<br>18 de Agosto</div>
+    </div>
+    <div class="countdown-item ${dEleicao <= 0 ? 'passed' : ''}">
+      <div class="days">${dEleicao <= 0 ? '✅ Hoje!' : dEleicao}</div>
+      <div class="label">1º Turno Eleição<br>4 de Outubro</div>
+    </div>
+    <div class="countdown-item">
+      <div class="days" style="color:#ffc107;">${new Date().toLocaleDateString('pt-BR')}</div>
+      <div class="label">Data Atual</div>
+    </div>
+  `;
+}
+
+function renderNews() {
+  document.getElementById('news-section').style.display = 'block';
+  document.getElementById('news-feed').innerHTML = NOTICIAS.map(n => `
+    <div class="news-card">
+      <div class="news-title">${n.titulo}</div>
+      <div class="news-source">${n.fonte}</div>
+      <div class="news-desc">${n.descricao}</div>
+      <a href="${n.url}" target="_blank" class="news-link">🔗 Ler mais →</a>
+    </div>
+  `).join('');
+}
+
+function renderEleitoral() {
+  const pctTermometro = Math.round((DADOS_ELEITORAIS.votos2022 / DADOS_ELEITORAIS.meta2026) * 100);
+  const necessario = DADOS_ELEITORAIS.meta2026 - DADOS_ELEITORAIS.votos2022;
+
+  document.getElementById('eleitoral-grid').innerHTML = `
+    <div class="eleitoral-card thermometer">
+      <div style="font-size:0.8em;color:#888;">Termômetro</div>
+      <div style="font-size:0.9em;font-weight:700;margin:4px 0;">${DADOS_ELEITORAIS.votos2022.toLocaleString()} → ${DADOS_ELEITORAIS.meta2026.toLocaleString()}</div>
+      <div class="thermo-track"><div class="thermo-fill" style="width:${pctTermometro}%"></div></div>
+      <div class="desc">${pctTermometro}% da meta alcançada em 2022<br>Faltam ${necessario.toLocaleString()} votos pra meta</div>
+    </div>
+    <div class="eleitoral-card">
+      <div class="big-num">${DADOS_ELEITORAIS.votos2022.toLocaleString()}</div>
+      <div class="desc">Votos em Jundiaí (2022)</div>
+      <div class="sub">Erika Hilton</div>
+    </div>
+    <div class="eleitoral-card">
+      <div class="big-num gold">${DADOS_ELEITORAIS.meta2026.toLocaleString()}</div>
+      <div class="desc">Meta 2026</div>
+      <div class="sub">↗ ${Math.round((DADOS_ELEITORAIS.meta2026/DADOS_ELEITORAIS.votos2022 - 1) * 100)}% de crescimento</div>
+    </div>
+    <div class="eleitoral-card">
+      <div class="big-num">${DADOS_ELEITORAIS.eleitores.toLocaleString()}</div>
+      <div class="desc">Eleitores em Jundiaí</div>
+      <div class="sub">${DADOS_ELEITORAIS.zonas.length} zonas: ${DADOS_ELEITORAIS.zonas.join(', ')}</div>
+    </div>
+    <div class="eleitoral-card">
+      <div class="big-num green">${(DADOS_ELEITORAIS.emendasTotal / 1e6).toFixed(1)}M</div>
+      <div class="desc">Emendas de Erika (R$)</div>
+      <div class="sub">Biênio 2025-2026</div>
+    </div>
+    <div class="eleitoral-card">
+      <div class="big-num" style="font-size:1.2em;">${DADOS_ELEITORAIS.boulosRef.toLocaleString()}</div>
+      <div class="desc">Teto de referência (Boulos 2022)</div>
+      <div class="sub">↘ ${Math.round((1 - DADOS_ELEITORAIS.meta2026/DADOS_ELEITORAIS.boulosRef) * 100)}% abaixo do teto</div>
+    </div>
+  `;
+}
+
+function renderEmendas() {
+  document.getElementById('emendas-grid').innerHTML = EMENDAS.map(e => `
+    <div class="emenda-card">
+      <div class="valor">${e.valor}</div>
+      <div class="destino">${e.destino}</div>
+      <div class="articulacao">🤝 ${e.articulacao}</div>
+    </div>
+  `).join('');
+}
+
+function renderPartners() {
+  document.getElementById('partners-area').innerHTML = PARCEIROS.map(p => `
+    <div class="partner-card">
+      <div class="partner-name">${p.nome}</div>
+      <div class="partner-desc">${p.descricao}</div>
+      ${p.tarefas.length ? `<div class="partner-tasks">📋 ${p.tarefas.map(t => `<span>${t}</span>`).join(' ')}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+function renderInstaSchedule() {
+  const hoje = new Date();
+  const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+  const diaSemana = diasSemana[hoje.getDay()];
+
+  document.getElementById('insta-grid').innerHTML = CRONOGRAMA_INSTA.map(d => `
+    <div class="insta-day ${d.dia === diaSemana ? 'today' : ''}">
+      <div class="dia">${d.dia} ${d.dia === diaSemana ? '📌' : ''}</div>
+      <div class="tema">${d.tema}</div>
+      <div class="formato">${d.formato}</div>
+    </div>
+  `).join('');
+}
+
+function renderBio() {
+  document.getElementById('bio-card').innerHTML = `
+    <div class="bio-header">
+      <div class="bio-avatar">EH</div>
+      <div>
+        <div class="bio-name">Erika Hilton</div>
+        <div class="bio-role">Deputada Federal (PSOL/SP) • 256.903 votos (2022)</div>
+      </div>
+    </div>
+    <div class="bio-text">
+      Primeira mulher trans a presidir a <strong>Comissão de Defesa dos Direitos da Mulher</strong> na Câmara dos Deputados (eleita em 11/03/2026). Eleita a <strong>melhor deputada do Brasil</strong> em 2024 e 2025 (Prêmio Congresso em Foco). Reconhecida pela BBC como uma das 100 mulheres mais influentes do mundo.
+    </div>
+    <div class="bio-highlights">
+      <span>🏆 Melhor Deputada 2024/25</span>
+      <span>📜 26 propostas sobre mulheres</span>
+      <span>⚧️ Lei Keron Ravache (transfeminicídio)</span>
+      <span>💰 R$ 4,6M em emendas a Jundiaí</span>
+      <span>🎤 Roda Viva 30/03/2026</span>
+      <span>🌍 BBC 100 Women 2022</span>
+    </div>
+  `;
+}
+
+function renderAgenda() {
+  document.getElementById('agenda-table').innerHTML = `
+    <tr><th>Horário</th><th>Atividade</th><th>Local</th></tr>
+    ${AGENDA_18.map(a => `
+      <tr class="${a.destaque ? 'highlight' : ''}">
+        <td>${a.hora}</td>
+        <td>${a.atividade}</td>
+        <td>${a.local}</td>
+      </tr>
+    `).join('')}
+  `;
+}
+
+function renderLinks(pode) {
+  const links = [
+    { icon: '📘', name: 'Notion', desc: 'Estratégia e cronograma', url: 'https://notion.so/3ae6bd5dbb788131ba9ddc2c6d0c1d59', todos: true },
+    { icon: '📊', name: 'Planilha', desc: 'Caravanas e municípios', url: 'https://docs.google.com/spreadsheets/d/1Y60DrMPeepBqAfeuhQQK8WA14dzdXMagaoMFMJGYIMo', todos: pode('planilha') },
+    { icon: '📁', name: 'Drive', desc: 'Documentos e Atas', url: 'https://drive.google.com/drive/folders/1TiZdbyXbuhBjBPr8ZFoP7Xmfe1s3aWuB', todos: true },
+    { icon: '📸', name: 'Instagram Erika', desc: '@hilton_erika', url: 'https://instagram.com/hilton_erika', todos: true },
+    { icon: '📸', name: 'Instagram Jundiaí', desc: '@erikahiltonjundiai', url: 'https://instagram.com/erikahiltonjundiai', todos: true },
+    { icon: '🌐', name: 'Hub (este site)', desc: 'everferreira.github.io', url: 'https://everferreira.github.io/hub-campanha-jundiai/', todos: true },
+    { icon: '🗳️', name: 'Câmara dos Deputados', desc: 'Perfil oficial de Erika', url: 'https://www.camara.leg.br/deputados/220645', todos: true },
+  ];
+
+  document.getElementById('links-grid').innerHTML = links
+    .filter(l => l.todos)
+    .map(l => `
+      <a href="${l.url}" target="_blank" class="link-item">
+        <div class="icon">${l.icon}</div>
+        <div class="info">
+          <div class="name">${l.name}</div>
+          <div class="desc">${l.desc}</div>
+        </div>
+      </a>
+    `).join('');
 }
 
 function taskCard(t) {
   const checked = localStorage.getItem('done_' + t.texto) === 'true' ? 'done' : '';
-  const prazoClass = t.urg === 'urgent' ? 'urgent' : t.urg === 'soon' ? 'soon' : t.urg === 'normal' ? 'normal' : 'continuous';
+  const prazoClass = t.urg;
   const rotuloPrazo = t.urg === 'continuous' ? '🔄 Contínuo' : `📅 ${t.prazo}`;
   const isMine = usuarioAtual && t.responsaveis.includes(usuarioAtual);
   const borderColor = isMine ? 'border-left:4px solid #e94560;' : '';
+  const safeText = t.texto.replace(/'/g, "\\'");
 
   return `
-    <div class="task-card ${checked}" onclick="toggleTask(this, '${t.texto.replace(/'/g, "\\'")}')" style="${borderColor}">
+    <div class="task-card ${checked}" onclick="toggleTask(this, '${safeText}')" style="${borderColor}">
       <div class="task-header">
         <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong></div>
         <span class="task-prazo ${prazoClass}">${rotuloPrazo}</span>
