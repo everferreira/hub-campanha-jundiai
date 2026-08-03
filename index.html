@@ -248,6 +248,40 @@ footer a { color: #e94560; text-decoration: none; }
   .eleitoral-grid { grid-template-columns: repeat(2, 1fr); }
   .insta-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* SEÇÃO COLAPSÁVEL */
+.collapse-header {
+  cursor: pointer; user-select: none;
+  display: flex; align-items: center; justify-content: space-between; padding: 4px 0;
+}
+.collapse-header:hover { opacity: 0.8; }
+.collapse-arrow { font-size: 0.7em; color: #555; transition: transform 0.2s; margin-left: 8px; }
+.collapse-arrow.open { transform: rotate(90deg); }
+.collapse-body { overflow: hidden; transition: max-height 0.3s ease; }
+.collapse-body.closed { max-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; margin-top: 0 !important; margin-bottom: 0 !important; }
+
+/* NAVEGAÇÃO POR ABAS */
+.tab-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: #0f0f0f; padding: 8px 0; margin-bottom: 16px; border-bottom: 1px solid #2a2a4a;
+  display: flex; gap: 4px; overflow-x: auto; -webkit-overflow-scrolling: touch;
+}
+.tab-nav::-webkit-scrollbar { display: none; }
+.tab-btn {
+  background: transparent; border: none; color: #555; padding: 8px 14px;
+  border-radius: 8px; cursor: pointer; font-size: 0.75em; font-weight: 500;
+  white-space: nowrap; transition: all 0.2s; flex-shrink: 0;
+}
+.tab-btn:hover { color: #e0e0e0; background: #1a1a2e; }
+.tab-btn.active { color: #e94560; background: #2a1a1a; font-weight: 600; }
+
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+
+@media (max-width: 600px) {
+  .tab-btn { font-size: 0.65em; padding: 6px 10px; }
+  .collapse-arrow { font-size: 0.6em; }
+}
 </style>
 </head>
 <body>
@@ -316,9 +350,13 @@ footer a { color: #e94560; text-decoration: none; }
     </div>
   </header>
 
+  <!-- NAVEGAÇÃO POR ABAS -->
+  <nav class="tab-nav" id="tab-nav"></nav>  
+
   <div class="container" style="padding-top:0;">
 
-    <!-- GREETING -->
+    <!-- ABA: AÇÕES -->
+    <div class="tab-section" id="tab-acoes">
     <div class="greeting" id="greeting-area"></div>
 
     <!-- COUNTDOWN -->
@@ -379,99 +417,83 @@ footer a { color: #e94560; text-decoration: none; }
     <!-- 🔄 ENGAJAMENTO DIÁRIO -->
     <div class="section-title">🔄 Engajamento Diário</div>
     <div class="tasks-grid" id="engajamento-grid"></div>
+    </div><!-- /tab-acoes -->
 
-    <!-- BIO -->
-    <div class="section-title">👤 Quem é Erika Hilton</div>
-    <div class="bio-card" id="bio-card"></div>
+    <!-- ABA: ESTRATÉGIA (Ever/Tiana + quem pode ver) -->
+    <div class="tab-section" id="tab-estrategia">
+      <div id="news-section"></div>
+      <div id="eleitoral-section"></div>
+      <div id="emendas-section"></div>
+      <div class="bio-card" id="bio-card"></div>
+      <div class="section-title">🤝 Parceiros da Campanha</div>
+      <div id="partners-area"></div>
+    </div><!-- /tab-estrategia -->
 
-    <!-- AGENDA 18/08 -->
-    <div class="section-title">📅 Agenda 18/08 — Visita de Erika em Jundiaí</div>
-    <div style="overflow-x:auto;">
-      <table class="agenda-table" id="agenda-table"></table>
-    </div>
-
-    <!-- LINKS -->
-    <div class="section-title">🔗 Links Rápidos</div>
-    <div class="links-grid" id="links-grid"></div>
-
-    <!-- REFERÊNCIAS -->
-    <div class="section-title">📸 Banco de Referências</div>
-    <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:16px;margin-bottom:16px;">
-      <div style="font-size:0.85em;color:#e0e0e0;margin-bottom:10px;">
-        <strong>📁 Referências Visuais da Campanha</strong> — fotos e artes de referência enviadas pela coordenação
+    <!-- ABA: CONTEÚDO (Kawa/Eva focus) -->
+    <div class="tab-section" id="tab-conteudo">
+      <div class="section-title" style="cursor:pointer;" onclick="toggleCollapse('conteudo-dicas')">📝 Conteúdo Pronto <span class="collapse-arrow open" id="arrow-conteudo-dicas">▶</span></div>
+      <div class="collapse-body" id="body-conteudo-dicas">
+      <div style="font-size:0.78em;color:#888;margin:-6px 0 12px;">Legendas, hashtags e roteiros prontos pra usar — é só copiar e colar!</div>
+      <div class="section-title" style="font-size:0.9em;">📄 Legendas para cada post</div>
+      <div class="task-card" onclick="this.classList.toggle('done')" style="margin-bottom:10px;">
+        <div class="task-header"><strong>Clique num post abaixo pra ver a legenda</strong></div>
+        <div class="task-responsaveis">Copiar e colar na hora de publicar</div>
       </div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
-        <a href="https://drive.google.com/drive/folders/1mH9jxdkCWrK_KYHwZCIFv-flMedirOFR" target="_blank" class="link-item" style="flex:1;min-width:200px;">
-          <div class="icon">🖼️</div>
-          <div class="info">
-            <div class="name">7 Fotos de Referência</div>
-            <div class="desc">Enviadas em 03/08 — abrir no Drive</div>
-          </div>
-        </a>
-        <a href="https://www.instagram.com/hilton_erika/" target="_blank" class="link-item" style="flex:1;min-width:200px;">
-          <div class="icon">📸</div>
-          <div class="info">
-            <div class="name">Perfil Oficial @hilton_erika</div>
-            <div class="desc">4,9M seguidores — fotos oficiais</div>
-          </div>
-        </a>
-        <a href="https://www.instagram.com/erikahiltonjundiai/" target="_blank" class="link-item" style="flex:1;min-width:200px;">
-          <div class="icon">📍</div>
-          <div class="info">
-            <div class="name">Perfil Local @erikahiltonjundiai</div>
-            <div class="desc">579 seguidores — página de apoiadores</div>
-          </div>
-        </a>
-        <a href="https://erikahilton.com.br/" target="_blank" class="link-item" style="flex:1;min-width:200px;">
-          <div class="icon">🌐</div>
-          <div class="info">
-            <div class="name">Site Oficial</div>
-            <div class="desc">erikahilton.com.br — fotos e materiais</div>
-          </div>
-        </a>
-        <a href="https://www.camara.leg.br/deputados/220645" target="_blank" class="link-item" style="flex:1;min-width:200px;">
-          <div class="icon">🏛️</div>
-          <div class="info">
-            <div class="name">Galeria Câmara dos Deputados</div>
-            <div class="desc">Fotos oficiais do mandato</div>
-          </div>
-        </a>
-        <a href="https://pt.wikipedia.org/wiki/Erika_Hilton" target="_blank" class="link-item" style="flex:1;min-width:200px;">
-          <div class="icon">📖</div>
-          <div class="info">
-            <div class="name">Wikipedia</div>
-            <div class="desc">Fotos e biografia completa</div>
-          </div>
-        </a>
+      <div id="legendas-container" style="display:grid;gap:8px;margin-bottom:20px;"></div>
+      <div class="section-title" style="font-size:0.9em;">🏷️ Hashtags por tema</div>
+      <div id="hashtags-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;"></div>
+      <div class="section-title" style="font-size:0.9em;">🎬 Scripts de Reels</div>
+      <div id="reels-container" style="display:grid;gap:10px;margin-bottom:20px;"></div>
+      <div class="section-title" style="font-size:0.9em;">🎨 Guia Visual</div>
+      <div id="guia-container" style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:16px;margin-bottom:20px;"></div>
       </div>
-      <div style="margin-top:10px;font-size:0.75em;color:#555;">
-        💡 <strong>Dica pra Eva:</strong> Use as fotos de referência como inspiração de estilo, enquadramento e paleta de cores. As imagens oficiais da Câmara e do Instagram da Erika têm alta resolução.
+    </div><!-- /tab-conteudo -->
+
+    <!-- ABA: AGENDA -->
+    <div class="tab-section" id="tab-agenda">
+      <div class="section-title">📅 Agenda 18/08 — Visita de Erika em Jundiaí</div>
+      <div style="overflow-x:auto;"><table class="agenda-table" id="agenda-table"></table></div>
+      <div class="section-title">🚩 Bandeiraço 16/08</div>
+      <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:14px;margin-bottom:16px;font-size:0.82em;color:#888;">
+        Material da campanha da Erika (pessoal vai mandar). Local e horário a definir.<br>
+        Pontos sugeridos: Praça Matriz, Terminal Central, Av. 9 de Julho, Parque da Uva, feira livre.
       </div>
-    </div>
+    </div><!-- /tab-agenda -->
 
-    <!-- 📝 CONTEÚDO PRONTO -->
-    <div class="section-title">📝 Conteúdo Pronto</div>
-    <div style="font-size:0.78em;color:#888;margin:-6px 0 12px;">Legendas, hashtags e roteiros prontos pra usar — é só copiar e colar!</div>
-
-    <!-- Legendas -->
-    <div class="section-title" style="font-size:0.9em;">📄 Legendas para cada post</div>
-    <div class="task-card" onclick="this.classList.toggle('done')" style="margin-bottom:10px;">
-      <div class="task-header"><strong>Clique num post abaixo pra ver a legenda</strong></div>
-      <div class="task-responsaveis">Copiar e colar na hora de publicar</div>
-    </div>
-    <div id="legendas-container" style="display:grid;gap:8px;margin-bottom:20px;"></div>
-
-    <!-- Hashtags -->
-    <div class="section-title" style="font-size:0.9em;">🏷️ Hashtags por tema</div>
-    <div id="hashtags-container" style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;"></div>
-
-    <!-- Reels Scripts -->
-    <div class="section-title" style="font-size:0.9em;">🎬 Scripts de Reels</div>
-    <div id="reels-container" style="display:grid;gap:10px;margin-bottom:20px;"></div>
-
-    <!-- Guia Visual -->
-    <div class="section-title" style="font-size:0.9em;">🎨 Guia Visual</div>
-    <div id="guia-container" style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:16px;margin-bottom:20px;"></div>
+    <!-- ABA: REFERÊNCIAS -->
+    <div class="tab-section" id="tab-referencias">
+      <div class="section-title">🔗 Links Rápidos</div>
+      <div class="links-grid" id="links-grid"></div>
+      <div class="section-title">📸 Banco de Referências</div>
+      <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:16px;margin-bottom:16px;">
+        <div style="font-size:0.85em;color:#e0e0e0;margin-bottom:10px;">
+          <strong>📁 Referências Visuais da Campanha</strong> — fotos e artes de referência enviadas pela coordenação
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <a href="https://drive.google.com/drive/folders/1mH9jxdkCWrK_KYHwZCIFv-flMedirOFR" target="_blank" class="link-item" style="flex:1;min-width:200px;">
+            <div class="icon">🖼️</div><div class="info"><div class="name">7 Fotos de Referência</div><div class="desc">Enviadas em 03/08 — abrir no Drive</div></div>
+          </a>
+          <a href="https://www.instagram.com/hilton_erika/" target="_blank" class="link-item" style="flex:1;min-width:200px;">
+            <div class="icon">📸</div><div class="info"><div class="name">Perfil Oficial @hilton_erika</div><div class="desc">4,9M seguidores — fotos oficiais</div></div>
+          </a>
+          <a href="https://www.instagram.com/erikahiltonjundiai/" target="_blank" class="link-item" style="flex:1;min-width:200px;">
+            <div class="icon">📍</div><div class="info"><div class="name">Perfil Local @erikahiltonjundiai</div><div class="desc">579 seguidores — página de apoiadores</div></div>
+          </a>
+          <a href="https://erikahilton.com.br/" target="_blank" class="link-item" style="flex:1;min-width:200px;">
+            <div class="icon">🌐</div><div class="info"><div class="name">Site Oficial</div><div class="desc">erikahilton.com.br — fotos e materiais</div></div>
+          </a>
+          <a href="https://www.camara.leg.br/deputados/220645" target="_blank" class="link-item" style="flex:1;min-width:200px;">
+            <div class="icon">🏛️</div><div class="info"><div class="name">Galeria Câmara</div><div class="desc">Fotos oficiais do mandato</div></div>
+          </a>
+          <a href="https://pt.wikipedia.org/wiki/Erika_Hilton" target="_blank" class="link-item" style="flex:1;min-width:200px;">
+            <div class="icon">📖</div><div class="info"><div class="name">Wikipedia</div><div class="desc">Fotos e biografia completa</div></div>
+          </a>
+        </div>
+        <div style="margin-top:10px;font-size:0.75em;color:#555;">
+          💡 <strong>Dica pra Eva:</strong> Use as fotos de referência como inspiração de estilo, enquadramento e paleta de cores.
+        </div>
+      </div>
+    </div><!-- /tab-referencias -->
 
     <footer>
       Hub Interno — Campanha Erika Hilton 2026 • Jundiaí-SP<br>
@@ -1110,6 +1132,9 @@ function renderDashboard() {
   // Conteudo Pronto (legendas, hashtags, scripts, guia)
   renderConteudoPronto();
 
+  // Navegação por abas
+  renderTabNav();
+
   // Agenda
   renderAgenda();
 
@@ -1276,6 +1301,45 @@ function renderContentSchedule() {
 function toggleProd(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('prod_' + tarefa, el.classList.contains('done')); }
 function togglePub(el, key) { el.classList.toggle('done'); localStorage.setItem('pub_' + key, el.classList.contains('done')); }
 function toggleEng(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('eng_' + tarefa, el.classList.contains('done')); }
+
+// 📌 NAVEGAÇÃO POR ABAS
+function renderTabNav() {
+  const tabs = [
+    { id: 'acoes',    label: '📋 Ações',     nivel: 1 },
+    { id: 'estrategia', label: '📊 Estratégia', nivel: 5 },
+    { id: 'conteudo', label: '📝 Conteúdo',  nivel: 1 },
+    { id: 'agenda',   label: '📅 Agenda',    nivel: 1 },
+    { id: 'referencias', label: '🖼️ Ref.',  nivel: 1 },
+  ];
+  const visiveis = tabs.filter(t => t.nivel <= pessoa(usuarioAtual).nivel || t.id === 'acoes');
+  const nav = document.getElementById('tab-nav');
+  if (!nav) return;
+  nav.innerHTML = visiveis.map(t =>
+    `<button class="tab-btn" id="tabbtn-${t.id}" onclick="switchTab('${t.id}')">${t.label}</button>`
+  ).join('');
+  const nivel = pessoa(usuarioAtual).nivel;
+  let defaultTab = 'acoes';
+  if (nivel >= 5) defaultTab = 'estrategia';
+  if (nivel <= 2) defaultTab = 'conteudo';
+  switchTab(defaultTab);
+}
+
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  const section = document.getElementById('tab-' + tabId);
+  if (section) section.classList.add('active');
+  const btn = document.getElementById('tabbtn-' + tabId);
+  if (btn) btn.classList.add('active');
+}
+
+function toggleCollapse(id) {
+  const body = document.getElementById('body-' + id);
+  const arrow = document.getElementById('arrow-' + id);
+  if (!body || !arrow) return;
+  const isClosed = body.classList.toggle('closed');
+  arrow.classList.toggle('open', !isClosed);
+}
 
 // 📝 CONTEÚDO PRONTO
 function renderConteudoPronto() {
