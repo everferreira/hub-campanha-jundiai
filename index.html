@@ -33,10 +33,6 @@ body { font-family: 'Inter', sans-serif; background: #0f0f0f; color: #e0e0e0; mi
 }
 .person-btn .pname { font-size: 0.85em; font-weight: 600; }
 .person-btn .prole { font-size: 0.7em; color: #888; }
-.person-btn .nivel {
-  font-size: 0.6em; color: #555; margin-top: 2px;
-}
-
 /* DASHBOARD */
 #dashboard { display: none; }
 header {
@@ -50,7 +46,6 @@ header .user-info { display: flex; align-items: center; gap: 12px; }
 header .user-info .avatar-sm { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.85em; font-weight: 700; color: #fff; }
 header .user-info .uname { font-size: 0.85em; font-weight: 600; }
 header .user-info .urole { font-size: 0.7em; color: #888; }
-header .user-info .ubadge { font-size: 0.6em; color: #e94560; background: #2a1a1a; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
 header .switch-btn {
   background: #e94560; color: #fff; border: none; padding: 8px 16px;
   border-radius: 8px; cursor: pointer; font-size: 0.8em; font-weight: 600; transition: opacity 0.2s;
@@ -317,7 +312,6 @@ footer a { color: #e94560; text-decoration: none; }
         <div class="uname" id="user-name-bar">Ever Maria</div>
         <div class="urole" id="user-role-bar">Coordenadora</div>
       </div>
-      <span class="ubadge" id="user-badge">👑 Nível 5</span>
       <button class="switch-btn" onclick="showLogin()">🔄 Trocar</button>
     </div>
   </header>
@@ -403,17 +397,17 @@ footer a { color: #e94560; text-decoration: none; }
 
 // Níveis de acesso: 5=Coordenadora, 4=Assessora, 3=Líder, 2=Equipe
 const EQUIPE = [
-  { nome: 'Ever Maria', role: 'Coordenadora Municipal', cor: '#e94560', iniciais: 'EM', nivel: 5, badge: '👑' },
-  { nome: 'Tiana Cauton', role: 'Assessora', cor: '#9c27b0', iniciais: 'TC', nivel: 5, badge: '👑' },
-  { nome: 'Junior Arcanjo', role: 'Mobilizador de Rua', cor: '#ff6b35', iniciais: 'JA', nivel: 3, badge: '🟠' },
-  { nome: 'Hoanny', role: 'Eventos', cor: '#2196f3', iniciais: 'HO', nivel: 3, badge: '🔵' },
-  { nome: 'João', role: 'Financeiro', cor: '#4caf50', iniciais: 'JO', nivel: 3, badge: '🟢' },
-  { nome: 'Kawa', role: 'Redes Sociais', cor: '#00bcd4', iniciais: 'KA', nivel: 2, badge: '📱' },
-  { nome: 'Eva', role: 'Redes Sociais', cor: '#ff80ab', iniciais: 'EV', nivel: 2, badge: '📱' },
+  { nome: 'Ever Maria', role: 'Coordenadora Municipal', cor: '#e94560', iniciais: 'EM', nivel: 5 },
+  { nome: 'Tiana Cauton', role: 'Assessora', cor: '#9c27b0', iniciais: 'TC', nivel: 5 },
+  { nome: 'Junior Arcanjo', role: 'Mobilizador de Rua', cor: '#ff6b35', iniciais: 'JA', nivel: 3 },
+  { nome: 'Hoanny', role: 'Eventos', cor: '#2196f3', iniciais: 'HO', nivel: 3 },
+  { nome: 'João', role: 'Financeiro', cor: '#4caf50', iniciais: 'JO', nivel: 3 },
+  { nome: 'Kawa', role: 'Redes Sociais', cor: '#00bcd4', iniciais: 'KA', nivel: 2 },
+  { nome: 'Eva', role: 'Redes Sociais', cor: '#ff80ab', iniciais: 'EV', nivel: 2 },
 ];
 
 function pessoa(nome) {
-  return EQUIPE.find(p => p.nome === nome) || { nome, role: 'Equipe', cor: '#888', iniciais: nome.slice(0,2).toUpperCase(), nivel: 0, badge: '' };
+  return EQUIPE.find(p => p.nome === nome) || { nome, role: 'Equipe', cor: '#888', iniciais: nome.slice(0,2).toUpperCase(), nivel: 0 };
 }
 
 function nivelMin(nivel) {
@@ -556,7 +550,6 @@ function renderLogin() {
       <div class="avatar" style="background:${p.cor}">${p.iniciais}</div>
       <div class="pname">${p.nome}</div>
       <div class="prole">${p.role}</div>
-      <div class="nivel">${p.badge} Nível ${p.nivel}</div>
     </div>
   `).join('');
 }
@@ -659,8 +652,7 @@ function renderDashboard() {
   document.getElementById('user-avatar-sm').textContent = p.iniciais;
   document.getElementById('user-name-bar').textContent = p.nome;
   document.getElementById('user-role-bar').textContent = p.role;
-  document.getElementById('user-badge').textContent = `${p.badge} Nível ${p.nivel}`;
-
+    const hoje = new Date();
   // Saudação
   const horas = hoje.getHours();
   const saud = horas < 12 ? 'Bom dia' : horas < 18 ? 'Boa tarde' : 'Boa noite';
