@@ -365,12 +365,20 @@ footer a { color: #e94560; text-decoration: none; }
     <div class="section-title">🤝 Parceiros da Campanha</div>
     <div id="partners-area"></div>
 
-    <!-- INSTA SCHEDULE -->
-    <div class="section-title">📱 Cronograma Instagram</div>
-    <div class="insta-grid" id="insta-grid"></div>
+    <!-- 📦 PRODUÇÃO -->
+    <div class="section-title">📦 Produzir (Eva 🎨 / Kawa 🎬)</div>
+    <div class="tasks-grid" id="producao-grid"></div>
+
+    <!-- 📢 PUBLICAÇÃO -->
+    <div class="section-title">📢 Publicar</div>
+    <div class="tasks-grid" id="publicacao-grid"></div>
     <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.78em;color:#888;">
-      ⏳ <strong>Postagens começam em breve</strong> — dando tempo pra preparar as imagens. Horários alternados entre 13h e 15h (janela de melhor alcance).
+      📐 <strong>Regra:</strong> Eventos de mobilização → produzir 20 dias antes, publicar 15 dias antes. Conteúdo histórico → mais flexível.
     </div>
+
+    <!-- 🔄 ENGAJAMENTO DIÁRIO -->
+    <div class="section-title">🔄 Engajamento Diário</div>
+    <div class="tasks-grid" id="engajamento-grid"></div>
 
     <!-- BIO -->
     <div class="section-title">👤 Quem é Erika Hilton</div>
@@ -504,14 +512,58 @@ const EMENDAS = [
   { valor: 'R$ 1 milhão', destino: 'CTA — Testagem HIV, sífilis, hepatites', articulacao: 'Tiana Cauton' },
 ];
 
-const CRONOGRAMA_INSTA = [
-  { dia: 'Seg', tema: 'Quem é Erika?', formato: 'Carrossel biográfico', horario: '13h' },
-  { dia: 'Ter', tema: 'Atuação em Jundiaí', formato: 'Post + legenda política', horario: '15h' },
-  { dia: 'Qua', tema: 'Pauta social LGBTQIAPN+', formato: 'Carrossel com dados', horario: '13h' },
-  { dia: 'Qui', tema: 'Propostas e bandeiras', formato: 'Post + chamada pra ação', horario: '15h' },
-  { dia: 'Sex', tema: 'Bastidores da equipe', formato: 'Reels / Vídeo curto', horario: '13h' },
-  { dia: 'Sáb', tema: 'Agenda do fds', formato: 'Stories + Post', horario: '15h' },
-  { dia: 'Dom', tema: 'Mobilização pré-bandeiraço', formato: 'Post convocatório', horario: '13h' },
+// ═══════════════════════════════════════════════════════════
+// CRONOGRAMA DE CONTEÚDO
+// ═══════════════════════════════════════════════════════════
+
+// 📦 PRODUÇÃO — o que criar (responsável + prazo)
+const PRODUCAO = [
+  // 🔴 EMERGÊNCIA — Bandeiraço 16/08 + Visita 18/08
+  { tarefa: "Card convocação Bandeiraço 16/08", responsavel: "Eva 🎨", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência" },
+  { tarefa: "Reels convocação Bandeiraço 16/08", responsavel: "Kawa 🎬", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência" },
+  { tarefa: "Card anúncio visita Erika 18/08", responsavel: "Eva 🎨", prazo: "05/08", urgencia: "urgent", lote: "🔴 Emergência" },
+  { tarefa: "6 cards Agenda 18/08 (1 por atividade)", responsavel: "Eva 🎨", prazo: "05/08", urgencia: "urgent", lote: "🔴 Emergência" },
+  { tarefa: "Reels Agenda Erika em Jundiaí", responsavel: "Kawa 🎬", prazo: "06/08", urgencia: "urgent", lote: "🔴 Emergência" },
+  { tarefa: "Template stories '📍 Ao vivo de...'", responsavel: "Eva 🎨", prazo: "06/08", urgencia: "urgent", lote: "🔴 Emergência" },
+  // 🟡 LOTE 2 — Posts históricos
+  { tarefa: "Carrossel biográfico 'Quem é Erika'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2" },
+  { tarefa: "Card infográfico 'R$ 4,6M em Jundiaí'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2" },
+  { tarefa: "Card 'R$ 2M na Saúde' (oftalmo+TEA+CTA)", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2" },
+  { tarefa: "Card 'Melhor Deputada 2024/25'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2" },
+  // 🟢 LOTE 3 — Complementos
+  { tarefa: "Card 'Presidente Comissão da Mulher'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3" },
+  { tarefa: "Card 'Erika na Parada LGBT+ Jundiaí'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3" },
+  { tarefa: "Card 'Meta 5.000 votos' (1.944→5.000)", responsavel: "Eva 🎨", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3" },
+  { tarefa: "Reels 'Por que votar em Erika?'", responsavel: "Kawa 🎬", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3" },
+];
+
+// 📢 PUBLICAÇÃO — quando postar
+const PUBLICACAO = [
+  { data: "07/08", dia: "Sex", horario: "13h", tema: "🚩 Bandeiraço 16/08 — CONVOCAÇÃO", formato: "Card", pronto: false },
+  { data: "07/08", dia: "Sex", horario: "15h", tema: "🎬 Reels: Vem pro Bandeiraço!", formato: "Reels", pronto: false },
+  { data: "08/08", dia: "Sáb", horario: "15h", tema: "📸 Quem é Erika Hilton? (carrossel)", formato: "Carrossel", pronto: false },
+  { data: "09/08", dia: "Dom", horario: "13h", tema: "🏆 Duas vezes melhor deputada do Brasil", formato: "Card", pronto: false },
+  { data: "10/08", dia: "Seg", horario: "15h", tema: "⚧️ Presidente Comissão da Mulher", formato: "Post", pronto: false },
+  { data: "11/08", dia: "Ter", horario: "13h", tema: "🏳️‍🌈 Erika na Parada LGBT+ de Jundiaí", formato: "Card", pronto: false },
+  { data: "12/08", dia: "Qua", horario: "15h", tema: "💰 R$ 4,6 milhões em Jundiaí", formato: "Card", pronto: false },
+  { data: "13/08", dia: "Qui", horario: "13h", tema: "🏥 R$ 2 milhões na Saúde de Jundiaí", formato: "Card", pronto: false },
+  { data: "13/08", dia: "Qui", horario: "15h", tema: "📅 Erika vem a Jundiaí! — ANÚNCIO", formato: "Card", pronto: false },
+  { data: "14/08", dia: "Sex", horario: "13h", tema: "📋 Agenda 18/08 — cards individuais", formato: "Cards", pronto: false },
+  { data: "14/08", dia: "Sex", horario: "15h", tema: "🎬 Reels: Agenda da Erika em Jundiaí", formato: "Reels", pronto: false },
+  { data: "15/08", dia: "Sáb", horario: "13h", tema: "🎯 Meta: 5.000 votos em Jundiaí", formato: "Card", pronto: false },
+  { data: "15/08", dia: "Sáb", horario: "15h", tema: "🎬 Por que votar em Erika?", formato: "Reels", pronto: false },
+  { data: "16/08", dia: "Dom", horario: "🔴 Ao vivo", tema: "🚀 Bandeiraço + Lançamento oficial", formato: "Cobertura", pronto: false },
+  { data: "17/08", dia: "Seg", horario: "13h", tema: "⏰ Amanhã: Erika em Jundiaí!", formato: "Story+Post", pronto: false },
+  { data: "18/08", dia: "Ter", horario: "🔴 Ao vivo", tema: "🎯 VISITA DA ERIKA — cobertura total", formato: "Cobertura", pronto: false },
+];
+
+// 🔄 ENGAJAMENTO DIÁRIO
+const ENGAJAMENTO = [
+  { tarefa: "Responder TODOS os comentários das postagens", responsavel: "Quem postou", feito: false },
+  { tarefa: "Comentar 2 posts da Erika (@hilton_erika)", responsavel: "Kawa", feito: false },
+  { tarefa: "Comentar 2 posts da Sofia Favaro", responsavel: "Eva", feito: false },
+  { tarefa: "Compartilhar posts oficiais (Erika+Sofia) nos stories", responsavel: "Ambos", feito: false },
+  { tarefa: "Verificar engajamento e salvar stories em destaque", responsavel: "Ambos", feito: false },
 ];
 
 const PARCEIROS = [
@@ -734,8 +786,8 @@ function renderDashboard() {
   // Parceiros (todos veem)
   renderPartners();
 
-  // Instagram (todos veem, mas destaca se é Kawa/Eva)
-  renderInstaSchedule();
+  // Conteúdo (produção, publicação, engajamento)
+  renderContentSchedule();
 
   // Biografia
   renderBio();
@@ -853,20 +905,59 @@ function renderPartners() {
   `).join('');
 }
 
-function renderInstaSchedule() {
-  const hoje = new Date();
-  const diasSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-  const diaSemana = diasSemana[hoje.getDay()];
+function renderContentSchedule() {
+  // 📦 PRODUÇÃO
+  const prodEl = document.getElementById('producao-grid');
+  prodEl.innerHTML = PRODUCAO.map(p => {
+    const done = localStorage.getItem('prod_' + p.tarefa) === 'true' ? 'done' : '';
+    const safeTarefa = p.tarefa.replace(/'/g, "\\'");
+    return `
+      <div class="task-card ${done}" onclick="toggleProd(this, '${safeTarefa}')">
+        <div class="task-header">
+          <div class="task-text"><strong>${p.tarefa}</strong></div>
+          <span class="task-prazo ${p.urgencia}">📅 ${p.prazo}</span>
+        </div>
+        <div class="task-responsaveis">👤 ${p.responsavel} • ${p.lote}</div>
+      </div>
+    `;
+  }).join('');
 
-  document.getElementById('insta-grid').innerHTML = CRONOGRAMA_INSTA.map(d => `
-    <div class="insta-day ${d.dia === diaSemana ? 'today' : ''}">
-      <div class="dia">${d.dia} ${d.dia === diaSemana ? '📌' : ''}</div>
-      <div class="tema">${d.tema}</div>
-      <div class="formato">${d.formato}</div>
-      <div style="font-size:0.7em;color:#e94560;margin-top:4px;font-weight:600;">🕐 ${d.horario}</div>
-    </div>
-  `).join('');
+  // 📢 PUBLICAÇÃO
+  const pubEl = document.getElementById('publicacao-grid');
+  pubEl.innerHTML = PUBLICACAO.map(p => {
+    const done = localStorage.getItem('pub_' + p.data + p.tema) === 'true' ? 'done' : '';
+    const safeTema = p.tema.replace(/'/g, "\\'");
+    const safeKey = (p.data + p.tema).replace(/'/g, "\\'");
+    return `
+      <div class="task-card ${done}" onclick="togglePub(this, '${safeKey}')">
+        <div class="task-header">
+          <div class="task-text"><strong>${p.tema}</strong></div>
+          <span class="task-prazo ${p.horario.includes('vivo') ? 'urgent' : 'normal'}">🕐 ${p.horario}</span>
+        </div>
+        <div class="task-responsaveis">📅 ${p.data} (${p.dia}) • ${p.formato}</div>
+      </div>
+    `;
+  }).join('');
+
+  // 🔄 ENGAJAMENTO
+  const engEl = document.getElementById('engajamento-grid');
+  engEl.innerHTML = ENGAJAMENTO.map(e => {
+    const done = localStorage.getItem('eng_' + e.tarefa) === 'true' ? 'done' : '';
+    const safeTarefa = e.tarefa.replace(/'/g, "\\'");
+    return `
+      <div class="task-card ${done}" onclick="toggleEng(this, '${safeTarefa}')">
+        <div class="task-header">
+          <div class="task-text">${e.tarefa}</div>
+        </div>
+        <div class="task-responsaveis">👤 ${e.responsavel}</div>
+      </div>
+    `;
+  }).join('');
 }
+
+function toggleProd(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('prod_' + tarefa, el.classList.contains('done')); }
+function togglePub(el, key) { el.classList.toggle('done'); localStorage.setItem('pub_' + key, el.classList.contains('done')); }
+function toggleEng(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('eng_' + tarefa, el.classList.contains('done')); }
 
 function renderBio() {
   document.getElementById('bio-card').innerHTML = `
