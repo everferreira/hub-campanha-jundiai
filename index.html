@@ -515,20 +515,18 @@ footer a { color: #e94560; text-decoration: none; }
       <div id="all-tasks-content"></div>
     </div>
 
-    <!-- PRODUÇÃO -->
-    <div class="section-title">📦 Produzir (Eva 🎨 / Kawa 🎬)</div>
-    <div class="tasks-grid" id="producao-grid"></div>
-
-    <!-- 📢 PUBLICAÇÃO -->
-    <div class="section-title">📢 Publicar</div>
-    <div class="tasks-grid" id="publicacao-grid"></div>
-    <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.78em;color:#888;">
-      📐 <strong>Regra:</strong> Eventos de mobilização → produzir 20 dias antes, publicar 15 dias antes. Conteúdo histórico → mais flexível.
+    <!-- 📢 PUBLICAÇÃO + 🔄 ENGAJAMENTO (com ver mais) -->
+    <div class="section-title" style="cursor:pointer;" onclick="document.getElementById('body-pub-eng').classList.toggle('closed');this.querySelector('.ca').classList.toggle('open');">
+      📢 Publicações & Engajamento <span class="collapse-arrow open ca">▶</span>
     </div>
-
-    <!-- 🔄 ENGAJAMENTO DIÁRIO -->
-    <div class="section-title">🔄 Engajamento Diário</div>
-    <div class="tasks-grid" id="engajamento-grid"></div>
+    <div class="collapse-body" id="body-pub-eng">
+      <div class="tasks-grid" id="publicacao-grid"></div>
+      <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:8px;padding:10px 14px;margin-bottom:16px;font-size:0.78em;color:#888;">
+        📐 <strong>Regra:</strong> Eventos de mobilização → produzir 20 dias antes, publicar 15 dias antes. Conteúdo histórico → mais flexível.
+      </div>
+      <div class="section-title" style="font-size:0.9em;">🔄 Engajamento Diário</div>
+      <div class="tasks-grid" id="engajamento-grid"></div>
+    </div>
 
     <!-- 📤 SINCRONIZAÇÃO -->
     <div class="section-title">📤 Sincronização</div>
@@ -538,10 +536,6 @@ footer a { color: #e94560; text-decoration: none; }
 
     <!-- NEWS -->
     <div id="news-section-acoes"></div>
-
-    <!-- PARCEIROS -->
-    <div class="section-title">🤝 Parceiros da Campanha</div>
-    <div id="partners-area"></div>
     </div><!-- /tab-acoes -->
 
     <!-- ABA: ESTRATÉGIA (Ever/Tiana + João) -->
@@ -559,6 +553,7 @@ footer a { color: #e94560; text-decoration: none; }
         <div id="financeiro-grid" class="finance-grid"></div>
       </div>
       <div class="bio-card" id="bio-card"></div>
+      <div id="partners-area-estrategia"></div>
     </div><!-- /tab-estrategia -->
 
     <!-- ABA: CONTEÚDO (Kawa/Eva focus) -->
@@ -1672,9 +1667,14 @@ function renderEmendas() {
 }
 
 function renderPartners() {
-  const partnersEl = document.getElementById('partners-area');
+  // Restrito: nível 5 (Ever/Tiana) e nível 3 (Junior/Hoanny/João)
+  const podeVer = usuarioAtual && pessoa(usuarioAtual).nivel >= 3;
+  const partnersEl = document.getElementById('partners-area-estrategia');
   if (partnersEl) {
-    partnersEl.innerHTML = PARCEIROS.map(p => `
+    if (!podeVer) { partnersEl.style.display = 'none'; return; }
+    partnersEl.style.display = 'block';
+    partnersEl.innerHTML = '<div class="section-title">🤝 Parceiros da Campanha</div>' +
+      PARCEIROS.map(p => `
       <div class="partner-card">
         <div class="partner-name">${p.nome}</div>
         <div class="partner-desc">${p.descricao}</div>
@@ -1685,24 +1685,6 @@ function renderPartners() {
 }
 
 function renderContentSchedule() {
-  // 📦 PRODUÇÃO
-  const prodEl = document.getElementById('producao-grid');
-  prodEl.innerHTML = PRODUCAO.map(p => {
-    const done = localStorage.getItem('prod_' + p.tarefa) === 'true' ? 'done' : '';
-    const safeTarefa = p.tarefa.replace(/'/g, "\\'");
-    const urgBadge = p.urgencia === 'urgent' ? '<span style="font-size:0.65em;background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px;">🔴 URGENTE</span>' : '';
-    const hasContent = (p.legendaKey || p.reelsKey || (p.refs && p.refs.length > 0));
-    return `
-      <div class="task-card ${done}" onclick="openProdModal('${safeTarefa}')">
-        <div class="task-header">
-          <div class="task-text"><strong>${p.tarefa}</strong>${urgBadge}</div>
-          <span class="task-prazo ${p.urgencia}">📅 ${p.prazo}</span>
-        </div>
-        <div class="task-responsaveis">👤 ${p.responsavel} • ${p.lote}${hasContent ? ' • 📎 Ver recursos' : ''}</div>
-      </div>
-    `;
-  }).join('');
-
   // 📢 PUBLICAÇÃO — com filtros
   // Coleta formatos e fases únicos
   const todosFormatos = [...new Set(PUBLICACAO.map(p => p.formato))];
