@@ -285,6 +285,42 @@ footer a { color: #e94560; text-decoration: none; }
   .tab-btn { font-size: 0.65em; padding: 6px 10px; }
   .collapse-arrow { font-size: 0.6em; }
 }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center;
+  z-index: 999; padding: 20px;
+}
+.modal-box {
+  background: #1a1a2e; border: 1px solid #e94560; border-radius: 12px;
+  padding: 24px; max-width: 520px; width: 100%; max-height: 85vh; overflow-y: auto;
+}
+.modal-box h3 { font-size: 1em; color: #fff; margin-bottom: 12px; line-height: 1.4; }
+.modal-section { margin-bottom: 16px; }
+.modal-section-title { font-size: 0.75em; color: #e94560; font-weight: 600; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+.modal-link {
+  display: flex; align-items: center; gap: 8px;
+  background: #0f0f0f; border: 1px solid #2a2a4a; border-radius: 8px;
+  padding: 10px 14px; text-decoration: none; color: #e0e0e0; font-size: 0.82em;
+  margin-bottom: 6px; transition: all 0.2s;
+}
+.modal-link:hover { border-color: #e94560; background: #1e1e3a; }
+.modal-link .link-icon { font-size: 1.1em; }
+.modal-link .link-label { font-weight: 600; }
+.modal-link .link-desc { font-size: 0.8em; color: #888; }
+.modal-btn {
+  width: 100%; padding: 12px; border-radius: 8px; border: none;
+  font-size: 0.85em; font-weight: 700; cursor: pointer; transition: all 0.2s;
+  margin-bottom: 8px;
+}
+.modal-btn.primary { background: #e94560; color: #fff; }
+.modal-btn.primary:hover { opacity: 0.85; }
+.modal-btn.primary.done { background: #2a5a2a; }
+.modal-btn.secondary { background: #2a2a4a; color: #888; }
+.modal-btn.secondary:hover { background: #3a3a5a; color: #e0e0e0; }
+.modal-btn.success { background: #4caf50; color: #fff; }
+.modal-btn.success:hover { opacity: 0.85; }
 </style>
 </head>
 <body>
@@ -385,12 +421,6 @@ footer a { color: #e94560; text-decoration: none; }
     <!-- PRODUÇÃO -->
     <div class="section-title">📦 Produzir (Eva 🎨 / Kawa 🎬)</div>
     <div class="tasks-grid" id="producao-grid"></div>
-    <div class="section-title">🤝 Parceiros da Campanha</div>
-    <div id="partners-area"></div>
-
-    <!-- 📦 PRODUÇÃO -->
-    <div class="section-title">📦 Produzir (Eva 🎨 / Kawa 🎬)</div>
-    <div class="tasks-grid" id="producao-grid"></div>
 
     <!-- 📢 PUBLICAÇÃO -->
     <div class="section-title">📢 Publicar</div>
@@ -403,18 +433,28 @@ footer a { color: #e94560; text-decoration: none; }
     <div class="section-title">🔄 Engajamento Diário</div>
     <div class="tasks-grid" id="engajamento-grid"></div>
 
-    <!-- NEWS (mais abaixo) -->
+    <!-- NEWS -->
     <div id="news-section-acoes"></div>
+
+    <!-- PARCEIROS -->
+    <div class="section-title">🤝 Parceiros da Campanha</div>
+    <div id="partners-area"></div>
     </div><!-- /tab-acoes -->
 
     <!-- ABA: ESTRATÉGIA (Ever/Tiana + quem pode ver) -->
     <div class="tab-section" id="tab-estrategia">
       <div id="news-section"></div>
-      <div id="eleitoral-section"></div>
-      <div id="emendas-section"></div>
+      <div id="eleitoral-section">
+        <div class="section-title">📊 Painel Eleitoral</div>
+        <div id="eleitoral-grid" class="eleitoral-grid"></div>
+      </div>
+      <div id="emendas-section">
+        <div class="section-title">💰 Emendas de Erika em Jundiaí</div>
+        <div id="emendas-grid" class="emendas-grid"></div>
+      </div>
       <div class="bio-card" id="bio-card"></div>
       <div class="section-title">🤝 Parceiros da Campanha</div>
-      <div id="partners-area"></div>
+      <div id="partners-area-estrategia"></div>
     </div><!-- /tab-estrategia -->
 
     <!-- ABA: CONTEÚDO (Kawa/Eva focus) -->
@@ -517,6 +557,16 @@ function nivelMin(nivel) {
   };
 }
 
+// Referências globais disponíveis
+const REFS_GLOBAIS = {
+  drive: { icon: '🖼️', label: '7 Fotos de Referência', desc: 'Abrir no Drive', url: 'https://drive.google.com/drive/folders/1mH9jxdkCWrK_KYHwZCIFv-flMedirOFR' },
+  instaOficial: { icon: '📸', label: 'Perfil Oficial @hilton_erika', desc: 'Fotos e posts oficiais', url: 'https://www.instagram.com/hilton_erika/' },
+  instaLocal: { icon: '📍', label: 'Perfil Local @erikahiltonjundiai', desc: 'Página de apoiadores', url: 'https://www.instagram.com/erikahiltonjundiai/' },
+  siteOficial: { icon: '🌐', label: 'Site Oficial', desc: 'erikahilton.com.br', url: 'https://erikahilton.com.br/' },
+  galeriaCamara: { icon: '🏛️', label: 'Galeria Câmara', desc: 'Fotos oficiais do mandato', url: 'https://www.camara.leg.br/deputados/220645' },
+  wikipedia: { icon: '📖', label: 'Wikipedia', desc: 'Biografia completa', url: 'https://pt.wikipedia.org/wiki/Erika_Hilton' },
+};
+
 const TAREFAS = [
   { texto: 'Disparar convites para grupo WhatsApp', prazo: '05/08', responsaveis: ['Junior Arcanjo'], urg: 'urgent' },
   { texto: 'Lista de lideranças Jundiaí e região metropolitana', prazo: '05/08', responsaveis: ['Junior Arcanjo'], urg: 'urgent' },
@@ -607,39 +657,69 @@ const EMENDAS = [
 
 // 📦 PRODUÇÃO — o que criar (responsável + prazo)
 // Regra: eventos = produzir 20 dias antes. Histórico = flexível.
+// Cada item pode ter:
+//   refs: array de chaves de REFS_GLOBAIS
+//   legendaKey: chave em LEGENDAS
+//   reelsKey: chave em REELS_SCRIPTS
 const PRODUCAO = [
   // 🔴 EMERGÊNCIA — Bandeiraço 16/08 + Visita 18/08
-  { tarefa: "Card convocação Bandeiraço 16/08", responsavel: "Eva 🎨", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Reels convocação Bandeiraço 16/08", responsavel: "Kawa 🎬", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card anúncio visita Erika 18/08", responsavel: "Eva 🎨", prazo: "05/08", urgencia: "urgent", lote: "🔴 Emergência", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "6 cards Agenda 18/08 (1 por atividade)", responsavel: "Eva 🎨", prazo: "05/08", urgencia: "urgent", lote: "🔴 Emergência", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Reels Agenda Erika em Jundiaí", responsavel: "Kawa 🎬", prazo: "06/08", urgencia: "urgent", lote: "🔴 Emergência", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Template stories '📍 Ao vivo de...'", responsavel: "Eva 🎨", prazo: "06/08", urgencia: "urgent", lote: "🔴 Emergência", link: "https://www.instagram.com/erikahiltonjundiai/" },
+  { tarefa: "Card convocação Bandeiraço 16/08", responsavel: "Eva 🎨", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência",
+    refs: ['drive', 'instaLocal'], legendaKey: 'bandeiraco' },
+  { tarefa: "Reels convocação Bandeiraço 16/08", responsavel: "Kawa 🎬", prazo: "04/08", urgencia: "urgent", lote: "🔴 Emergência",
+    refs: ['drive', 'instaOficial'], reelsKey: 'bandeiraco' },
+  { tarefa: "Card anúncio visita Erika 18/08", responsavel: "Eva 🎨", prazo: "05/08", urgencia: "urgent", lote: "🔴 Emergência",
+    refs: ['drive', 'instaOficial', 'siteOficial'], legendaKey: 'anuncio_visita' },
+  { tarefa: "6 cards Agenda 18/08 (1 por atividade)", responsavel: "Eva 🎨", prazo: "05/08", urgencia: "urgent", lote: "🔴 Emergência",
+    refs: ['drive', 'instaLocal'], legendaKey: 'agenda_18' },
+  { tarefa: "Reels Agenda Erika em Jundiaí", responsavel: "Kawa 🎬", prazo: "06/08", urgencia: "urgent", lote: "🔴 Emergência",
+    refs: ['instaOficial', 'siteOficial'], reelsKey: 'agenda_visita' },
+  { tarefa: "Template stories '📍 Ao vivo de...'", responsavel: "Eva 🎨", prazo: "06/08", urgencia: "urgent", lote: "🔴 Emergência",
+    refs: ['drive', 'instaLocal'], legendaKey: 'visita_cobertura' },
   // 🟡 LOTE 2 — Posts históricos
-  { tarefa: "Carrossel biográfico 'Quem é Erika'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card infográfico 'R$ 4,6M em Jundiaí'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card 'R$ 2M na Saúde' (oftalmo+TEA+CTA)", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card 'Melhor Deputada 2024/25'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2", link: "https://www.instagram.com/erikahiltonjundiai/" },
+  { tarefa: "Carrossel biográfico 'Quem é Erika'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2",
+    refs: ['wikipedia', 'galeriaCamara', 'instaOficial', 'siteOficial'], legendaKey: 'quem_e_erika' },
+  { tarefa: "Card infográfico 'R$ 4,6M em Jundiaí'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2",
+    refs: ['drive', 'siteOficial'], legendaKey: 'emendas_total' },
+  { tarefa: "Card 'R$ 2M na Saúde' (oftalmo+TEA+CTA)", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2",
+    refs: ['drive', 'instaLocal'], legendaKey: 'emendas_saude' },
+  { tarefa: "Card 'Melhor Deputada 2024/25'", responsavel: "Eva 🎨", prazo: "11/08", urgencia: "soon", lote: "🟡 Lote 2",
+    refs: ['galeriaCamara', 'wikipedia', 'instaOficial'], legendaKey: 'melhor_deputada' },
   // 🟢 LOTE 3 — Complementos
-  { tarefa: "Card 'Presidente Comissão da Mulher'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card 'Erika na Parada LGBT+ Jundiaí'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card 'Meta 5.000 votos' (1.944→5.000)", responsavel: "Eva 🎨", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Reels 'Por que votar em Erika?'", responsavel: "Kawa 🎬", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3", link: "https://www.instagram.com/erikahiltonjundiai/" },
+  { tarefa: "Card 'Presidente Comissão da Mulher'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3",
+    refs: ['galeriaCamara', 'wikipedia', 'instaOficial'], legendaKey: 'comissao_mulher' },
+  { tarefa: "Card 'Erika na Parada LGBT+ Jundiaí'", responsavel: "Eva 🎨", prazo: "13/08", urgencia: "normal", lote: "🟢 Lote 3",
+    refs: ['instaLocal', 'drive'], legendaKey: 'parada_lgbt' },
+  { tarefa: "Card 'Meta 5.000 votos' (1.944→5.000)", responsavel: "Eva 🎨", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3",
+    refs: ['instaLocal', 'siteOficial'], legendaKey: 'meta_votos' },
+  { tarefa: "Reels 'Por que votar em Erika?'", responsavel: "Kawa 🎬", prazo: "14/08", urgencia: "normal", lote: "🟢 Lote 3",
+    refs: ['instaOficial', 'galeriaCamara', 'wikipedia'], reelsKey: 'por_que_votar' },
   // 🔵 LOTE 4 — Pós-visita 18/08
-  { tarefa: "Edição melhores momentos visita (fotos+vídeos)", responsavel: "Kawa 🎬", prazo: "19/08", urgencia: "soon", lote: "🔵 Pós-visita", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Cards 'Melhores momentos' (3-4 cards)", responsavel: "Eva 🎨", prazo: "19/08", urgencia: "soon", lote: "🔵 Pós-visita", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Reels com depoimentos da visita", responsavel: "Kawa 🎬", prazo: "21/08", urgencia: "normal", lote: "🔵 Pós-visita", link: "https://www.instagram.com/erikahiltonjundiai/" },
+  { tarefa: "Edição melhores momentos visita (fotos+vídeos)", responsavel: "Kawa 🎬", prazo: "19/08", urgencia: "soon", lote: "🔵 Pós-visita",
+    refs: ['instaLocal', 'instaOficial'], legendaKey: 'melhores_momentos' },
+  { tarefa: "Cards 'Melhores momentos' (3-4 cards)", responsavel: "Eva 🎨", prazo: "19/08", urgencia: "soon", lote: "🔵 Pós-visita",
+    refs: ['drive', 'instaLocal'], legendaKey: 'melhores_momentos' },
+  { tarefa: "Reels com depoimentos da visita", responsavel: "Kawa 🎬", prazo: "21/08", urgencia: "normal", lote: "🔵 Pós-visita",
+    refs: ['instaLocal', 'instaOficial'], reelsKey: 'depoimentos_visita' },
   // 🟣 LOTE 5 — Semanas temáticas (Fase 3: 26/08 a 20/09)
-  { tarefa: "Cards 'Erika e as pautas de Jundiaí' (saúde, educação, direitos)", responsavel: "Eva 🎨", prazo: "24/08", urgencia: "normal", lote: "🟣 Semana 1", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Cards 'Apoios locais' (lideranças, comerciantes)", responsavel: "Eva 🎨", prazo: "31/08", urgencia: "normal", lote: "🟣 Semana 2", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Cards 'Prestação de contas' (resultados das emendas)", responsavel: "Eva 🎨", prazo: "07/09", urgencia: "normal", lote: "🟣 Semana 3", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Cards 'Caravanas e mobilização'", responsavel: "Eva 🎨", prazo: "13/09", urgencia: "normal", lote: "🟣 Semana 4", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Reels temáticos (1 por semana)", responsavel: "Kawa 🎬", prazo: "24/08, 31/08, 07/09, 13/09", urgencia: "normal", lote: "🟣 Semanal", link: "https://www.instagram.com/erikahiltonjundiai/" },
+  { tarefa: "Cards 'Erika e as pautas de Jundiaí' (saúde, educação, direitos)", responsavel: "Eva 🎨", prazo: "24/08", urgencia: "normal", lote: "🟣 Semana 1",
+    refs: ['siteOficial', 'galeriaCamara', 'wikipedia'], legendaKey: 'semana_pautas' },
+  { tarefa: "Cards 'Apoios locais' (lideranças, comerciantes)", responsavel: "Eva 🎨", prazo: "31/08", urgencia: "normal", lote: "🟣 Semana 2",
+    refs: ['instaLocal', 'drive'], legendaKey: 'semana_apoios' },
+  { tarefa: "Cards 'Prestação de contas' (resultados das emendas)", responsavel: "Eva 🎨", prazo: "07/09", urgencia: "normal", lote: "🟣 Semana 3",
+    refs: ['siteOficial', 'instaLocal'], legendaKey: 'semana_prestacao' },
+  { tarefa: "Cards 'Caravanas e mobilização'", responsavel: "Eva 🎨", prazo: "13/09", urgencia: "normal", lote: "🟣 Semana 4",
+    refs: ['instaLocal', 'drive'], legendaKey: 'semana_caravanas' },
+  { tarefa: "Reels temáticos (1 por semana)", responsavel: "Kawa 🎬", prazo: "24/08, 31/08, 07/09, 13/09", urgencia: "normal", lote: "🟣 Semanal",
+    refs: ['instaOficial', 'instaLocal', 'drive'] },
   // ⚫ LOTE 6 — Reta final (21/09 a 04/10)
-  { tarefa: "Gravação depoimentos apoiadores (testemunhais)", responsavel: "Kawa 🎬", prazo: "18/09", urgencia: "normal", lote: "⚫ Reta Final", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Cards 'Motivos pra votar em Erika' (série)", responsavel: "Eva 🎨", prazo: "25/09", urgencia: "normal", lote: "⚫ Reta Final", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card 'Amanhã é dia de votar!'", responsavel: "Eva 🎨", prazo: "02/10", urgencia: "urgent", lote: "⚫ Reta Final", link: "https://www.instagram.com/erikahiltonjundiai/" },
-  { tarefa: "Card agradecimento pós-eleição", responsavel: "Eva 🎨", prazo: "04/10", urgencia: "urgent", lote: "⚫ Reta Final", link: "https://www.instagram.com/erikahiltonjundiai/" },
+  { tarefa: "Gravação depoimentos apoiadores (testemunhais)", responsavel: "Kawa 🎬", prazo: "18/09", urgencia: "normal", lote: "⚫ Reta Final",
+    refs: ['instaLocal', 'instaOficial'], reelsKey: 'testemunhais' },
+  { tarefa: "Cards 'Motivos pra votar em Erika' (série)", responsavel: "Eva 🎨", prazo: "25/09", urgencia: "normal", lote: "⚫ Reta Final",
+    refs: ['siteOficial', 'galeriaCamara', 'wikipedia'], legendaKey: 'por_que_votar' },
+  { tarefa: "Card 'Amanhã é dia de votar!'", responsavel: "Eva 🎨", prazo: "02/10", urgencia: "urgent", lote: "⚫ Reta Final",
+    refs: ['instaLocal', 'instaOficial'], legendaKey: 'amanha_votar' },
+  { tarefa: "Card agradecimento pós-eleição", responsavel: "Eva 🎨", prazo: "04/10", urgencia: "urgent", lote: "⚫ Reta Final",
+    refs: ['instaLocal', 'instaOficial'], legendaKey: 'agradecimento_pos' },
 ];
 
 // 📢 PUBLICAÇÃO — quando postar (até 04/10 — eleição)
@@ -823,19 +903,6 @@ const REELS_SCRIPTS = {
       "8-12s: Mosaico rápido: PA, Instituto Braile, Centro TEA",
       "12-18s: Texto: '19h - Encontro Aberto (Clube 28)'",
       "18-22s: 'Vem participar! Agenda nos stories'",
-    ]
-  },
-  "depoimentos_visita": {
-    titulo: "Reels: Melhores momentos da visita",
-    duracao: "30-45 segundos",
-    trilha: "Música emocionante",
-    cenas: [
-      "0-5s: Erika abraçando crianças no PA Vila Progresso",
-      "5-12s: Discurso na coletiva de imprensa (melhor frase)",
-      "12-20s: Encontro com lideranças - apertos de mão",
-      "20-30s: Encontro aberto - multidão, bandeiras, energia",
-      "30-35s: Texto: 'Jundiaí recebeu Erika de braços abertos!'",
-      "35-40s: Erika agradecendo + logo da campanha",
     ]
   },
   "depoimentos_visita": {
@@ -1280,13 +1347,28 @@ function renderEmendas() {
 }
 
 function renderPartners() {
-  document.getElementById('partners-area').innerHTML = PARCEIROS.map(p => `
-    <div class="partner-card">
-      <div class="partner-name">${p.nome}</div>
-      <div class="partner-desc">${p.descricao}</div>
-      ${p.tarefas.length ? `<div class="partner-tasks">📋 ${p.tarefas.map(t => `<span>${t}</span>`).join(' ')}</div>` : ''}
-    </div>
-  `).join('');
+  // Ações tab
+  const partnersEl = document.getElementById('partners-area');
+  if (partnersEl) {
+    partnersEl.innerHTML = PARCEIROS.map(p => `
+      <div class="partner-card">
+        <div class="partner-name">${p.nome}</div>
+        <div class="partner-desc">${p.descricao}</div>
+        ${p.tarefas.length ? `<div class="partner-tasks">📋 ${p.tarefas.map(t => `<span>${t}</span>`).join(' ')}</div>` : ''}
+      </div>
+    `).join('');
+  }
+  // Estratégia tab
+  const partnersEl2 = document.getElementById('partners-area-estrategia');
+  if (partnersEl2) {
+    partnersEl2.innerHTML = PARCEIROS.map(p => `
+      <div class="partner-card">
+        <div class="partner-name">${p.nome}</div>
+        <div class="partner-desc">${p.descricao}</div>
+        ${p.tarefas.length ? `<div class="partner-tasks">📋 ${p.tarefas.map(t => `<span>${t}</span>`).join(' ')}</div>` : ''}
+      </div>
+    `).join('');
+  }
 }
 
 function renderContentSchedule() {
@@ -1295,15 +1377,15 @@ function renderContentSchedule() {
   prodEl.innerHTML = PRODUCAO.map(p => {
     const done = localStorage.getItem('prod_' + p.tarefa) === 'true' ? 'done' : '';
     const safeTarefa = p.tarefa.replace(/'/g, "\\'");
-    const linkHtml = p.link ? `<a href="${p.link}" target="_blank" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:4px;background:#1a1a2e;color:#e94560;text-decoration:none;padding:4px 10px;border-radius:6px;font-size:0.7em;border:1px solid #2a2a4a;margin-top:6px;font-weight:600;">🔗 Ver conteúdo</a>` : '';
     const urgBadge = p.urgencia === 'urgent' ? '<span style="font-size:0.65em;background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px;">🔴 URGENTE</span>' : '';
+    const hasContent = (p.legendaKey || p.reelsKey || (p.refs && p.refs.length > 0));
     return `
-      <div class="task-card ${done}" onclick="toggleProd(this, '${safeTarefa}')">
+      <div class="task-card ${done}" onclick="openProdModal('${safeTarefa}')">
         <div class="task-header">
           <div class="task-text"><strong>${p.tarefa}</strong>${urgBadge}</div>
           <span class="task-prazo ${p.urgencia}">📅 ${p.prazo}</span>
         </div>
-        <div class="task-responsaveis">👤 ${p.responsavel} • ${p.lote}${linkHtml}</div>
+        <div class="task-responsaveis">👤 ${p.responsavel} • ${p.lote}${hasContent ? ' • 📎 Ver recursos' : ''}</div>
       </div>
     `;
   }).join('');
@@ -1344,6 +1426,110 @@ function renderContentSchedule() {
 function toggleProd(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('prod_' + tarefa, el.classList.contains('done')); }
 function togglePub(el, key) { el.classList.toggle('done'); localStorage.setItem('pub_' + key, el.classList.contains('done')); }
 function toggleEng(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('eng_' + tarefa, el.classList.contains('done')); }
+
+// 📌 NOVO MODAL DE PRODUÇÃO
+function openProdModal(tarefaNome) {
+  const p = PRODUCAO.find(t => t.tarefa === tarefaNome);
+  if (!p) return;
+
+  const done = localStorage.getItem('prod_' + p.tarefa) === 'true';
+  const urgBadge = p.urgencia === 'urgent' ? '<span style="background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;font-size:0.75em;">🔴 URGENTE</span>' : '';
+
+  // Montar links de referência
+  let refsHtml = '';
+  if (p.refs && p.refs.length > 0) {
+    refsHtml = p.refs.map(key => {
+      const ref = REFS_GLOBAIS[key];
+      if (!ref) return '';
+      return `<a href="${ref.url}" target="_blank" class="modal-link">
+        <span class="link-icon">${ref.icon}</span>
+        <span><span class="link-label">${ref.label}</span><br><span class="link-desc">${ref.desc}</span></span>
+      </a>`;
+    }).join('');
+  }
+
+  // Link pra legenda
+  let legendaHtml = '';
+  if (p.legendaKey && LEGENDAS[p.legendaKey]) {
+    legendaHtml = `<div class="modal-section">
+      <div class="modal-section-title">📄 Legenda Pronta</div>
+      <a href="#" class="modal-link" onclick="event.preventDefault();mostrarLegenda('${p.legendaKey}')" style="cursor:pointer;">
+        <span class="link-icon">📄</span>
+        <span><span class="link-label">Ver legenda pra este post</span><br><span class="link-desc">Clique pra copiar o texto</span></span>
+      </a>
+    </div>`;
+  }
+
+  // Link pra roteiro de reels
+  let reelsHtml = '';
+  if (p.reelsKey && REELS_SCRIPTS[p.reelsKey]) {
+    const s = REELS_SCRIPTS[p.reelsKey];
+    reelsHtml = `<div class="modal-section">
+      <div class="modal-section-title">🎬 Roteiro de Reels</div>
+      <div style="background:#0f0f0f;border:1px solid #2a2a4a;border-radius:8px;padding:12px;font-size:0.8em;color:#ccc;line-height:1.5;">
+        <div style="color:#e94560;font-weight:600;margin-bottom:4px;">${s.titulo}</div>
+        <div style="color:#888;font-size:0.85em;margin-bottom:6px;">⏱️ ${s.duracao} • 🎵 ${s.trilha}</div>
+        ${s.cenas.map(c => `<div>🎬 ${c}</div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  // Botão de conclusão
+  const doneBtn = done
+    ? `<button class="modal-btn success" onclick="fecharModalEToggleProd('${p.tarefa.replace(/'/g, "\\'")}')">✅ Concluída — Desmarcar</button>`
+    : `<button class="modal-btn primary" onclick="fecharModalEToggleProd('${p.tarefa.replace(/'/g, "\\'")}')">✅ Marcar como concluída</button>`;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.onclick = () => document.body.removeChild(overlay);
+
+  overlay.innerHTML = `
+    <div class="modal-box" onclick="e => e.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
+        <h3>${p.tarefa} ${urgBadge}</h3>
+        <button onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)" style="background:#2a2a4a;border:none;color:#888;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:0.85em;">✕ Fechar</button>
+      </div>
+      <div style="font-size:0.8em;color:#888;margin-bottom:16px;">
+        👤 ${p.responsavel} • 📅 Prazo: ${p.prazo} • ${p.lote}
+      </div>
+
+      ${refsHtml ? `<div class="modal-section"><div class="modal-section-title">🔗 Referências</div>${refsHtml}</div>` : ''}
+      ${legendaHtml}
+      ${reelsHtml}
+
+      <div style="border-top:1px solid #2a2a4a;padding-top:12px;margin-top:4px;">
+        ${doneBtn}
+        <button class="modal-btn secondary" onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)">Continuar depois</button>
+      </div>
+    </div>
+  `;
+
+  // Fix stopPropagation on modal-box
+  const modalBox = overlay.querySelector('.modal-box');
+  if (modalBox) modalBox.onclick = (e) => e.stopPropagation();
+
+  document.body.appendChild(overlay);
+}
+
+function fecharModalEToggleProd(tarefa) {
+  // Marca/desmarca a tarefa
+  const el = document.querySelector(`.task-card:has(.task-text strong:contains("${tarefa}"))`);
+  // Since :contains doesn't work in modern CSS, find by iterating
+  const cards = document.querySelectorAll('#producao-grid .task-card');
+  for (const card of cards) {
+    const strong = card.querySelector('.task-text strong');
+    if (strong && strong.textContent.trim() === tarefa) {
+      card.classList.toggle('done');
+      localStorage.setItem('prod_' + tarefa, card.classList.contains('done'));
+      break;
+    }
+  }
+  // Fecha o modal
+  const overlay = document.querySelector('.modal-overlay');
+  if (overlay) document.body.removeChild(overlay);
+  // Re-render pra atualizar
+  renderContentSchedule();
+}
 
 // 📌 NAVEGAÇÃO POR ABAS
 function renderTabNav() {
