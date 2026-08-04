@@ -530,6 +530,12 @@ footer a { color: #e94560; text-decoration: none; }
     <div class="section-title">🔄 Engajamento Diário</div>
     <div class="tasks-grid" id="engajamento-grid"></div>
 
+    <!-- 📤 SINCRONIZAÇÃO -->
+    <div class="section-title">📤 Sincronização</div>
+    <div id="historico-conclusoes" style="margin-bottom:10px;"></div>
+    <button id="btn-sync" onclick="sincronizarConclusoes()" style="width:100%;background:#2a2a4a;color:#e0e0e0;border:1px solid #4a4a6a;padding:10px;border-radius:8px;font-size:0.82em;font-weight:600;cursor:pointer;transition:0.2s;">📤 Sincronizar conclusões</button>
+    <div style="font-size:0.72em;color:#555;margin-top:6px;margin-bottom:20px;">⚠️ Sincronize após concluir tarefas para compartilhar o progresso com a equipe</div>
+
     <!-- NEWS -->
     <div id="news-section-acoes"></div>
 
@@ -636,6 +642,7 @@ footer a { color: #e94560; text-decoration: none; }
   </div>
 </div>
 
+<script src="token.js"></script>
 <script>
 // ═══════════════════════════════════════════════════════════
 // DADOS DA CAMPANHA
@@ -1255,26 +1262,43 @@ function renderDashboard() {
   
   // Unifica tarefas: TAREFAS + PRODUCAO + PUBLICACAO + ENGAJAMENTO, filtrando pelo usuário
   function getUserTasks(nome) {
-    const hoje = new Date();
-    const anoRef = hoje.getFullYear();
+    const tz = 'America/Sao_Paulo';
+    const agora = new Date();
+    const hojeSP = new Date(agora.toLocaleString('en-US', { timeZone: tz }));
+    const anoRef = hojeSP.getFullYear();
+
+    function parseDataPrazo(prazo) {
+      if (!prazo || prazo === 'Contínuo' || prazo.includes('-') || prazo.includes(',')) return null;
+      const partes = prazo.split('/');
+      if (partes.length !== 2) return null;
+      const d = parseInt(partes[0], 10), m = parseInt(partes[1], 10);
+      if (!d || !m) return null;
+      return new Date(anoRef, m - 1, d, 23, 59, 59);
+    }
 
     function calcUrgencia(prazo) {
-      if (!prazo || prazo === 'Contínuo' || prazo.includes('-') || prazo.includes(',')) return 'normal';
-      const partes = prazo.split('/');
-      if (partes.length !== 2) return 'normal';
-      const d = parseInt(partes[0], 10), m = parseInt(partes[1], 10);
-      if (!d || !m) return 'normal';
-      const dt = new Date(anoRef, m - 1, d, 23, 59, 59);
-      const diff = Math.ceil((dt - hoje) / (1000 * 60 * 60 * 24));
+      const dt = parseDataPrazo(prazo);
+      if (!dt) return 'normal';
+      const hojeMeiaNoite = new Date(hojeSP.getFullYear(), hojeSP.getMonth(), hojeSP.getDate(), 23, 59, 59);
+      const diff = Math.ceil((dt - hojeMeiaNoite) / (1000 * 60 * 60 * 24));
       if (diff < 0) return 'overdue';
       if (diff === 0) return 'duetoday';
+      if (diff === 1) return 'tomorrow';
       if (diff <= 3) return 'soon';
       return 'normal';
     }
 
+    // Função pra extrair data numérica pra ordenação
+    function prazoToNum(prazo) {
+      const dt = parseDataPrazo(prazo);
+      return dt ? dt.getTime() : 99999999999999;
+    }
+
     const deTarefas = TAREFAS.filter(t => t.responsaveis.includes(nome)).map(t => ({
       ...t,
-      _sortUrg: t.urg === 'continuous' ? 5 : (calcUrgencia(t.prazo) === 'overdue' ? 0 : calcUrgencia(t.prazo) === 'duetoday' ? 1 : t.urg === 'urgent' ? 2 : t.urg === 'soon' ? 3 : 4)
+      _urgCalc: calcUrgencia(t.prazo),
+      _prazoNum: prazoToNum(t.prazo),
+      _sortUrg: t.urg === 'continuous' ? 5 : (calcUrgencia(t.prazo) === 'overdue' ? 0 : calcUrgencia(t.prazo) === 'duetoday' ? 1 : calcUrgencia(t.prazo) === 'tomorrow' ? 2 : t.urg === 'urgent' ? 3 : t.urg === 'soon' ? 4 : 5)
     }));
 
     const deProducao = PRODUCAO.filter(t => {
@@ -1287,7 +1311,8 @@ function renderDashboard() {
         prazo: t.prazo,
         responsaveis: [t.responsavel],
         urg: urg === 'overdue' || urg === 'duetoday' ? 'urgent' : t.urgencia,
-        _sortUrg: urg === 'overdue' ? 0 : urg === 'duetoday' ? 1 : t.urgencia === 'urgent' ? 2 : t.urgencia === 'soon' ? 3 : 4,
+        _sortUrg: urg === 'overdue' ? 0 : urg === 'duetoday' ? 1 : urg === 'tomorrow' ? 2 : t.urgencia === 'urgent' ? 3 : t.urgencia === 'soon' ? 4 : 5,
+        _prazoNum: prazoToNum(t.prazo),
         _isProd: true
       };
     });
@@ -1300,8 +1325,9 @@ function renderDashboard() {
         texto: p.tema,
         prazo: p.data,
         responsaveis: p.responsavel,
-        urg: urg === 'overdue' || urg === 'duetoday' ? 'urgent' : urg === 'soon' ? 'soon' : 'normal',
-        _sortUrg: urg === 'overdue' ? 0 : urg === 'duetoday' ? 1 : 4,
+        urg: urg === 'overdue' || urg === 'duetoday' ? 'urgent' : urg === 'tomorrow' ? 'soon' : urg === 'soon' ? 'soon' : 'normal',
+        _sortUrg: urg === 'overdue' ? 0 : urg === 'duetoday' ? 1 : urg === 'tomorrow' ? 2 : 5,
+        _prazoNum: prazoToNum(p.data),
         _isPublicacao: true
       };
     });
@@ -1314,17 +1340,23 @@ function renderDashboard() {
       prazo: 'Contínuo',
       responsaveis: [e.responsavel],
       urg: 'continuous',
-      _sortUrg: 5,
+      _sortUrg: 6,
+      _prazoNum: 99999999999999,
       _isEngajamento: true
     }));
 
-    // Junta e ordena: vencidas > vence hoje > urgente > próximo > normal > contínuo
-    return [...deTarefas, ...deProducao, ...dePublicacao, ...deEngajamento].sort((a, b) => {
-      const ordem = { overdue: 0, duetoday: 1, urgent: 2, soon: 3, normal: 4, continuous: 5 };
+    // Junta e ordena: vencidas > vence hoje > amanhã > urgente > próximo > normal > contínuo
+    // Dentro do mesmo nível, ordena por data crescente
+    const todas = [...deTarefas, ...deProducao, ...dePublicacao, ...deEngajamento];
+    return todas.sort((a, b) => {
+      const ordem = { overdue: 0, duetoday: 1, tomorrow: 2, urgent: 3, soon: 4, normal: 5, continuous: 6 };
       const sortA = a._sortUrg !== undefined ? a._sortUrg : (ordem[a.urg] !== undefined ? ordem[a.urg] : 99);
       const sortB = b._sortUrg !== undefined ? b._sortUrg : (ordem[b.urg] !== undefined ? ordem[b.urg] : 99);
       if (sortA !== sortB) return sortA - sortB;
-      // Desempate: produção antes de publicação, alfabético
+      // Desempate: data mais próxima primeiro
+      const dA = a._prazoNum || 99999999999999;
+      const dB = b._prazoNum || 99999999999999;
+      if (dA !== dB) return dA - dB;
       return (a.texto || '').localeCompare(b.texto || '');
     });
   }
@@ -1337,7 +1369,9 @@ function renderDashboard() {
     : '✅ Tudo em dia com os prazos urgentes!';
   document.getElementById('greeting-area').innerHTML = `
     <h2>${saud}, ${usuarioAtual}! 💛</h2>
-    <p>${p.role} na campanha Erika Hilton em Jundiaí.<br>${urgMsg}</p>
+    <p>${p.role} na campanha Erika Hilton em Jundiaí<br>
+    <strong id="relogio-sp">🕐 carregando...</strong></p>
+    <div id="sync-badge" class="update-badge" style="display:none;margin-top:6px;"></div>
     ${renderOverdueAlert()}
   `;
 
@@ -1367,42 +1401,84 @@ function renderDashboard() {
     <div style="font-size:0.75em;color:#888;margin-bottom:12px;">${doneCount} de ${total} tarefas concluídas</div>
   `;
 
-  // Minhas tarefas
-  const myTasksDiv = document.getElementById('my-tasks');
-  document.getElementById('my-tasks-count').textContent = userTasks.length;
-  if (userTasks.length === 0) {
-    myTasksDiv.innerHTML = '<p style="color:#888;font-size:0.85em;padding:12px;">Nenhuma tarefa atribuída diretamente a você.</p>';
-  } else {
-    myTasksDiv.innerHTML = userTasks.map(t => taskCard(t)).join('');
-  }
+  // Minhas tarefas (com toggle Ver Mais)
+  renderTasksComToggle(userTasks, 'my-tasks', 'my-tasks-count');
 
-  // Unifica tarefas: TAREFAS + PRODUCAO
+  // Unifica tarefas: TAREFAS + PRODUCAO — com detecção de vencimento
   function getUnifiedTasks() {
-    const deProducao = PRODUCAO.map(t => ({
-      texto: t.tarefa,
-      prazo: t.prazo,
-      responsaveis: [t.responsavel],
-      urg: t.urgencia
-    }));
-    const dePublicacao = PUBLICACAO.map(p => ({
-      texto: p.tema,
-      prazo: p.data,
-      responsaveis: p.responsavel || ['Equipe'],
-      urg: 'normal',
-      _isPublicacao: true
-    }));
+    const tz = 'America/Sao_Paulo';
+    const agora = new Date();
+    const hojeSP = new Date(agora.toLocaleString('en-US', { timeZone: tz }));
+    const anoRef = hojeSP.getFullYear();
+
+    function parseData(prazo) {
+      if (!prazo || prazo === 'Contínuo' || prazo.includes('-') || prazo.includes(',')) return null;
+      const partes = prazo.split('/');
+      if (partes.length !== 2) return null;
+      const d = parseInt(partes[0], 10), m = parseInt(partes[1], 10);
+      if (!d || !m) return null;
+      return new Date(anoRef, m - 1, d, 23, 59, 59);
+    }
+
+    function calcUrg(prazo) {
+      const dt = parseData(prazo);
+      if (!dt) return 'normal';
+      const hojeMN = new Date(hojeSP.getFullYear(), hojeSP.getMonth(), hojeSP.getDate(), 23, 59, 59);
+      const diff = Math.ceil((dt - hojeMN) / (1000 * 60 * 60 * 24));
+      if (diff < 0) return 'overdue';
+      if (diff === 0) return 'duetoday';
+      if (diff === 1) return 'tomorrow';
+      if (diff <= 3) return 'soon';
+      return 'normal';
+    }
+
+    function prazoNum(prazo) {
+      const dt = parseData(prazo);
+      return dt ? dt.getTime() : 99999999999999;
+    }
+
+    const deProducao = PRODUCAO.map(t => {
+      const urg = calcUrg(t.prazo);
+      return {
+        texto: t.tarefa,
+        prazo: t.prazo,
+        responsaveis: [t.responsavel],
+        urg: urg === 'overdue' || urg === 'duetoday' ? 'urgent' : urg === 'tomorrow' ? 'soon' : t.urgencia,
+        _sortUrg: urg === 'overdue' ? 0 : urg === 'duetoday' ? 1 : urg === 'tomorrow' ? 2 : t.urgencia === 'urgent' ? 3 : t.urgencia === 'soon' ? 4 : 5,
+        _prazoNum: prazoNum(t.prazo)
+      };
+    });
+    const dePublicacao = PUBLICACAO.map(p => {
+      const urg = calcUrg(p.data);
+      return {
+        texto: p.tema,
+        prazo: p.data,
+        responsaveis: p.responsavel || ['Equipe'],
+        urg: urg === 'overdue' || urg === 'duetoday' ? 'urgent' : urg === 'tomorrow' ? 'soon' : urg === 'soon' ? 'soon' : 'normal',
+        _sortUrg: urg === 'overdue' ? 0 : urg === 'duetoday' ? 1 : urg === 'tomorrow' ? 2 : 5,
+        _prazoNum: prazoNum(p.data),
+        _isPublicacao: true
+      };
+    });
     const deEngajamento = ENGAJAMENTO.map(e => ({
       texto: e.tarefa,
       prazo: 'Contínuo',
       responsaveis: [e.responsavel],
       urg: 'continuous',
+      _sortUrg: 6,
+      _prazoNum: 99999999999999,
       _isEngajamento: true
     }));
-    return [...TAREFAS, ...deProducao, ...dePublicacao, ...deEngajamento].sort((a, b) => {
-      const ordem = { urgent: 0, soon: 1, normal: 2, continuous: 3 };
-      const prioA = ordem[a.urg] !== undefined ? ordem[a.urg] : 99;
-      const prioB = ordem[b.urg] !== undefined ? ordem[b.urg] : 99;
-      return prioA - prioB;
+    const todas = [...TAREFAS, ...deProducao, ...dePublicacao, ...deEngajamento];
+    return todas.sort((a, b) => {
+      const ordem = { overdue: 0, duetoday: 1, tomorrow: 2, urgent: 3, soon: 4, normal: 5, continuous: 6 };
+      const sortA = a._sortUrg !== undefined ? a._sortUrg : (ordem[a.urg] !== undefined ? ordem[a.urg] : 99);
+      const sortB = b._sortUrg !== undefined ? b._sortUrg : (ordem[b.urg] !== undefined ? ordem[b.urg] : 99);
+      if (sortA !== sortB) return sortA - sortB;
+      const dA = a._prazoNum || 99999999999999;
+      const dB = b._prazoNum || 99999999999999;
+      if (dA !== dB) return dA - dB;
+      return (a.texto || '').localeCompare(b.texto || '');
     });
   }
 
@@ -1411,8 +1487,7 @@ function renderDashboard() {
     const allTasksContainer = document.getElementById('all-tasks-content');
     if (pode('geral')) {
       document.getElementById('all-tasks-section').style.display = 'block';
-      document.getElementById('all-tasks-count').textContent = allTasks.length;
-      allTasksContainer.innerHTML = '<div class="tasks-grid">' + allTasks.map(t => taskCard(t)).join('') + '</div>';
+      renderTasksComToggle(allTasks, 'all-tasks-content', 'all-tasks-count');
       renderAllTasksFilter();
   } else {
     document.getElementById('all-tasks-section').style.display = 'none';
@@ -1475,6 +1550,11 @@ function renderDashboard() {
   } else {
     financeiroSection.style.display = 'none';
   }
+
+  // 🕐 Relógio SP + sincronização
+  iniciarRelogio();
+  carregarConclusoesOnline();
+  renderHistoricoConclusoes();
 }
 
 function renderCountdown() {
@@ -1679,7 +1759,12 @@ function renderContentSchedule() {
 }
 
 function togglePub(el, key) { el.classList.toggle('done'); localStorage.setItem('pub_' + key, el.classList.contains('done')); }
-function toggleEng(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('eng_' + tarefa, el.classList.contains('done')); }
+function toggleEng(el, tarefa) {
+  el.classList.toggle('done');
+  const done = el.classList.contains('done');
+  localStorage.setItem('eng_' + tarefa, done);
+  if (done && usuarioAtual) registrarConclusao(tarefa, usuarioAtual);
+}
 
 // 📌 NOVO MODAL DE PRODUÇÃO
 function openProdModal(tarefaNome) {
@@ -1768,14 +1853,18 @@ function openProdModal(tarefaNome) {
 function fecharModalEToggleProd(tarefa) {
   // Encontra o card em producao-grid ou my-tasks e alterna o estado
   const cards = document.querySelectorAll('#producao-grid .task-card, #my-tasks .task-card');
+  let ficouPronta = false;
   for (const card of cards) {
     const strong = card.querySelector('.task-text strong');
     if (strong && strong.textContent.trim() === tarefa) {
       card.classList.toggle('done');
-      localStorage.setItem('prod_' + tarefa, card.classList.contains('done'));
+      const done = card.classList.contains('done');
+      localStorage.setItem('prod_' + tarefa, done);
+      if (done) ficouPronta = true;
       break;
     }
   }
+  if (ficouPronta && usuarioAtual) registrarConclusao(tarefa, usuarioAtual);
   // Fecha o modal
   const overlay = document.querySelector('.modal-overlay');
   if (overlay) document.body.removeChild(overlay);
@@ -2216,6 +2305,202 @@ let pubFiltroFase = '';
 // 🕐 Última atualização do hub
 const ULTIMA_ATUALIZACAO = '04/08/2026 16:30';
 
+// ═══════════════════════════════════════════════════════════
+// RELÓGIO SÃO PAULO AO VIVO
+// ═══════════════════════════════════════════════════════════
+
+let relogioInterval = null;
+
+function iniciarRelogio() {
+  if (relogioInterval) clearInterval(relogioInterval);
+  function atualizar() {
+    const agora = new Date();
+    const sp = agora.toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    const el = document.getElementById('relogio-sp');
+    if (el) el.textContent = '🕐 ' + sp + ' (SP)';
+  }
+  atualizar();
+  relogioInterval = setInterval(atualizar, 1000);
+}
+
+// ═══════════════════════════════════════════════════════════
+// "VER MAIS" — mostra só urgentes/atrasadas por padrão
+// ═══════════════════════════════════════════════════════════
+
+let expandirTarefas = false;
+
+function renderTasksComToggle(tasks, containerId, countId) {
+  const el = document.getElementById(containerId);
+  const countEl = countId ? document.getElementById(countId) : null;
+  if (!el) return;
+  
+  const urgentes = tasks.filter(t => t.urg === 'urgent' || t._sortUrg <= 1);
+  const outras = tasks.filter(t => t.urg !== 'urgent' && t._sortUrg > 1);
+  
+  if (countEl) countEl.textContent = tasks.length;
+  
+  if (tasks.length === 0) {
+    el.innerHTML = '<p style="color:#888;font-size:0.85em;padding:12px;">Nenhuma tarefa pendente. ✅</p>';
+    return;
+  }
+
+  const mostrar = expandirTarefas ? tasks : urgentes;
+  const ocultas = outras.length;
+
+  let html = '<div class="tasks-grid">';
+  html += mostrar.map(t => taskCard(t)).join('');
+  html += '</div>';
+
+  if (ocultas > 0) {
+    html += `<div style="text-align:center;margin-top:8px;">
+      <button onclick="expandirTarefas=!expandirTarefas;renderDashboard();" 
+        style="background:#2a2a4a;color:#e0e0e0;border:1px solid #555;padding:8px 20px;border-radius:8px;font-size:0.8em;cursor:pointer;transition:0.2s;">
+        ${expandirTarefas ? '🔼 Mostrar só urgentes' : `🔽 Ver mais ${ocultas} tarefa(s)`}
+      </button>
+    </div>`;
+  }
+
+  el.innerHTML = html;
+}
+
+// ═══════════════════════════════════════════════════════════
+// SINCRONIZAÇÃO DE CONCLUSÕES
+// ═══════════════════════════════════════════════════════════
+
+const COMPLETIONS_URL = 'https://raw.githubusercontent.com/everferreira/hub-campanha-jundiai/master/completions.json';
+const COMPLETIONS_API = 'https://api.github.com/repos/everferreira/hub-campanha-jundiai/contents/completions.json';
+
+let ultimoSync = null;
+
+function carregarConclusoesOnline() {
+  fetch(COMPLETIONS_URL + '?t=' + Date.now())
+    .then(r => r.ok ? r.json() : Promise.resolve([]))
+    .then(dados => {
+      if (Array.isArray(dados)) {
+        localStorage.setItem('completions_online', JSON.stringify(dados));
+        atualizarBadgeSync();
+      }
+    })
+    .catch(() => {});
+}
+
+function getConclusoesLocais() {
+  try { return JSON.parse(localStorage.getItem('completions_online') || '[]'); } catch { return []; }
+}
+
+function getConclusoesPendentes() {
+  try { return JSON.parse(localStorage.getItem('completions_pendentes') || '[]'); } catch { return []; }
+}
+
+function registrarConclusao(tarefa, responsavel) {
+  const entry = {
+    tarefa,
+    responsavel,
+    concluidaEm: new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+    timestamp: Date.now()
+  };
+  // Salva local
+  const pendentes = getConclusoesPendentes();
+  pendentes.push(entry);
+  localStorage.setItem('completions_pendentes', JSON.stringify(pendentes));
+  // Atualiza badge
+  atualizarBadgeSync();
+}
+
+function atualizarBadgeSync() {
+  const pendentes = getConclusoesPendentes().length;
+  const el = document.getElementById('sync-badge');
+  if (el) {
+    if (pendentes > 0) {
+      el.innerHTML = `📤 ${pendentes} conclusão(ões) pendente(s) de sincronização`;
+      el.style.display = 'block';
+    } else {
+      el.innerHTML = '✅ Todas as conclusões sincronizadas';
+      el.style.display = 'block';
+    }
+  }
+}
+
+function sincronizarConclusoes() {
+  const pendentes = getConclusoesPendentes();
+  if (pendentes.length === 0) {
+    alert('Nenhuma conclusão pendente de sincronização.');
+    return;
+  }
+  if (typeof GITHUB_TOKEN === 'undefined') {
+    alert('⚠️ Token do GitHub não configurado.\n\nExecute no terminal:\n  cd ~/hub-campanha-jundiai && bash setup-token.sh');
+    return;
+  }
+
+  const btn = document.getElementById('btn-sync');
+  if (btn) { btn.textContent = '⏳ Sincronizando...'; btn.disabled = true; }
+
+  // Lê o SHA atual do arquivo pra poder sobrescrever
+  fetch(COMPLETIONS_API, {
+    headers: { 'Authorization': 'token ' + GITHUB_TOKEN, 'Accept': 'application/vnd.github.v3+json' }
+  })
+  .then(r => r.json())
+  .then(meta => {
+    const sha = meta.sha;
+    // Junta conclusões online + pendentes
+    const online = getConclusoesLocais();
+    const todas = [...pendentes, ...online];
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(todas, null, 2))));
+
+    return fetch(COMPLETIONS_API, {
+      method: 'PUT',
+      headers: {
+        'Authorization': 'token ' + GITHUB_TOKEN,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message: 'Sync conclusões ' + new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+        content: content,
+        sha: sha
+      })
+    });
+  })
+  .then(r => r.json())
+  .then(res => {
+    if (res.content) {
+      localStorage.setItem('completions_pendentes', '[]');
+      ultimoSync = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' });
+      atualizarBadgeSync();
+      carregarConclusoesOnline();
+      if (btn) { btn.textContent = '✅ Sincronizado!'; btn.disabled = false; }
+      setTimeout(() => { if (btn) btn.textContent = '📤 Sincronizar conclusões'; }, 3000);
+    } else {
+      throw new Error(res.message || 'Erro ao sincronizar');
+    }
+  })
+  .catch(err => {
+    alert('Erro ao sincronizar: ' + err.message);
+    if (btn) { btn.textContent = '📤 Sincronizar conclusões'; btn.disabled = false; }
+  });
+}
+
+function renderHistoricoConclusoes() {
+  const el = document.getElementById('historico-conclusoes');
+  if (!el) return;
+  const todas = getConclusoesLocais();
+  if (todas.length === 0) {
+    el.innerHTML = '<div style="font-size:0.82em;color:#888;padding:12px;">Nenhuma conclusão registrada ainda.</div>';
+    return;
+  }
+  // Mostra as 10 mais recentes
+  const recentes = [...todas].reverse().slice(0, 10);
+  el.innerHTML = `
+    <div style="font-size:0.75em;color:#888;margin-bottom:8px;">📋 Últimas conclusões (${todas.length} total):</div>
+    ${recentes.map(c => `
+      <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:6px;padding:8px 12px;margin-bottom:4px;font-size:0.78em;display:flex;justify-content:space-between;align-items:center;">
+        <span><strong>${c.responsavel}</strong> concluiu: ${c.tarefa}</span>
+        <span style="color:#888;font-size:0.85em;">${c.concluidaEm}</span>
+      </div>
+    `).join('')}
+    ${todas.length > 10 ? `<div style="font-size:0.72em;color:#555;margin-top:4px;">...e mais ${todas.length - 10} conclusão(ões)</div>` : ''}
+  `;
+}
+
 function renderAllTasksFilter() {
   const pode = nivelMin(pessoa(usuarioAtual).nivel);
   if (!pode('geral')) return;
@@ -2376,6 +2661,9 @@ function toggleTask(el, texto) {
   el.classList.toggle('done');
   const done = el.classList.contains('done');
   localStorage.setItem('done_' + texto, done);
+  if (done && usuarioAtual) {
+    registrarConclusao(texto, usuarioAtual);
+  }
 }
 
 init();
