@@ -717,9 +717,9 @@ const PRODUCAO = [
     refs: ['instaLocal', 'instaOficial'], reelsKey: 'testemunhais' },
   { tarefa: "Cards 'Motivos pra votar em Erika' (série)", responsavel: "Eva 🎨", prazo: "25/09", urgencia: "normal", lote: "⚫ Reta Final",
     refs: ['siteOficial', 'galeriaCamara', 'wikipedia'], legendaKey: 'por_que_votar' },
-  { tarefa: "Card 'Amanhã é dia de votar!'", responsavel: "Eva 🎨", prazo: "02/10", urgencia: "urgent", lote: "⚫ Reta Final",
+  { tarefa: "Card 'Amanhã é dia de votar!'", responsavel: "Eva 🎨", prazo: "02/10", urgencia: "normal", lote: "⚫ Reta Final",
     refs: ['instaLocal', 'instaOficial'], legendaKey: 'amanha_votar' },
-  { tarefa: "Card agradecimento pós-eleição", responsavel: "Eva 🎨", prazo: "04/10", urgencia: "urgent", lote: "⚫ Reta Final",
+  { tarefa: "Card agradecimento pós-eleição", responsavel: "Eva 🎨", prazo: "04/10", urgencia: "normal", lote: "⚫ Reta Final",
     refs: ['instaLocal', 'instaOficial'], legendaKey: 'agradecimento_pos' },
 ];
 
@@ -2005,7 +2005,7 @@ function taskCard(t) {
     catCor = '#888';
   }
 
-  const catBadge = `<span style="font-size:0.65em;background:${catCor}22;color:${catCor};padding:2px 8px;border-radius:6px;font-weight:600;border:1px solid ${catCor}44;">${catIcon} ${categoria}</span>`;
+  const catBadge = `<span style="font-size:0.75em;font-weight:600;">${catIcon} ${categoria}</span>`;
 
   const hasContent = prodTask && (prodTask.legendaKey || prodTask.reelsKey || (prodTask.refs && prodTask.refs.length > 0));
   const onClick = prodTask
