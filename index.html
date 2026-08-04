@@ -1740,21 +1740,44 @@ function taskCard(t) {
   const urgBadge = t.urg === 'urgent' ? '<span style="font-size:0.65em;background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px;">🔴 URGENTE</span>' : '';
   const safeText = t.texto.replace(/'/g, "\\'");
 
-  // Categoriza a tarefa
+  // Categoriza por tipo de trabalho
   const prodTask = PRODUCAO.find(p => p.tarefa === t.texto);
-  let categoria = '';
-  let catCor = '';
+  const engTask = ENGAJAMENTO.find(e => e.tarefa === t.texto);
+  let categoria = '', catCor = '', catIcon = '', catBorder = '';
+
   if (prodTask) {
-    categoria = '📦 Produção';
-    catCor = '#e94560';
-  } else if (t.urg === 'continuous') {
-    categoria = '🔄 Engajamento';
-    catCor = '#4caf50';
+    const resp = prodTask.responsavel;
+    if (resp.startsWith('Eva')) {
+      categoria = 'Arte';
+      catIcon = '🎨';
+      catCor = '#e040fb'; // magenta
+    } else if (resp.startsWith('Kawa')) {
+      categoria = 'Vídeo';
+      catIcon = '🎬';
+      catCor = '#00bcd4'; // cyan
+    } else {
+      categoria = 'Produção';
+      catIcon = '📦';
+      catCor = '#e94560';
+    }
+    catBorder = `border-left:4px solid ${catCor};`;
+  } else if (engTask || t.texto.toLowerCase().includes('comentar') || t.texto.toLowerCase().includes('responder') || t.texto.toLowerCase().includes('compartilhar')) {
+    categoria = 'Engajar';
+    catIcon = '💬';
+    catCor = '#4caf50'; // verde
+    catBorder = `border-left:4px solid ${catCor};`;
+  } else if (t.texto.toLowerCase().includes('post') || t.texto.toLowerCase().includes('publicar') || t.texto.toLowerCase().includes('stories') || t.texto.toLowerCase().includes('redes')) {
+    categoria = 'Redes';
+    catIcon = '📱';
+    catCor = '#2196f3'; // azul
+    catBorder = `border-left:4px solid ${catCor};`;
   } else {
-    categoria = '📋 Tarefa';
-    catCor = '#64b5f6';
+    categoria = 'Tarefa';
+    catIcon = '📋';
+    catCor = '#888';
   }
-  const catBadge = `<span style="font-size:0.65em;background:${catCor}22;color:${catCor};padding:2px 8px;border-radius:6px;font-weight:600;border:1px solid ${catCor}44;">${categoria}</span>`;
+
+  const catBadge = `<span style="font-size:0.65em;background:${catCor}22;color:${catCor};padding:2px 8px;border-radius:6px;font-weight:600;border:1px solid ${catCor}44;">${catIcon} ${categoria}</span>`;
 
   const hasContent = prodTask && (prodTask.legendaKey || prodTask.reelsKey || (prodTask.refs && prodTask.refs.length > 0));
   const onClick = prodTask
@@ -1762,8 +1785,11 @@ function taskCard(t) {
     : `toggleTask(this, '${safeText}')`;
   const extraHint = hasContent ? ' • 📎 Ver recursos' : '';
 
+  // Borda da esquerda: prioridade (se for minha) OU categoria
+  const leftBorder = isMine ? borderColor : catBorder;
+
   return `
-    <div class="task-card ${checked}" onclick="${onClick}" style="${borderColor}">
+    <div class="task-card ${checked}" onclick="${onClick}" style="${leftBorder}">
       <div class="task-header">
         <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong>${urgBadge}</div>
         <span class="task-prazo ${prazoClass}">${rotuloPrazo}</span>
