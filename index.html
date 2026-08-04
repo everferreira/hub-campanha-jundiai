@@ -415,6 +415,7 @@ footer a { color: #e94560; text-decoration: none; }
     <!-- ALL TASKS (restricted) -->
     <div id="all-tasks-section">
       <div class="section-title">📋 Todas as Tarefas da Campanha <span class="count" id="all-tasks-count">0</span></div>
+      <div id="all-tasks-filter"></div>
       <div id="all-tasks-content"></div>
     </div>
 
@@ -1128,12 +1129,14 @@ function renderDashboard() {
 
   const userTasks = getUserTasks(usuarioAtual);
   const myUrgent = userTasks.filter(t => t.urg === 'urgent');
+  const hojeStr = `${String(hoje.getDate()).padStart(2,'0')}/${String(hoje.getMonth()+1).padStart(2,'0')}`;
   const urgMsg = myUrgent.length > 0
-    ? `🔴 Você tem <strong>${myUrgent.length} tarefa(s) urgente(s)</strong> para hoje/dia 05/08!`
+    ? `🔴 Você tem <strong>${myUrgent.length} tarefa(s) urgente(s)</strong> para hoje/dia ${hojeStr}!`
     : '✅ Tudo em dia com os prazos urgentes!';
   document.getElementById('greeting-area').innerHTML = `
     <h2>${saud}, ${usuarioAtual}! 💛</h2>
     <p>${p.role} na campanha Erika Hilton em Jundiaí.<br>${urgMsg}</p>
+    ${renderOverdueAlert()}
   `;
 
   // Contagem regressiva
@@ -1194,6 +1197,7 @@ function renderDashboard() {
       document.getElementById('all-tasks-section').style.display = 'block';
       document.getElementById('all-tasks-count').textContent = allTasks.length;
       allTasksContainer.innerHTML = '<div class="tasks-grid">' + allTasks.map(t => taskCard(t)).join('') + '</div>';
+      renderAllTasksFilter();
   } else {
     document.getElementById('all-tasks-section').style.display = 'none';
   }
@@ -1423,7 +1427,6 @@ function renderContentSchedule() {
   }).join('');
 }
 
-function toggleProd(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('prod_' + tarefa, el.classList.contains('done')); }
 function togglePub(el, key) { el.classList.toggle('done'); localStorage.setItem('pub_' + key, el.classList.contains('done')); }
 function toggleEng(el, tarefa) { el.classList.toggle('done'); localStorage.setItem('eng_' + tarefa, el.classList.contains('done')); }
 
@@ -1484,7 +1487,7 @@ function openProdModal(tarefaNome) {
   overlay.onclick = () => document.body.removeChild(overlay);
 
   overlay.innerHTML = `
-    <div class="modal-box" onclick="e => e.stopPropagation()">
+    <div class="modal-box">
       <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;">
         <h3>${p.tarefa} ${urgBadge}</h3>
         <button onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)" style="background:#2a2a4a;border:none;color:#888;padding:4px 12px;border-radius:6px;cursor:pointer;font-size:0.85em;">✕ Fechar</button>
@@ -1512,10 +1515,8 @@ function openProdModal(tarefaNome) {
 }
 
 function fecharModalEToggleProd(tarefa) {
-  // Marca/desmarca a tarefa
-  const el = document.querySelector(`.task-card:has(.task-text strong:contains("${tarefa}"))`);
-  // Since :contains doesn't work in modern CSS, find by iterating
-  const cards = document.querySelectorAll('#producao-grid .task-card');
+  // Encontra o card em producao-grid ou my-tasks e alterna o estado
+  const cards = document.querySelectorAll('#producao-grid .task-card, #my-tasks .task-card');
   for (const card of cards) {
     const strong = card.querySelector('.task-text strong');
     if (strong && strong.textContent.trim() === tarefa) {
@@ -1730,6 +1731,137 @@ function renderLinks(pode) {
       </a>
     `).join('');
 }
+
+// ═══════════════════════════════════════════════════════════
+// ALERTA DE TAREFAS VENCIDAS
+// ═══════════════════════════════════════════════════════════
+
+function renderOverdueAlert() {
+  const hoje = new Date();
+  const ano = hoje.getFullYear();
+  const mes = hoje.getMonth() + 1;
+  const dia = hoje.getDate();
+
+  function parseData(str) {
+    if (!str || str === 'Contínuo' || str.includes('-') || str.includes(',')) return null;
+    const partes = str.split('/');
+    if (partes.length !== 2) return null;
+    // Assume ano 2026 pra prazos, ou ano atual se já passou 2026
+    const d = parseInt(partes[0], 10);
+    const m = parseInt(partes[1], 10);
+    if (!d || !m) return null;
+    const anoRef = (ano >= 2026) ? ano : 2026;
+    return new Date(anoRef, m - 1, d, 23, 59, 59);
+  }
+
+  // Verifica todas as tarefas (TAREFAS + PRODUCAO)
+  const todas = [
+    ...TAREFAS.filter(t => t.urg !== 'continuous').map(t => ({ texto: t.texto, prazo: t.prazo, responsaveis: t.responsaveis })),
+    ...PRODUCAO.map(p => ({ texto: p.tarefa, prazo: p.prazo, responsaveis: [p.responsavel] })),
+  ];
+
+  const vencidas = [];
+  const vencemHoje = [];
+
+  for (const t of todas) {
+    const dt = parseData(t.prazo);
+    if (!dt) continue;
+    const diff = Math.ceil((dt - hoje) / (1000 * 60 * 60 * 24));
+    const concluida = localStorage.getItem('done_' + t.texto) === 'true' || localStorage.getItem('prod_' + t.texto) === 'true';
+    if (concluida) continue;
+    if (diff < 0) {
+      vencidas.push({ ...t, diasAtraso: Math.abs(diff) });
+    } else if (diff === 0) {
+      vencemHoje.push(t);
+    }
+  }
+
+  // Mostra no greeting area via um alerta abaixo da saudação
+  let alertHtml = '';
+  if (vencidas.length > 0) {
+    alertHtml += `<div style="background:#3a1a1a;border:1px solid #e94560;border-radius:10px;padding:14px;margin-bottom:14px;">
+      <div style="color:#ff6b6b;font-weight:700;font-size:0.9em;margin-bottom:6px;">🔴 ${vencidas.length} tarefa(s) atrasada(s)!</div>
+      <div style="font-size:0.8em;color:#ccc;line-height:1.6;">
+        ${vencidas.slice(0, 5).map(v => `• <strong>${v.texto}</strong> — ${v.diasAtraso} dia(s) de atraso (prazo: ${v.prazo})`).join('<br>')}
+        ${vencidas.length > 5 ? `<br>• ...e mais ${vencidas.length - 5} tarefa(s)` : ''}
+      </div>
+    </div>`;
+  }
+  if (vencemHoje.length > 0) {
+    alertHtml += `<div style="background:#3a3a1a;border:1px solid #ffc107;border-radius:10px;padding:14px;margin-bottom:14px;">
+      <div style="color:#ffc107;font-weight:700;font-size:0.9em;margin-bottom:6px;">⚠️ ${vencemHoje.length} tarefa(s) vencem hoje!</div>
+      <div style="font-size:0.8em;color:#ccc;line-height:1.6;">
+        ${vencemHoje.slice(0, 5).map(v => `• <strong>${v.texto}</strong>`).join('<br>')}
+      </div>
+    </div>`;
+  }
+
+  return alertHtml;
+}
+
+// ═══════════════════════════════════════════════════════════
+// FILTRO DE TODAS AS TAREFAS
+// ═══════════════════════════════════════════════════════════
+
+let filtroResponsavel = 'todos';
+
+function renderAllTasksFilter() {
+  const pode = nivelMin(pessoa(usuarioAtual).nivel);
+  if (!pode('geral')) return;
+
+  const filtroDiv = document.getElementById('all-tasks-filter');
+  if (!filtroDiv) return;
+
+  // Lista única de responsáveis
+  const todosResp = [...new Set([...TAREFAS.flatMap(t => t.responsaveis), ...PRODUCAO.map(p => p.responsavel)])].sort();
+
+  filtroDiv.innerHTML = `
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+      <button onclick="setFiltroResponsavel('todos')" style="background:${filtroResponsavel === 'todos' ? '#e94560' : '#2a2a4a'};color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:0.75em;font-weight:600;cursor:pointer;transition:0.2s;">👥 Todos</button>
+      ${todosResp.map(r => `
+        <button onclick="setFiltroResponsavel('${r.replace(/'/g, "\\'")}')" style="background:${filtroResponsavel === r ? '#e94560' : '#2a2a4a'};color:#fff;border:none;padding:6px 14px;border-radius:8px;font-size:0.75em;font-weight:600;cursor:pointer;transition:0.2s;">${r}</button>
+      `).join('')}
+    </div>
+  `;
+}
+
+function setFiltroResponsavel(resp) {
+  filtroResponsavel = resp;
+  renderAllTasksFilter();
+  // Re-renderiza a lista de Todas as Tarefas
+  const pode = nivelMin(pessoa(usuarioAtual).nivel);
+  if (!pode('geral')) return;
+
+  function getUnifiedTasks() {
+    const deProducao = PRODUCAO.map(t => ({
+      texto: t.tarefa,
+      prazo: t.prazo,
+      responsaveis: [t.responsavel],
+      urg: t.urgencia
+    }));
+    return [...TAREFAS, ...deProducao].sort((a, b) => {
+      const ordem = { urgent: 0, soon: 1, normal: 2, continuous: 3 };
+      const prioA = ordem[a.urg] !== undefined ? ordem[a.urg] : 99;
+      const prioB = ordem[b.urg] !== undefined ? ordem[b.urg] : 99;
+      return prioA - prioB;
+    });
+  }
+
+  let allTasks = getUnifiedTasks();
+  if (resp !== 'todos') {
+    allTasks = allTasks.filter(t => t.responsaveis.some(r => r === resp));
+  }
+
+  const container = document.getElementById('all-tasks-content');
+  if (container) {
+    document.getElementById('all-tasks-count').textContent = allTasks.length;
+    container.innerHTML = '<div class="tasks-grid">' + allTasks.map(t => taskCard(t)).join('') + '</div>';
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// TASK CARD
+// ═══════════════════════════════════════════════════════════
 
 function taskCard(t) {
   const checked = localStorage.getItem('done_' + t.texto) === 'true' ? 'done' : '';
