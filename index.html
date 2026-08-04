@@ -1740,13 +1740,21 @@ function taskCard(t) {
   const urgBadge = t.urg === 'urgent' ? '<span style="font-size:0.65em;background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px;">🔴 URGENTE</span>' : '';
   const safeText = t.texto.replace(/'/g, "\\'");
 
+  // Verifica se é uma tarefa de produção (tem refs/legenda/reels)
+  const prodTask = PRODUCAO.find(p => p.tarefa === t.texto);
+  const hasContent = prodTask && (prodTask.legendaKey || prodTask.reelsKey || (prodTask.refs && prodTask.refs.length > 0));
+  const onClick = prodTask
+    ? `openProdModal('${safeText}')`
+    : `toggleTask(this, '${safeText}')`;
+  const extraHint = hasContent ? ' • 📎 Ver recursos' : '';
+
   return `
-    <div class="task-card ${checked}" onclick="toggleTask(this, '${safeText}')" style="${borderColor}">
+    <div class="task-card ${checked}" onclick="${onClick}" style="${borderColor}">
       <div class="task-header">
         <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong>${urgBadge}</div>
         <span class="task-prazo ${prazoClass}">${rotuloPrazo}</span>
       </div>
-      <div class="task-responsaveis">👥 ${t.responsaveis.join(', ')}</div>
+      <div class="task-responsaveis">👥 ${t.responsaveis.join(', ')}${extraHint}</div>
     </div>
   `;
 }
