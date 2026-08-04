@@ -1740,8 +1740,22 @@ function taskCard(t) {
   const urgBadge = t.urg === 'urgent' ? '<span style="font-size:0.65em;background:#5a1a1a;color:#ff6b6b;padding:2px 8px;border-radius:6px;font-weight:700;margin-left:6px;">🔴 URGENTE</span>' : '';
   const safeText = t.texto.replace(/'/g, "\\'");
 
-  // Verifica se é uma tarefa de produção (tem refs/legenda/reels)
+  // Categoriza a tarefa
   const prodTask = PRODUCAO.find(p => p.tarefa === t.texto);
+  let categoria = '';
+  let catCor = '';
+  if (prodTask) {
+    categoria = '📦 Produção';
+    catCor = '#e94560';
+  } else if (t.urg === 'continuous') {
+    categoria = '🔄 Engajamento';
+    catCor = '#4caf50';
+  } else {
+    categoria = '📋 Tarefa';
+    catCor = '#64b5f6';
+  }
+  const catBadge = `<span style="font-size:0.65em;background:${catCor}22;color:${catCor};padding:2px 8px;border-radius:6px;font-weight:600;border:1px solid ${catCor}44;">${categoria}</span>`;
+
   const hasContent = prodTask && (prodTask.legendaKey || prodTask.reelsKey || (prodTask.refs && prodTask.refs.length > 0));
   const onClick = prodTask
     ? `openProdModal('${safeText}')`
@@ -1754,7 +1768,7 @@ function taskCard(t) {
         <div class="task-text"><strong>${isMine ? '⭐ ' : ''}${t.texto}</strong>${urgBadge}</div>
         <span class="task-prazo ${prazoClass}">${rotuloPrazo}</span>
       </div>
-      <div class="task-responsaveis">👥 ${t.responsaveis.join(', ')}${extraHint}</div>
+      <div class="task-responsaveis">${catBadge} 👥 ${t.responsaveis.join(', ')}${extraHint}</div>
     </div>
   `;
 }
