@@ -321,6 +321,102 @@ footer a { color: #e94560; text-decoration: none; }
 .modal-btn.secondary:hover { background: #3a3a5a; color: #e0e0e0; }
 .modal-btn.success { background: #4caf50; color: #fff; }
 .modal-btn.success:hover { opacity: 0.85; }
+
+/* ═══════ MELHORIAS UX ═══════ */
+/* Botão copiar */
+.copy-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #e94560; color: #fff; border: none; padding: 8px 16px;
+  border-radius: 8px; font-size: 0.8em; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; margin-top: 10px;
+}
+.copy-btn:hover { opacity: 0.85; }
+.copy-btn.copied { background: #4caf50; }
+
+/* Checklist */
+.checklist { display: grid; gap: 8px; margin-bottom: 16px; }
+.checklist-item {
+  display: flex; align-items: center; gap: 10px;
+  background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 10px;
+  padding: 12px 14px; cursor: pointer; transition: all 0.2s;
+}
+.checklist-item:hover { border-color: #555; }
+.checklist-item .box {
+  width: 22px; height: 22px; border-radius: 6px; border: 2px solid #555;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  font-size: 0.8em; color: #fff; transition: all 0.2s;
+}
+.checklist-item.done { opacity: 0.6; }
+.checklist-item.done .box { background: #4caf50; border-color: #4caf50; }
+.checklist-item.done .cl-text { text-decoration: line-through; color: #888; }
+.checklist-item .cl-text { flex: 1; font-size: 0.82em; line-height: 1.4; }
+.checklist-item .cl-prazo { font-size: 0.68em; color: #888; white-space: nowrap; }
+.checklist-item .cl-prazo.urgent { color: #ff6b6b; font-weight: 600; }
+
+/* Termômetro de mobilização */
+.mobilizacao-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.mobilizacao-card { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 10px; padding: 14px; text-align: center; }
+.mobilizacao-card .num { font-size: 1.5em; font-weight: 800; color: #ffc107; }
+.mobilizacao-card .label { font-size: 0.7em; color: #888; margin-top: 4px; }
+.mobilizacao-card .bar-box { margin-top: 10px; }
+.mobilizacao-card .bar { height: 8px; background: #2a2a4a; border-radius: 4px; overflow: hidden; }
+.mobilizacao-card .bar-fill { height: 100%; background: linear-gradient(90deg, #e94560, #ffc107); border-radius: 4px; transition: width 0.6s; }
+
+/* Filtro de publicação */
+.pub-filters { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+.pub-filter-btn {
+  background: #2a2a4a; color: #ddd; border: none; padding: 6px 12px;
+  border-radius: 16px; font-size: 0.72em; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.pub-filter-btn.active { background: #e94560; color: #fff; }
+.pub-filter-btn:hover { opacity: 0.85; }
+
+/* Indicador de atualização */
+.update-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: #1a2a1a; border: 1px solid #2a5a2a; color: #81c784;
+  border-radius: 16px; padding: 4px 12px; font-size: 0.7em; font-weight: 600; margin-bottom: 12px;
+}
+
+/* Drive preview */
+.drive-preview { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.drive-preview-item {
+  background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 10px; overflow: hidden;
+  text-decoration: none; color: #e0e0e0; transition: all 0.2s;
+}
+.drive-preview-item:hover { border-color: #e94560; }
+.drive-preview-item .thumb {
+  height: 90px; background: linear-gradient(135deg, #2a2a4a, #1a1a2e);
+  display: flex; align-items: center; justify-content: center; font-size: 2em;
+}
+.drive-preview-item .dname { padding: 8px 10px; font-size: 0.72em; font-weight: 600; text-align: center; }
+
+/* Quem somos */
+.quem-somos { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px; margin-bottom: 16px; }
+.quem-somos .qs-title { font-size: 0.95em; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.quem-somos .qs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+.quem-somos .qs-card { background: #0f0f0f; border: 1px solid #2a2a4a; border-radius: 8px; padding: 10px 12px; }
+.quem-somos .qs-card .n { font-weight: 600; font-size: 0.8em; color: #e0e0e0; }
+.quem-somos .qs-card .r { font-size: 0.7em; color: #888; }
+
+/* Painel financeiro */
+.finance-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 16px; }
+.finance-card { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 10px; padding: 14px; text-align: center; }
+.finance-card .valor { font-size: 1.2em; font-weight: 800; color: #ffc107; }
+.finance-card .label { font-size: 0.7em; color: #888; margin-top: 4px; }
+.finance-card.entrada .valor { color: #81c784; }
+.finance-card.saida .valor { color: #ff6b6b; }
+
+/* Mobile-first reforçado */
+@media (max-width: 600px) {
+  .container { padding: 12px; }
+  .task-card { padding: 12px; }
+  .modal-box { padding: 16px; }
+  .checklist-item { padding: 10px 12px; }
+  .cl-prazo { display: none; }
+  .bio-highlights span { font-size: 0.68em; }
+  .quem-somos .qs-grid { grid-template-columns: repeat(2, 1fr); }
+}
 </style>
 </head>
 <body>
@@ -442,9 +538,8 @@ footer a { color: #e94560; text-decoration: none; }
     <div id="partners-area"></div>
     </div><!-- /tab-acoes -->
 
-    <!-- ABA: ESTRATÉGIA (Ever/Tiana + quem pode ver) -->
+    <!-- ABA: ESTRATÉGIA (Ever/Tiana + João) -->
     <div class="tab-section" id="tab-estrategia">
-      <div id="news-section"></div>
       <div id="eleitoral-section">
         <div class="section-title">📊 Painel Eleitoral</div>
         <div id="eleitoral-grid" class="eleitoral-grid"></div>
@@ -453,9 +548,11 @@ footer a { color: #e94560; text-decoration: none; }
         <div class="section-title">💰 Emendas de Erika em Jundiaí</div>
         <div id="emendas-grid" class="emendas-grid"></div>
       </div>
+      <div id="financeiro-section">
+        <div class="section-title">💵 Painel Financeiro</div>
+        <div id="financeiro-grid" class="finance-grid"></div>
+      </div>
       <div class="bio-card" id="bio-card"></div>
-      <div class="section-title">🤝 Parceiros da Campanha</div>
-      <div id="partners-area-estrategia"></div>
     </div><!-- /tab-estrategia -->
 
     <!-- ABA: CONTEÚDO (Kawa/Eva focus) -->
@@ -483,14 +580,21 @@ footer a { color: #e94560; text-decoration: none; }
       <div class="section-title">📅 Agenda 18/08 — Visita de Erika em Jundiaí</div>
       <div style="overflow-x:auto;"><table class="agenda-table" id="agenda-table"></table></div>
       <div class="section-title">🚩 Bandeiraço 16/08</div>
-      <div style="background:#1a1a2e;border:1px solid #2a2a4a;border-radius:10px;padding:14px;margin-bottom:16px;font-size:0.82em;color:#888;">
-        Material da campanha da Erika (pessoal vai mandar). Local e horário a definir.<br>
-        Pontos sugeridos: Praça Matriz, Terminal Central, Av. 9 de Julho, Parque da Uva, feira livre.
+      <div class="update-badge">🔄 atualizado em 04/08</div>
+      <div id="mobilizacao-grid" class="mobilizacao-grid"></div>
+      <div class="section-title" style="font-size:0.9em;margin-top:8px;">✅ Checklist de Preparação</div>
+      <div class="checklist" id="checklist-bandeiraco"></div>
+      <div style="font-size:0.8em;color:#555;margin-top:4px;">
+        💡 Pontos sugeridos para o local: Praça Matriz, Terminal Central, Av. 9 de Julho, Parque da Uva, feira livre.
       </div>
     </div><!-- /tab-agenda -->
 
     <!-- ABA: REFERÊNCIAS -->
     <div class="tab-section" id="tab-referencias">
+      <div class="section-title">👥 Quem Somos</div>
+      <div class="quem-somos" id="quem-somos-container"></div>
+      <div class="section-title">🖼️ Fotos de Referência</div>
+      <div class="drive-preview" id="drive-preview"></div>
       <div class="section-title">🔗 Links Rápidos</div>
       <div class="links-grid" id="links-grid"></div>
       <div class="section-title">📸 Banco de Referências</div>
@@ -526,6 +630,7 @@ footer a { color: #e94560; text-decoration: none; }
 
     <footer>
       Hub Interno — Campanha Erika Hilton 2026 • Jundiaí-SP<br>
+      <span class="update-badge" style="display:inline-flex;margin:6px 0;">🔄 ${ULTIMA_ATUALIZACAO}</span><br>
       <a href="#" onclick="showLogin();return false;">🔐 Trocar de pessoa</a>
     </footer>
   </div>
@@ -976,6 +1081,51 @@ const PARCEIROS = [
   },
 ];
 
+// ═══════════════════════════════════════════════════════════
+// NOVOS DADOS — MELHORIAS
+// ═══════════════════════════════════════════════════════════
+
+// 🚩 Checklist Bandeiraço 16/08
+const BANDEIRACO = [
+  { tarefa: 'Definir local do bandeiraço', prazo: '05/08', responsavel: 'Ever Maria', urgente: true },
+  { tarefa: 'Definir horário do bandeiraço', prazo: '05/08', responsavel: 'Ever Maria', urgente: true },
+  { tarefa: 'Conseguir material de campanha (bandeiras, adesivos, camisetas)', prazo: '10/08', responsavel: 'Junior Arcanjo', urgente: false },
+  { tarefa: 'Montar equipe de apoio para o dia (5-10 pessoas)', prazo: '10/08', responsavel: 'Tiana Cauton', urgente: false },
+  { tarefa: 'Criar evento no Instagram e Whatsapp', prazo: '08/08', responsavel: 'Kawa', urgente: false },
+  { tarefa: 'Disparar convite em massa para apoiadores', prazo: '10/08', responsavel: 'Junior Arcanjo', urgente: false },
+  { tarefa: 'Combinar discurso/rota com a equipe', prazo: '14/08', responsavel: 'Ever Maria', urgente: false },
+  { tarefa: 'Levar caixa de som + microfone', prazo: '15/08', responsavel: 'Hoanny', urgente: false },
+  { tarefa: 'Cobertura nos stories (Eva + Kawa)', prazo: '16/08', responsavel: 'Eva, Kawa', urgente: false },
+  { tarefa: 'Pós-evento: fotos e relatório', prazo: '17/08', responsavel: 'Kawa', urgente: false },
+];
+
+// 📊 Mobilização — confirmações e alcance
+const MOBILIZACAO = {
+  confirmados: { atual: 42, meta: 100, label: 'Confirmações Bandeiraço' },
+  liderancas: { atual: 8, meta: 25, label: 'Lideranças contatadas' },
+  bairros: { atual: 5, meta: 15, label: 'Bairros alcançados' },
+  voluntarios: { atual: 12, meta: 30, label: 'Voluntários ativos' },
+};
+
+// 💰 Finanças da campanha (João)
+const FINANCAS = {
+  arrecadado: 0,
+  previsto: 15000,
+  gastos: [
+    { item: 'Material gráfico (bandeiras, adesivos)', valor: 2500, tipo: 'saida' },
+    { item: 'Transporte equipe', valor: 1800, tipo: 'saida' },
+    { item: 'Alimentação dia da visita', valor: 1200, tipo: 'saida' },
+    { item: 'Caixa de som + microfone', valor: 800, tipo: 'saida' },
+    { item: 'Imprevistos', valor: 1000, tipo: 'saida' },
+  ],
+};
+
+// 👥 Quem somos
+const QUEM_SOMOS = {
+  descricao: 'Comitê municipal da campanha de Erika Hilton para deputada federal em Jundiaí (2026). Coordenação de Ever Maria Tobias Ferreira, com equipe dedicada de mobilização, redes sociais, eventos e finanças.',
+  valores: ['Representatividade', 'Luta por direitos', 'Saúde pública', 'Cidade para todos'],
+};
+
 const SENHA_PADRAO = 'erika2026';
 
 // ═══════════════════════════════════════════════════════════
@@ -1306,6 +1456,25 @@ function renderDashboard() {
 
   // Links
   renderLinks(pode);
+
+  // 🚩 Checklist Bandeiraço + Mobilização
+  renderChecklistBandeiraco();
+  renderMobilizacao();
+
+  // 👥 Quem Somos
+  renderQuemSomos();
+
+  // 🖼️ Drive Preview
+  renderDrivePreview();
+
+  // 💵 Painel Financeiro (Ever/Tiana/João)
+  const financeiroSection = document.getElementById('financeiro-section');
+  if (pode('financas')) {
+    financeiroSection.style.display = 'block';
+    renderFinanceiro();
+  } else {
+    financeiroSection.style.display = 'none';
+  }
 }
 
 function renderCountdown() {
@@ -1353,26 +1522,24 @@ function renderNews() {
     </div>
   `).join('');
 
-  // Na aba Estratégia (Ever/Tiana)
-  const section = document.getElementById('news-section');
-  if (section) {
-    section.style.display = 'block';
-    section.innerHTML = '<div class="section-title">📰 Notícias da Campanha</div><div class="news-feed">' + newsHtml + '</div>';
-  }
+  const updateBadge = `<div class="update-badge">🔄 atualizado em ${ULTIMA_ATUALIZACAO}</div>`;
 
-  // Na aba Ações (todos, mais abaixo)
+  // Na aba Ações (todos veem)
   const sectionAcoes = document.getElementById('news-section-acoes');
   if (sectionAcoes) {
-    sectionAcoes.innerHTML = '<div class="section-title">📰 Notícias da Campanha</div><div class="news-feed">' + newsHtml + '</div>';
+    sectionAcoes.innerHTML = '<div class="section-title">📰 Notícias da Campanha</div>' + updateBadge + '<div class="news-feed">' + newsHtml + '</div>';
   }
 }
 
 function renderEleitoral() {
   const pctTermometro = Math.round((DADOS_ELEITORAIS.votos2022 / DADOS_ELEITORAIS.meta2026) * 100);
   const necessario = DADOS_ELEITORAIS.meta2026 - DADOS_ELEITORAIS.votos2022;
+  const porZona = Math.round(DADOS_ELEITORAIS.meta2026 / DADOS_ELEITORAIS.zonas.length);
+  const superouBoulos = DADOS_ELEITORAIS.meta2026 > DADOS_ELEITORAIS.boulosRef;
+  const boulosDiff = Math.round((DADOS_ELEITORAIS.meta2026 / DADOS_ELEITORAIS.boulosRef - 1) * 100);
 
   document.getElementById('eleitoral-grid').innerHTML = `
-    <div class="eleitoral-card thermometer">
+    <div class="eleitoral-card thermometer" style="grid-column:1/-1;">
       <div style="font-size:0.8em;color:#888;">Termômetro</div>
       <div style="font-size:0.9em;font-weight:700;margin:4px 0;">${DADOS_ELEITORAIS.votos2022.toLocaleString()} → ${DADOS_ELEITORAIS.meta2026.toLocaleString()}</div>
       <div class="thermo-track"><div class="thermo-fill" style="width:${pctTermometro}%"></div></div>
@@ -1398,10 +1565,18 @@ function renderEleitoral() {
       <div class="desc">Emendas de Erika (R$)</div>
       <div class="sub">Biênio 2025-2026</div>
     </div>
-    <div class="eleitoral-card">
-      <div class="big-num" style="font-size:1.2em;">${DADOS_ELEITORAIS.boulosRef.toLocaleString()}</div>
+    <div class="eleitoral-card ${superouBoulos ? 'highlight' : ''}">
+      <div class="big-num" style="font-size:1.2em;${superouBoulos ? 'color:#ffc107;' : ''}">${DADOS_ELEITORAIS.boulosRef.toLocaleString()}</div>
       <div class="desc">Teto de referência (Boulos 2022)</div>
-      <div class="sub">↘ ${Math.round((1 - DADOS_ELEITORAIS.meta2026/DADOS_ELEITORAIS.boulosRef) * 100)}% abaixo do teto</div>
+      <div class="sub">${superouBoulos ? '🔥 SUPERAR! +' + boulosDiff + '% acima do teto' : '↘ ' + Math.round((1 - DADOS_ELEITORAIS.meta2026/DADOS_ELEITORAIS.boulosRef) * 100) + '% abaixo do teto'}</div>
+    </div>
+    <div class="eleitoral-card" style="grid-column:1/-1;border-color:#4a2a2a;">
+      <div style="font-size:0.8em;color:#ffc107;font-weight:600;margin-bottom:6px;">🎯 META DESDOBRADA — 10.000 votos</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;">
+        <div><div class="big-num" style="font-size:1.1em;">${porZona.toLocaleString()}</div><div class="desc">Votos por zona</div><div class="sub">${DADOS_ELEITORAIS.zonas.length} zonas eleitorais</div></div>
+        <div><div class="big-num" style="font-size:1.1em;">${Math.round(necessario / 30).toLocaleString()}</div><div class="desc">Votos/dia (até 04/10)</div><div class="sub">aproximadamente</div></div>
+        <div><div class="big-num" style="font-size:1.1em;color:#81c784;">${Math.round(DADOS_ELEITORAIS.meta2026 / DADOS_ELEITORAIS.eleitores * 100)}%</div><div class="desc">Dos eleitores</div><div class="sub">3% dos eleitores de Jundiaí</div></div>
+      </div>
     </div>
   `;
 }
@@ -1417,21 +1592,9 @@ function renderEmendas() {
 }
 
 function renderPartners() {
-  // Ações tab
   const partnersEl = document.getElementById('partners-area');
   if (partnersEl) {
     partnersEl.innerHTML = PARCEIROS.map(p => `
-      <div class="partner-card">
-        <div class="partner-name">${p.nome}</div>
-        <div class="partner-desc">${p.descricao}</div>
-        ${p.tarefas.length ? `<div class="partner-tasks">📋 ${p.tarefas.map(t => `<span>${t}</span>`).join(' ')}</div>` : ''}
-      </div>
-    `).join('');
-  }
-  // Estratégia tab
-  const partnersEl2 = document.getElementById('partners-area-estrategia');
-  if (partnersEl2) {
-    partnersEl2.innerHTML = PARCEIROS.map(p => `
       <div class="partner-card">
         <div class="partner-name">${p.nome}</div>
         <div class="partner-desc">${p.descricao}</div>
@@ -1460,9 +1623,31 @@ function renderContentSchedule() {
     `;
   }).join('');
 
-  // 📢 PUBLICAÇÃO
+  // 📢 PUBLICAÇÃO — com filtros
+  // Coleta formatos e fases únicos
+  const todosFormatos = [...new Set(PUBLICACAO.map(p => p.formato))];
+  const todasFases = [...new Set(PUBLICACAO.map(p => p.fase))];
+  
+  // Filtra
+  const pubFiltradas = PUBLICACAO.filter(p => {
+    const matchFormato = !pubFiltroFormato || p.formato === pubFiltroFormato;
+    const matchFase = !pubFiltroFase || p.fase === pubFiltroFase;
+    return matchFormato && matchFase;
+  });
+
+  // Botões de filtro
+  const pubFilterHtml = `
+    <div class="pub-filters">
+      <button class="pub-filter-btn ${!pubFiltroFormato ? 'active' : ''}" onclick="pubFiltroFormato='';renderContentSchedule();">📋 Todos</button>
+      ${todosFormatos.map(f => `<button class="pub-filter-btn ${pubFiltroFormato === f ? 'active' : ''}" onclick="pubFiltroFormato='${f.replace(/'/g, "\\'")}';renderContentSchedule();">${f}</button>`).join('')}
+      <span style="color:#555;font-size:0.7em;margin:0 4px;">|</span>
+      ${todasFases.map(f => `<button class="pub-filter-btn ${pubFiltroFase === f ? 'active' : ''}" onclick="pubFiltroFase='${f.replace(/'/g, "\\'")}';renderContentSchedule();">${f}</button>`).join('')}
+      ${pubFiltroFormato || pubFiltroFase ? `<button class="pub-filter-btn" onclick="pubFiltroFormato='';pubFiltroFase='';renderContentSchedule();" style="background:#5a1a1a;color:#ff6b6b;">✕ Limpar</button>` : ''}
+    </div>
+  `;
+  
   const pubEl = document.getElementById('publicacao-grid');
-  pubEl.innerHTML = PUBLICACAO.map(p => {
+  pubEl.innerHTML = pubFilterHtml + pubFiltradas.map(p => {
     const done = localStorage.getItem('pub_' + p.data + p.tema) === 'true' ? 'done' : '';
     const safeTema = p.tema.replace(/'/g, "\\'");
     const safeKey = (p.data + p.tema).replace(/'/g, "\\'");
@@ -1731,11 +1916,46 @@ function mostrarLegenda(key) {
       <strong style="color:#e94560;font-size:0.9em;">📄 Legenda</strong>
       <button onclick="document.body.removeChild(this.parentElement.parentElement.parentElement)" style="background:#2a2a4a;border:none;color:#888;padding:4px 12px;border-radius:6px;cursor:pointer;">✕ Fechar</button>
     </div>
-    <div style="background:#0f0f0f;border:1px solid #2a2a4a;border-radius:8px;padding:14px;font-size:0.82em;color:#e0e0e0;line-height:1.6;white-space:pre-wrap;">${legenda}</div>
-    <div style="margin-top:10px;font-size:0.72em;color:#555;">👆 Clique fora pra fechar. Copie o texto e cole no Instagram.</div>
+    <div id="legenda-texto" style="background:#0f0f0f;border:1px solid #2a2a4a;border-radius:8px;padding:14px;font-size:0.82em;color:#e0e0e0;line-height:1.6;white-space:pre-wrap;">${legenda}</div>
+    <button class="copy-btn" onclick="copiarLegenda(this, '${key.replace(/'/g, "\\'")}')">📋 Copiar legenda</button>
+    <div style="margin-top:8px;font-size:0.72em;color:#555;">👆 Clique fora pra fechar.</div>
   `;
   overlay.appendChild(modal);
   document.body.appendChild(overlay);
+}
+
+function copiarLegenda(btn, key) {
+  const texto = LEGENDAS[key];
+  if (!texto) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(texto).then(() => {
+      btn.textContent = '✅ Copiado!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = '📋 Copiar legenda'; btn.classList.remove('copied'); }, 2000);
+    }).catch(() => {
+      // Fallback: seleciona o texto
+      const el = document.getElementById('legenda-texto');
+      if (el) {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        btn.textContent = '✅ Selecione e copie (Ctrl+C)';
+      }
+    });
+  } else {
+    // Fallback manual
+    const el = document.getElementById('legenda-texto');
+    if (el) {
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+      btn.textContent = '✅ Selecione e copie (Ctrl+C)';
+    }
+  }
 }
 
 function renderBio() {
@@ -1796,6 +2016,126 @@ function renderLinks(pode) {
         </div>
       </a>
     `).join('');
+}
+
+// ═══════════════════════════════════════════════════════════
+// NOVAS FUNÇÕES — MELHORIAS
+// ═══════════════════════════════════════════════════════════
+
+// 🚩 Checklist Bandeiraço
+function renderChecklistBandeiraco() {
+  const el = document.getElementById('checklist-bandeiraco');
+  if (!el) return;
+  el.innerHTML = BANDEIRACO.map(item => {
+    const key = 'band_' + item.tarefa;
+    const done = localStorage.getItem(key) === 'true';
+    const prazoClass = item.urgente ? 'urgent' : '';
+    return `
+      <div class="checklist-item ${done ? 'done' : ''}" onclick="toggleChecklistItem('${key.replace(/'/g, "\\'")}', this)">
+        <div class="box">${done ? '✓' : ''}</div>
+        <div class="cl-text">${item.tarefa}</div>
+        <div class="cl-prazo ${prazoClass}">📅 ${item.prazo} • ${item.responsavel}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function toggleChecklistItem(key, el) {
+  el.classList.toggle('done');
+  const done = el.classList.contains('done');
+  el.querySelector('.box').textContent = done ? '✓' : '';
+  localStorage.setItem(key, done);
+}
+
+// 📊 Mobilização
+function renderMobilizacao() {
+  const el = document.getElementById('mobilizacao-grid');
+  if (!el) return;
+  el.innerHTML = Object.entries(MOBILIZACAO).map(([k, v]) => {
+    const pct = Math.round((v.atual / v.meta) * 100);
+    return `
+      <div class="mobilizacao-card">
+        <div class="num">${v.atual}/${v.meta}</div>
+        <div class="label">${v.label}</div>
+        <div class="bar-box" style="margin-top:8px;">
+          <div class="bar"><div class="bar-fill" style="width:${pct}%"></div></div>
+          <div style="font-size:0.65em;color:#888;margin-top:2px;">${pct}%</div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+// 👥 Quem Somos
+function renderQuemSomos() {
+  const el = document.getElementById('quem-somos-container');
+  if (!el) return;
+  el.innerHTML = `
+    <div class="qs-title">👥 Comitê Erika Hilton 2026 — Jundiaí</div>
+    <div style="font-size:0.82em;color:#aaa;line-height:1.6;margin-bottom:12px;">${QUEM_SOMOS.descricao}</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px;">
+      ${QUEM_SOMOS.valores.map(v => `<span style="background:#2a2a4a;padding:4px 12px;border-radius:16px;font-size:0.72em;color:#e0e0e0;">${v}</span>`).join('')}
+    </div>
+    <div class="qs-grid">
+      ${EQUIPE.map(p => `
+        <div class="qs-card">
+          <div class="n">${p.nome}</div>
+          <div class="r">${p.role}</div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// 🖼️ Drive Preview
+function renderDrivePreview() {
+  const el = document.getElementById('drive-preview');
+  if (!el) return;
+  const fotos = [
+    { nome: 'Erika plenário', icon: '🏛️' },
+    { nome: 'Erika em Jundiaí', icon: '📍' },
+    { nome: 'Bandeiraço referência', icon: '🚩' },
+    { nome: 'Erika + apoiadores', icon: '🤝' },
+    { nome: 'Emenda Saúde', icon: '🏥' },
+    { nome: 'Parada LGBT', icon: '🏳️‍🌈' },
+    { nome: 'Comissão Mulher', icon: '⚧️' },
+  ];
+  el.innerHTML = fotos.map(f => `
+    <a href="https://drive.google.com/drive/folders/1mH9jxdkCWrK_KYHwZCIFv-flMedirOFR" target="_blank" class="drive-preview-item">
+      <div class="thumb">${f.icon}</div>
+      <div class="dname">${f.nome}</div>
+    </a>
+  `).join('');
+}
+
+// 💵 Painel Financeiro
+function renderFinanceiro() {
+  const el = document.getElementById('financeiro-grid');
+  if (!el) return;
+  const totalGastos = FINANCAS.gastos.reduce((s, g) => s + g.valor, 0);
+  const saldo = FINANCAS.arrecadado - totalGastos;
+  el.innerHTML = `
+    <div class="finance-card entrada">
+      <div class="valor">R$ ${FINANCAS.arrecadado.toLocaleString()}</div>
+      <div class="label">Arrecadado</div>
+    </div>
+    <div class="finance-card">
+      <div class="valor">R$ ${FINANCAS.previsto.toLocaleString()}</div>
+      <div class="label">Previsto</div>
+    </div>
+    <div class="finance-card saida">
+      <div class="valor">R$ ${totalGastos.toLocaleString()}</div>
+      <div class="label">Gastos previstos</div>
+    </div>
+    <div class="finance-card ${saldo >= 0 ? 'entrada' : 'saida'}">
+      <div class="valor">R$ ${saldo.toLocaleString()}</div>
+      <div class="label">Saldo</div>
+    </div>
+    <div style="grid-column:1/-1;background:#1a1a2e;border:1px solid #2a2a4a;border-radius:8px;padding:12px;font-size:0.78em;color:#888;">
+      <strong style="color:#e0e0e0;">📋 Detalhamento de gastos:</strong><br>
+      ${FINANCAS.gastos.map(g => `• ${g.item}: <strong>R$ ${g.valor.toLocaleString()}</strong>`).join('<br>')}
+    </div>
+  `;
 }
 
 // ═══════════════════════════════════════════════════════════
@@ -1870,6 +2210,11 @@ function renderOverdueAlert() {
 // ═══════════════════════════════════════════════════════════
 
 let filtroResponsavel = 'todos';
+let pubFiltroFormato = '';
+let pubFiltroFase = '';
+
+// 🕐 Última atualização do hub
+const ULTIMA_ATUALIZACAO = '04/08/2026 16:30';
 
 function renderAllTasksFilter() {
   const pode = nivelMin(pessoa(usuarioAtual).nivel);
