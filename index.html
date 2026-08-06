@@ -820,8 +820,24 @@ const PRODUCAO = [
   { tarefa: "Reels temáticos (1 por semana)", responsavel: "Kawa 🎬", prazo: "24/08, 31/08, 07/09, 13/09", urgencia: "normal", lote: "🟣 Semanal",
     refs: ['instaOficial', 'instaLocal', 'drive'] },
   // ⚫ LOTE 6 — Reta final (21/09 a 04/10)
-  { tarefa: "Gravação depoimentos apoiadores (testemunhais)", responsavel: "Kawa 🎬", prazo: "18/09", urgencia: "normal", lote: "⚫ Reta Final",
-    refs: ['instaLocal', 'instaOficial'], reelsKey: 'testemunhais' },
+    { tarefa: "Gravação depoimentos apoiadores (testemunhais)", responsavel: "Kawa 🎬", prazo: "18/09", urgencia: "normal", lote: "⚫ Reta Final",
+      refs: ['instaLocal', 'instaOficial'], reelsKey: 'testemunhais' },
+    // 🔥 NOVOS CONTEÚDOS (Reunião 06/08)
+    { tarefa: "Reels: Solicitação de Erika ao MPF", responsavel: "Kawa 🎬", prazo: "10/08", urgencia: "urgent", lote: "🔴 Prioridade",
+      refs: ['instaOficial', 'instaLocal'] },
+    { tarefa: "Reels: Parada LGBT+ de Jundiaí", responsavel: "Kawa 🎬", prazo: "10/08", urgencia: "urgent", lote: "🔴 Prioridade",
+      refs: ['instaLocal', 'instaOficial'], legendaKey: 'parada_lgbt' },
+    { tarefa: "Reels: Quem é Erika Hilton?", responsavel: "Kawa 🎬", prazo: "12/08", urgencia: "urgent", lote: "🔴 Prioridade",
+      refs: ['instaOficial', 'galeriaCamara', 'wikipedia', 'siteOficial'], legendaKey: 'quem_e_erika' },
+    { tarefa: "Reels: Quem é Sofia Favaro?", responsavel: "Kawa 🎬", prazo: "12/08", urgencia: "urgent", lote: "🔴 Prioridade",
+      refs: ['instaOficial'] },
+    // 🚀 Lançamento Oficial 22/08
+    { tarefa: "Card convocação: Lançamento 22/08", responsavel: "Eva 🎨", prazo: "15/08", urgencia: "soon", lote: "🚀 Lançamento 22/08",
+      refs: ['drive', 'instaLocal'] },
+    { tarefa: "Reels: Vem pro Lançamento! 22/08", responsavel: "Kawa 🎬", prazo: "16/08", urgencia: "soon", lote: "🚀 Lançamento 22/08",
+      refs: ['instaLocal', 'instaOficial'] },
+    { tarefa: "Cobertura stories: Lançamento 22/08", responsavel: "Eva 🎨, Kawa 🎬", prazo: "22/08", urgencia: "normal", lote: "🚀 Lançamento 22/08",
+      refs: ['instaLocal'] },
   { tarefa: "Cards 'Motivos pra votar em Erika' (série)", responsavel: "Eva 🎨", prazo: "25/09", urgencia: "normal", lote: "⚫ Reta Final",
     refs: ['siteOficial', 'galeriaCamara', 'wikipedia'], legendaKey: 'por_que_votar' },
   { tarefa: "Card 'Amanhã é dia de votar!'", responsavel: "Eva 🎨", prazo: "02/10", urgencia: "normal", lote: "⚫ Reta Final",
@@ -847,11 +863,17 @@ const PUBLICACAO = [
   { data: "15/08", dia: "Sáb", horario: "13h", tema: "🎯 Meta: 10.000 votos em Jundiaí", formato: "Card", fase: "Pré-campanha", responsavel: ['Eva 🎨'] },
   { data: "15/08", dia: "Sáb", horario: "15h", tema: "🎬 Por que votar em Erika?", formato: "Reels", fase: "Pré-campanha", responsavel: ['Kawa 🎬'] },
 
-  // 🔹 FASE 2: LANÇAMENTO OFICIAL
-  { data: "16/08", dia: "Dom", horario: "🔴 Ao vivo", tema: "🚀 Bandeiraço + Lançamento oficial", formato: "Cobertura", fase: "Lançamento", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
-  { data: "17/08", dia: "Seg", horario: "13h", tema: "⏰ Amanhã: Erika em Jundiaí!", formato: "Story+Post", fase: "Lançamento", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
-  { data: "18/08", dia: "Ter", horario: "🔴 Ao vivo", tema: "🎯 VISITA DA ERIKA — cobertura total", formato: "Cobertura", fase: "Lançamento", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
-  { data: "19/08", dia: "Qua", horario: "13h", tema: "📸 Melhores momentos da visita (fotos)", formato: "Cards", fase: "Pós-visita", responsavel: ['Eva 🎨'] },
+  // 🔹 FASE 2: LANÇAMENTO OFICIAL — Bandeiraço 16/08
+    { data: "16/08", dia: "Dom", horario: "🔴 Ao vivo", tema: "🚩 Bandeiraço — abertura da campanha", formato: "Cobertura", fase: "Bandeiraço", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
+    { data: "17/08", dia: "Seg", horario: "13h", tema: "⏰ Amanhã: Erika em Jundiaí!", formato: "Story+Post", fase: "Visita 18/08", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
+    { data: "18/08", dia: "Ter", horario: "🔴 Ao vivo", tema: "🎯 VISITA DA ERIKA — cobertura total", formato: "Cobertura", fase: "Visita 18/08", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
+    // 🔹 LANÇAMENTO OFICIAL DA CAMPANHA — 22/08
+    { data: "19/08", dia: "Qua", horario: "13h", tema: "🚀 22/08 — Lançamento Oficial! CONVOCAÇÃO", formato: "Card", fase: "Lançamento 22/08", responsavel: ['Eva 🎨'] },
+    { data: "19/08", dia: "Qua", horario: "15h", tema: "📸 Melhores momentos da visita (fotos)", formato: "Cards", fase: "Pós-visita", responsavel: ['Eva 🎨'] },
+    { data: "20/08", dia: "Qui", horario: "15h", tema: "🎬 Reels: Vem pro lançamento! 22/08", formato: "Reels", fase: "Lançamento 22/08", responsavel: ['Kawa 🎬'] },
+    { data: "21/08", dia: "Sex", horario: "13h", tema: "⏰ Amanhã: Lançamento da campanha!", formato: "Story+Post", fase: "Lançamento 22/08", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
+    { data: "22/08", dia: "Sáb", horario: "🔴 Ao vivo", tema: "🚀 LANÇAMENTO OFICIAL — cobertura total", formato: "Cobertura", fase: "Lançamento 22/08", responsavel: ['Eva 🎨', 'Kawa 🎬'] },
+    // 🔹 PÓS-LANÇAMENTO + VISITA
   { data: "20/08", dia: "Qui", horario: "15h", tema: "🎤 O que Erika disse na Coletiva", formato: "Card", fase: "Pós-visita", responsavel: ['Eva 🎨'] },
   { data: "21/08", dia: "Sex", horario: "13h", tema: "🎬 Reels: Depoimentos da visita", formato: "Reels", fase: "Pós-visita", responsavel: ['Kawa 🎬'] },
   { data: "22/08", dia: "Sáb", horario: "15h", tema: "🤝 Encontro de lideranças — resumo", formato: "Card", fase: "Pós-visita", responsavel: ['Eva 🎨'] },
@@ -1556,6 +1578,7 @@ function renderCountdown() {
   const hoje = new Date();
   const inicio = new Date(2026, 7, 16); // 16/08
   const visita = new Date(2026, 7, 18); // 18/08
+  const lancamento = new Date(2026, 7, 22); // 22/08
   const eleicao = new Date(2026, 9, 4);  // 04/10
 
   function diff(d) {
@@ -1565,20 +1588,25 @@ function renderCountdown() {
 
   const dInicio = diff(inicio);
   const dVisita = diff(visita);
+  const dLancamento = diff(lancamento);
   const dEleicao = diff(eleicao);
 
   document.getElementById('countdown-bar').innerHTML = `
     <div class="countdown-item ${dInicio <= 0 ? 'passed' : 'highlight'}">
       <div class="days">${dInicio <= 0 ? '✅ Hoje!' : 'Faltam ' + dInicio + ' dias'}</div>
-      <div class="label">Início Oficial<br>16 de Agosto</div>
+      <div class="label">🚩 Bandeiraço<br>16 de Agosto</div>
     </div>
     <div class="countdown-item ${dVisita <= 0 ? 'passed' : ''}">
       <div class="days">${dVisita <= 0 ? '✅ Hoje!' : 'Faltam ' + dVisita + ' dias'}</div>
-      <div class="label">Visita Erika em Jundiaí<br>18 de Agosto</div>
+      <div class="label">🎯 Visita Erika<br>18 de Agosto</div>
+    </div>
+    <div class="countdown-item ${dLancamento <= 0 ? 'passed' : ''}">
+      <div class="days">${dLancamento <= 0 ? '✅ Hoje!' : 'Faltam ' + dLancamento + ' dias'}</div>
+      <div class="label">🚀 Lançamento Oficial<br>22 de Agosto</div>
     </div>
     <div class="countdown-item ${dEleicao <= 0 ? 'passed' : ''}">
       <div class="days">${dEleicao <= 0 ? '✅ Hoje!' : 'Faltam ' + dEleicao + ' dias'}</div>
-      <div class="label">1º Turno Eleição<br>4 de Outubro</div>
+      <div class="label">🗳️ 1º Turno Eleição<br>4 de Outubro</div>
     </div>
     <div class="countdown-item">
       <div class="days" style="color:#ffc107;">${new Date().toLocaleDateString('pt-BR')}</div>
