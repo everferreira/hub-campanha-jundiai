@@ -13,7 +13,7 @@ function cardTarefa(t) {
   if (t._isProd) {
     const resp = (t.responsaveis && t.responsaveis[0] || '').toLowerCase();
     if (resp.startsWith('eva') || resp.startsWith('Eva')) { catClass = 'badge-arte'; catLabel = '🎨 Arte'; }
-    else if (resp.startsWith('kawa') || resp.startsWith('Kawa')) { catClass = 'badge-video'; catLabel = '🎬 Vídeo'; }
+    else if (resp.startsWith('kwa') || resp.startsWith('Kwa')) { catClass = 'badge-video'; catLabel = '🎬 Vídeo'; }
     else { catClass = 'badge-tarefa'; catLabel = '📦 Produção'; }
   } else if (t._isPublicacao) { catClass = 'badge-publicar'; catLabel = '📱 Publicar'; }
   else if (t._isEngajamento) { catClass = 'badge-engajar'; catLabel = '💬 Engajar'; }

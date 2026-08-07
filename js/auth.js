@@ -10,7 +10,7 @@ const EQUIPE = [
   { id: 'junior', nome: 'Junior Arcanjo', funcao: 'Mobilizador de Rua', nivel: 3, cor: '#f59e0b', iniciais: 'JA' },
   { id: 'hoanny', nome: 'Hoanny', funcao: 'Eventos', nivel: 3, cor: '#3b82f6', iniciais: 'HO' },
   { id: 'joao', nome: 'João', funcao: 'Financeiro', nivel: 3, cor: '#10b981', iniciais: 'JO' },
-  { id: 'kawa', nome: 'Kawa', funcao: 'Redes Sociais — Vídeos', nivel: 2, cor: '#06b6d4', iniciais: 'KA' },
+  { id: 'kwa', nome: 'Kwa', funcao: 'Redes Sociais — Vídeos', nivel: 2, cor: '#06b6d4', iniciais: 'KW' },
   { id: 'eva', nome: 'Eva', funcao: 'Redes Sociais — Artes', nivel: 2, cor: '#ec4899', iniciais: 'EV' },
 ];
 

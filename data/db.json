@@ -126,20 +126,59 @@
       "prazo": "04/08",
       "urgencia": "urgent",
       "lote": "🔴 Emergência",
-      "status": "pendente",
+      "status": "active",
       "hoh_status": "pending",
       "legenda_key": "bandeiraco",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_028",
+      "titulo": "Card convocação: Lançamento 22/08",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "15/08",
+      "urgencia": "soon",
+      "lote": "🚀 Lançamento 22/08",
+      "status": "active",
+      "hoh_status": "pending",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_030",
+      "titulo": "Cobertura stories: Lançamento 22/08",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "22/08",
+      "urgencia": "normal",
+      "lote": "🚀 Lançamento 22/08",
+      "status": "active",
+      "hoh_status": "pending",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "kwa_script",
+      "titulo": "Criar roteiro de vídeo com Tiana, Hoanny e Ever",
+      "tipo": "producao",
+      "responsavel": "kwa",
+      "prazo": "10/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Prioridade",
+      "status": "active",
+      "hoh_status": "approved",
+      "legenda_key": "",
       "reels_key": ""
     },
     {
       "id": "prod_002",
       "titulo": "Reels convocação Bandeiraço 16/08",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "04/08",
       "urgencia": "urgent",
       "lote": "🔴 Emergência",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": "bandeiraco"
@@ -152,7 +191,7 @@
       "prazo": "05/08",
       "urgencia": "urgent",
       "lote": "🔴 Emergência",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "anuncio_visita",
       "reels_key": ""
@@ -165,7 +204,7 @@
       "prazo": "05/08",
       "urgencia": "urgent",
       "lote": "🔴 Emergência",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "agenda_18",
       "reels_key": ""
@@ -174,11 +213,11 @@
       "id": "prod_005",
       "titulo": "Reels Agenda Erika em Jundiaí",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "06/08",
       "urgencia": "urgent",
       "lote": "🔴 Emergência",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": "agenda_visita"
@@ -191,7 +230,7 @@
       "prazo": "06/08",
       "urgencia": "urgent",
       "lote": "🔴 Emergência",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "visita_cobertura",
       "reels_key": ""
@@ -204,7 +243,7 @@
       "prazo": "11/08",
       "urgencia": "soon",
       "lote": "🟡 Lote 2",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "quem_e_erika",
       "reels_key": ""
@@ -217,7 +256,7 @@
       "prazo": "11/08",
       "urgencia": "soon",
       "lote": "🟡 Lote 2",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "emendas_total",
       "reels_key": ""
@@ -230,7 +269,7 @@
       "prazo": "11/08",
       "urgencia": "soon",
       "lote": "🟡 Lote 2",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "emendas_saude",
       "reels_key": ""
@@ -243,7 +282,7 @@
       "prazo": "11/08",
       "urgencia": "soon",
       "lote": "🟡 Lote 2",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "melhor_deputada",
       "reels_key": ""
@@ -256,7 +295,7 @@
       "prazo": "13/08",
       "urgencia": "normal",
       "lote": "🟢 Lote 3",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "comissao_mulher",
       "reels_key": ""
@@ -269,7 +308,7 @@
       "prazo": "13/08",
       "urgencia": "normal",
       "lote": "🟢 Lote 3",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "parada_lgbt",
       "reels_key": ""
@@ -282,7 +321,7 @@
       "prazo": "14/08",
       "urgencia": "normal",
       "lote": "🟢 Lote 3",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "meta_votos",
       "reels_key": ""
@@ -291,11 +330,11 @@
       "id": "prod_014",
       "titulo": "Reels 'Por que votar em Erika?'",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "14/08",
       "urgencia": "normal",
       "lote": "🟢 Lote 3",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": "por_que_votar"
@@ -304,11 +343,11 @@
       "id": "prod_015",
       "titulo": "Edição melhores momentos visita (fotos+vídeos)",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "19/08",
       "urgencia": "soon",
       "lote": "🔵 Pós-visita",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "melhores_momentos",
       "reels_key": ""
@@ -321,7 +360,7 @@
       "prazo": "19/08",
       "urgencia": "soon",
       "lote": "🔵 Pós-visita",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "melhores_momentos",
       "reels_key": ""
@@ -330,11 +369,11 @@
       "id": "prod_017",
       "titulo": "Reels com depoimentos da visita",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "21/08",
       "urgencia": "normal",
       "lote": "🔵 Pós-visita",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": "depoimentos_visita"
@@ -347,7 +386,7 @@
       "prazo": "24/08",
       "urgencia": "normal",
       "lote": "🟣 Semana 1",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "semana_pautas",
       "reels_key": ""
@@ -360,7 +399,7 @@
       "prazo": "31/08",
       "urgencia": "normal",
       "lote": "🟣 Semana 2",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "semana_apoios",
       "reels_key": ""
@@ -373,7 +412,7 @@
       "prazo": "07/09",
       "urgencia": "normal",
       "lote": "🟣 Semana 3",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "semana_prestacao",
       "reels_key": ""
@@ -386,7 +425,7 @@
       "prazo": "13/09",
       "urgencia": "normal",
       "lote": "🟣 Semana 4",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "semana_caravanas",
       "reels_key": ""
@@ -395,11 +434,11 @@
       "id": "prod_022",
       "titulo": "Reels temáticos (1 por semana)",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "24/08, 31/08, 07/09, 13/09",
       "urgencia": "normal",
       "lote": "🟣 Semanal",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": ""
@@ -408,11 +447,11 @@
       "id": "prod_023",
       "titulo": "Gravação depoimentos apoiadores (testemunhais)",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "18/09",
       "urgencia": "normal",
       "lote": "⚫ Reta Final",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": "testemunhais"
@@ -421,11 +460,11 @@
       "id": "prod_024",
       "titulo": "Reels: Solicitação de Erika ao MPF",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "10/08",
       "urgencia": "urgent",
       "lote": "🔴 Prioridade",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "",
       "reels_key": ""
@@ -434,11 +473,11 @@
       "id": "prod_025",
       "titulo": "Reels: Parada LGBT+ de Jundiaí",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "10/08",
       "urgencia": "urgent",
       "lote": "🔴 Prioridade",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "parada_lgbt",
       "reels_key": ""
@@ -447,11 +486,11 @@
       "id": "prod_026",
       "titulo": "Reels: Quem é Erika Hilton?",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "12/08",
       "urgencia": "urgent",
       "lote": "🔴 Prioridade",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
       "legenda_key": "quem_e_erika",
       "reels_key": ""
@@ -460,25 +499,12 @@
       "id": "prod_027",
       "titulo": "Reels: Quem é Sofia Favaro?",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "12/08",
       "urgencia": "urgent",
       "lote": "🔴 Prioridade",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
-      "legenda_key": "",
-      "reels_key": ""
-    },
-    {
-      "id": "prod_028",
-      "titulo": "Card convocação: Lançamento 22/08",
-      "tipo": "producao",
-      "responsavel": "eva",
-      "prazo": "15/08",
-      "urgencia": "soon",
-      "lote": "🚀 Lançamento 22/08",
-      "status": "pendente",
-      "hoh_status": "pending",
       "legenda_key": "",
       "reels_key": ""
     },
@@ -486,25 +512,12 @@
       "id": "prod_029",
       "titulo": "Reels: Vem pro Lançamento! 22/08",
       "tipo": "producao",
-      "responsavel": "kawa",
+      "responsavel": "kwa",
       "prazo": "16/08",
       "urgencia": "soon",
       "lote": "🚀 Lançamento 22/08",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "approved",
-      "legenda_key": "",
-      "reels_key": ""
-    },
-    {
-      "id": "prod_030",
-      "titulo": "Cobertura stories: Lançamento 22/08",
-      "tipo": "producao",
-      "responsavel": "eva",
-      "prazo": "22/08",
-      "urgencia": "normal",
-      "lote": "🚀 Lançamento 22/08",
-      "status": "pendente",
-      "hoh_status": "pending",
       "legenda_key": "",
       "reels_key": ""
     },
@@ -516,7 +529,7 @@
       "prazo": "25/09",
       "urgencia": "normal",
       "lote": "⚫ Reta Final",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "por_que_votar",
       "reels_key": ""
@@ -529,7 +542,7 @@
       "prazo": "02/10",
       "urgencia": "normal",
       "lote": "⚫ Reta Final",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "amanha_votar",
       "reels_key": ""
@@ -542,7 +555,7 @@
       "prazo": "04/10",
       "urgencia": "normal",
       "lote": "⚫ Reta Final",
-      "status": "pendente",
+      "status": "pending",
       "hoh_status": "pending",
       "legenda_key": "agradecimento_pos",
       "reels_key": ""
@@ -570,7 +583,7 @@
       "formato": "Reels",
       "fase": "Pré-campanha",
       "responsavel": [
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -678,7 +691,7 @@
       "formato": "Reels",
       "fase": "Pré-campanha",
       "responsavel": [
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -702,7 +715,7 @@
       "formato": "Reels",
       "fase": "Pré-campanha",
       "responsavel": [
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -715,7 +728,7 @@
       "fase": "Bandeiraço",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -728,7 +741,7 @@
       "fase": "Visita 18/08",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -741,7 +754,7 @@
       "fase": "Visita 18/08",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -763,7 +776,7 @@
       "horario": "15h",
       "tema": "📸 Melhores momentos da visita (fotos)",
       "formato": "Cards",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -777,7 +790,7 @@
       "formato": "Reels",
       "fase": "Lançamento 22/08",
       "responsavel": [
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -790,7 +803,7 @@
       "fase": "Lançamento 22/08",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -803,7 +816,7 @@
       "fase": "Lançamento 22/08",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -813,7 +826,7 @@
       "horario": "15h",
       "tema": "🎤 O que Erika disse na Coletiva",
       "formato": "Card",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -825,9 +838,9 @@
       "horario": "13h",
       "tema": "🎬 Reels: Depoimentos da visita",
       "formato": "Reels",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -837,7 +850,7 @@
       "horario": "15h",
       "tema": "🤝 Encontro de lideranças — resumo",
       "formato": "Card",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -849,7 +862,7 @@
       "horario": "13h",
       "tema": "📍 Erika + Jundiaí = parceria que dá certo",
       "formato": "Post",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -861,7 +874,7 @@
       "horario": "15h",
       "tema": "🗓️ O que vem por aí na campanha",
       "formato": "Card",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -873,7 +886,7 @@
       "horario": "13h",
       "tema": "🙏 Agradecimento pela receptividade",
       "formato": "Post",
-      "fase": "Pós-visita",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -885,10 +898,10 @@
       "horario": "13/15h",
       "tema": "📍 Erika e as pautas de Jundiaí (saúde, educação, direitos)",
       "formato": "3-4 posts",
-      "fase": "Campanha",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -898,10 +911,10 @@
       "horario": "13/15h",
       "tema": "💪 Apoios locais — lideranças e comerciantes",
       "formato": "3-4 posts",
-      "fase": "Campanha",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -911,10 +924,10 @@
       "horario": "13/15h",
       "tema": "🔍 Prestação de contas — resultados das emendas",
       "formato": "3-4 posts",
-      "fase": "Campanha",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -924,10 +937,10 @@
       "horario": "13/15h",
       "tema": "🚐 Caravanas e mobilização",
       "formato": "3-4 posts",
-      "fase": "Campanha",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -937,9 +950,9 @@
       "horario": "13/15h",
       "tema": "🎤 Testemunhais — apoiadores gravam por que votam em Erika",
       "formato": "Reels",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
-        "kawa"
+        "kwa"
       ]
     },
     {
@@ -949,7 +962,7 @@
       "horario": "15h",
       "tema": "⏳ Faltam 6 dias — motivo #1",
       "formato": "Card",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -961,7 +974,7 @@
       "horario": "13h",
       "tema": "⏳ Faltam 5 dias — motivo #2",
       "formato": "Card",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -973,7 +986,7 @@
       "horario": "15h",
       "tema": "⏳ Faltam 4 dias — motivo #3",
       "formato": "Card",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -985,7 +998,7 @@
       "horario": "13h",
       "tema": "⏳ Faltam 3 dias — motivo #4",
       "formato": "Card",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -997,7 +1010,7 @@
       "horario": "15h",
       "tema": "⏳ Faltam 2 dias — motivo #5",
       "formato": "Card",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -1009,7 +1022,7 @@
       "horario": "13h",
       "tema": "⏳ Amanhã é dia de votar!",
       "formato": "Card",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva"
       ]
@@ -1021,10 +1034,10 @@
       "horario": "🗳️",
       "tema": "Votou? Compartilha! + Agradecimento",
       "formato": "Story+Post",
-      "fase": "Reta Final",
+      "fase": "Planejamento Interno",
       "responsavel": [
         "eva",
-        "kawa"
+        "kwa"
       ]
     }
   ],
@@ -1037,7 +1050,7 @@
     {
       "id": "e002",
       "tarefa": "Comentar 2 posts da Erika (@hilton_erika)",
-      "responsavel": "kawa"
+      "responsavel": "kwa"
     },
     {
       "id": "e003",
@@ -1103,7 +1116,7 @@
     {
       "tarefa": "Criar evento no Instagram e WhatsApp",
       "prazo": "08/08",
-      "responsavel": "Kawa"
+      "responsavel": "Kwa"
     },
     {
       "tarefa": "Disparar convite em massa",
@@ -1121,14 +1134,14 @@
       "responsavel": "Hoanny"
     },
     {
-      "tarefa": "Cobertura nos stories (Eva + Kawa)",
+      "tarefa": "Cobertura nos stories (Eva + Kwa)",
       "prazo": "16/08",
-      "responsavel": "Eva, Kawa"
+      "responsavel": "Eva, Kwa"
     },
     {
       "tarefa": "Pós-evento: fotos e relatório",
       "prazo": "17/08",
-      "responsavel": "Kawa"
+      "responsavel": "Kwa"
     }
   ],
   "mobilizacao": {
@@ -1390,10 +1403,11 @@
       "nivel": 3
     },
     {
-      "id": "kawa",
-      "nome": "Kawa",
+      "id": "kwa",
+      "nome": "Kwa",
       "funcao": "Redes Sociais — Vídeos",
-      "nivel": 2
+      "nivel": 2,
+      "iniciais": "KW"
     },
     {
       "id": "eva",

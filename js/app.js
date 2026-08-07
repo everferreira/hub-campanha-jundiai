@@ -183,7 +183,7 @@ function renderCountdown(db) {
 
 /* ─── RENDER: Minhas Tarefas ─── */
 function renderMinhasTarefas(db, session) {
-  const todas = [...(db.tarefas || []), ...(db.publicacoes || []).map(p => ({ ...p, texto: p.tema, prazo: p.data, responsaveis: p.responsavel || ['Equipe'], _isPublicacao: true })), ...(db.engajamento || []).map(e => ({ ...e, texto: e.tarefa, prazo: 'Contínuo', _isEngajamento: true }))];
+  const todas = [...(db.tarefas || []).filter(t => t.status === 'active'), ...(db.publicacoes || []).map(p => ({ ...p, texto: p.tema, prazo: p.data, responsaveis: p.responsavel || ['Equipe'], _isPublicacao: true })), ...(db.engajamento || []).map(e => ({ ...e, texto: e.tarefa, prazo: 'Contínuo', _isEngajamento: true }))];
   const minhas = todas.filter(t => t.responsaveis && t.responsaveis.some(r => {
     if (typeof r === 'string') return r.toLowerCase().includes(session.id) || r.toLowerCase().includes(session.nome.split(' ')[0].toLowerCase());
     return false;
@@ -195,7 +195,7 @@ function renderMinhasTarefas(db, session) {
 
 /* ─── RENDER: Todas as Tarefas ─── */
 function renderTodasTarefas(db) {
-  const todas = ordenarTarefas([...(db.tarefas || []), ...(db.publicacoes || []).map(p => ({ ...p, texto: p.tema, prazo: p.data, responsaveis: p.responsavel || ['Equipe'], _isPublicacao: true })), ...(db.engajamento || []).map(e => ({ ...e, texto: e.tarefa, prazo: 'Contínuo', _isEngajamento: true }))]);
+  const todas = ordenarTarefas([...(db.tarefas || []).filter(t => t.status === 'active'), ...(db.publicacoes || []).map(p => ({ ...p, texto: p.tema, prazo: p.data, responsaveis: p.responsavel || ['Equipe'], _isPublicacao: true })), ...(db.engajamento || []).map(e => ({ ...e, texto: e.tarefa, prazo: 'Contínuo', _isEngajamento: true }))]);
   document.getElementById('all-tasks-count').textContent = todas.length;
   renderTasksComToggle(todas, 'all-tasks-content');
   renderAllTasksFilter(db, todas);
@@ -215,7 +215,7 @@ function aplicarFiltroTarefas(resp, btn) {
   if (btn) btn.classList.add('active');
   const db = getDb();
   if (!db) return;
-  const todas = ordenarTarefas([...(db.tarefas || []), ...(db.publicacoes || []).map(p => ({ ...p, texto: p.tema, prazo: p.data, responsaveis: p.responsavel || ['Equipe'], _isPublicacao: true })), ...(db.engajamento || []).map(e => ({ ...e, texto: e.tarefa, prazo: 'Contínuo', _isEngajamento: true }))]);
+  const todas = ordenarTarefas([...(db.tarefas || []).filter(t => t.status === 'active'), ...(db.publicacoes || []).map(p => ({ ...p, texto: p.tema, prazo: p.data, responsaveis: p.responsavel || ['Equipe'], _isPublicacao: true })), ...(db.engajamento || []).map(e => ({ ...e, texto: e.tarefa, prazo: 'Contínuo', _isEngajamento: true }))]);
   const filtradas = resp === 'todos' ? todas : todas.filter(t => (t.responsaveis || []).some(r => (r || '').split(' ')[0] === resp));
   renderTasksComToggle(filtradas, 'all-tasks-content');
 }
