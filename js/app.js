@@ -47,6 +47,7 @@ async function renderDashboard(session) {
       <div class="greeting" id="greeting-area">
         <h2>${getSaudacao()}, ${session.nome}! 💛</h2>
         <p>${session.funcao} na campanha Erika Hilton em Jundiaí<br>${offlineBadge}</p>
+        <div id="badges-area" class="flex flex-wrap gap-8" style="margin-top:8px;"></div>
         <div id="sync-badge" class="sync-badge" style="display:none;margin-top:4px;"></div>
       </div>
       <div class="countdown-bar" id="countdown-bar"></div>
@@ -66,9 +67,12 @@ async function renderDashboard(session) {
           <div id="engajamento-grid"></div>
         </div>
       </div>
-      <div class="section-title">📤 Sincronização</div>
-      <div id="historico-conclusoes"></div>
-      <button id="btn-sync" class="btn secondary" onclick="sincronizarConclusoes()" style="width:100%;">📤 Sincronizar conclusões</button>
+      <div class="section-title" style="cursor:pointer;" onclick="toggleSecao(this)">📜 Diário de Bordo <span class="collapse-arrow">▶</span></div>
+      <div class="collapse-body" id="body-diario">
+        <div class="section-title" style="font-size:0.9em;">📤 Sincronização</div>
+        <div id="historico-conclusoes"></div>
+        <button id="btn-sync" class="btn secondary" onclick="sincronizarConclusoes()" style="width:100%;">📤 Sincronizar conclusões</button>
+      </div>
       <div id="news-section-acoes"></div>
     </div>
     ${podeVer(5) ? `
@@ -104,6 +108,7 @@ async function renderDashboard(session) {
   // Renderiza cada seção com safeRender
   safeRender(() => renderCountdown(db), 'Contagem regressiva', null);
   safeRender(() => renderMinhasTarefas(db, session), 'Minhas Tarefas', null);
+  renderBadges();
   if (podeVer(5)) {
     safeRender(() => renderTodasTarefas(db), 'Todas Tarefas', null);
     safeRender(() => renderEleitoral(db), 'Painel Eleitoral', null);
@@ -393,20 +398,48 @@ function renderNoticias(db) {
 function renderConteudoPronto(db) {
   const el = document.getElementById('conteudo-container');
   if (!el) return;
+  const cp = db.conteudo_pronto || {};
+  const legendas = cp.legendas || {};
+  const hashtags = cp.hashtags || {};
+  const scripts = cp.scripts_reels || {};
+  const guia = cp.guia_visual || {};
+
   el.innerHTML = `
     <p class="text-muted" style="font-size:0.78em;margin-bottom:12px;">Legendas, hashtags e roteiros — clique pra copiar</p>
-    <div class="section-title" style="font-size:0.9em;">📄 Legendas</div>
-    <div id="legendas-lista" class="tasks-grid"></div>
-    <div class="section-title" style="font-size:0.9em;">🏷️ Hashtags</div>
-    <div id="hashtags-lista" class="filter-chips"></div>
-    <div class="section-title" style="font-size:0.9em;">🎬 Scripts Reels</div>
-    <div id="scripts-lista" class="tasks-grid"></div>
+
+    <div class="section-title" style="font-size:0.9em;">📄 Legendas (${Object.keys(legendas).length})</div>
+    <div id="legendas-lista" class="tasks-grid" style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr));">
+      ${Object.entries(legendas).map(([k, v]) => `<div class="content-card" onclick="mostrarLegenda('${k}')"><strong>${k.replace(/_/g, ' ')}</strong></div>`).join('')}
+    </div>
+
+    <div class="section-title" style="font-size:0.9em;margin-top:16px;">🏷️ Hashtags</div>
+    <div class="filter-chips" style="gap:8px;">
+      ${Object.entries(hashtags).map(([k, tags]) => `<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:6px 10px;font-size:0.72em;"><strong style="color:var(--accent);">${k.toUpperCase()}</strong><br>${tags.join(' ')}</div>`).join('')}
+    </div>
+
+    <div class="section-title" style="font-size:0.9em;margin-top:16px;">🎬 Scripts de Reels (${Object.keys(scripts).length})</div>
+    <div id="scripts-lista" class="tasks-grid">
+      ${Object.entries(scripts).map(([k, s]) => `
+        <div class="content-card" onclick="mostrarScript('${k}')">
+          <strong>${s.titulo || k}</strong>
+          <div class="task-meta">⏱️ ${s.duracao || '?'} • 🎵 ${s.trilha || '?'}</div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div class="section-title" style="font-size:0.9em;margin-top:16px;">🎨 Guia Visual</div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px;">
+        <div><div style="font-size:0.72em;color:var(--accent);font-weight:600;margin-bottom:4px;">🎨 CORES</div>
+          ${guia.cores ? Object.entries(guia.cores).map(([n, c]) => `<div style="display:flex;align-items:center;gap:6px;font-size:0.72em;color:var(--text-secondary);"><span style="width:14px;height:14px;border-radius:3px;background:${c.split(' ')[0]};border:1px solid var(--border);display:inline-block;"></span>${n}: ${c}</div>`).join('') : ''}
+        </div>
+        <div><div style="font-size:0.72em;color:var(--accent);font-weight:600;margin-bottom:4px;">📐 FORMATOS</div>
+          ${guia.formatos ? Object.entries(guia.formatos).map(([n, d]) => `<div style="font-size:0.72em;color:var(--text-secondary);margin-bottom:2px;"><strong>${n}:</strong> ${d}</div>`).join('') : ''}
+        </div>
+      </div>
+      ${guia.fonte ? `<div style="margin-top:8px;font-size:0.72em;color:var(--text-muted);">🔤 Fonte: ${guia.fonte}</div>` : ''}
+    </div>
   `;
-  const legendas = db.conteudo_pronto && db.conteudo_pronto.legendas ? db.conteudo_pronto.legendas : {};
-  const keys = Object.keys(legendas);
-  if (keys.length > 0) {
-    document.getElementById('legendas-lista').innerHTML = keys.map(k => `<div class="content-card" onclick="mostrarLegenda('${k}')"><strong>${k}</strong></div>`).join('');
-  }
 }
 
 function mostrarLegenda(key) {
@@ -416,20 +449,86 @@ function mostrarLegenda(key) {
   const overlay = document.createElement('div');
   overlay.className = 'modal-overlay';
   overlay.onclick = () => overlay.remove();
-  overlay.innerHTML = `<div class="modal-box" onclick="event.stopPropagation()"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><strong style="color:var(--accent);">📄 Legenda</strong><button class="btn secondary small" onclick="this.closest('.modal-overlay').remove()">✕</button></div><div id="legenda-texto" style="background:#0b0f19;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;font-size:0.82em;color:var(--text);line-height:1.6;white-space:pre-wrap;">${texto}</div><button class="copy-btn" onclick="copiarTexto(this, '${key.replace(/'/g, "\\'")}')">📋 Copiar</button></div>`;
+  overlay.innerHTML = `
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <strong style="color:var(--accent);font-size:0.85em;">📄 ${key.replace(/_/g, ' ')}</strong>
+        <button class="btn secondary small" onclick="this.closest('.modal-overlay').remove()">✕</button>
+      </div>
+      <div id="legenda-texto" style="background:#0b0f19;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px;font-size:0.8em;color:var(--text);line-height:1.6;white-space:pre-wrap;">${texto}</div>
+      <button class="copy-btn" onclick="copiarLegendaModal(this, '${key.replace(/'/g, "\\'")}')">📋 Copiar legenda</button>
+    </div>`;
   document.body.appendChild(overlay);
 }
 
-function copiarTexto(btn, key) {
+function copiarLegendaModal(btn, key) {
   const db = getDb();
   if (!db || !db.conteudo_pronto || !db.conteudo_pronto.legendas || !db.conteudo_pronto.legendas[key]) return;
   const texto = db.conteudo_pronto.legendas[key];
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(texto).then(() => {
       btn.textContent = '✅ Copiado!'; btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = '📋 Copiar'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => { btn.textContent = '📋 Copiar legenda'; btn.classList.remove('copied'); }, 2000);
     });
   }
+}
+
+function mostrarScript(key) {
+  const db = getDb();
+  if (!db || !db.conteudo_pronto || !db.conteudo_pronto.scripts_reels || !db.conteudo_pronto.scripts_reels[key]) return;
+  const s = db.conteudo_pronto.scripts_reels[key];
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-overlay';
+  overlay.onclick = () => overlay.remove();
+  overlay.innerHTML = `
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <strong style="color:var(--accent);font-size:0.85em;">🎬 ${s.titulo || key}</strong>
+        <button class="btn secondary small" onclick="this.closest('.modal-overlay').remove()">✕</button>
+      </div>
+      <div style="font-size:0.72em;color:var(--text-secondary);margin-bottom:8px;">⏱️ ${s.duracao || '?'} • 🎵 ${s.trilha || '?'}</div>
+      <div style="background:#0b0f19;border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;font-size:0.78em;color:var(--text);line-height:1.6;">
+        ${(s.cenas || []).map(c => `🎬 ${c}`).join('<br>')}
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+
+/* ─── GAMIFICAÇÃO: Badges ─── */
+function calcularBadges(usuarioId) {
+  const completions = getConclusoesLocais();
+  const minhas = completions.filter(c => c.responsavel === usuarioAtual.nome);
+  const hoje = getHojeSP();
+  const hojeStr = hoje.toISOString().slice(0, 10);
+  const badges = [];
+
+  // 🔥 Turbinado: 5+ tarefas no mesmo dia
+  const hojeCount = minhas.filter(c => c.concluidaEm && c.concluidaEm.startsWith(hojeStr)).length;
+  if (hojeCount >= 5) badges.push('🔥 Turbinado');
+
+  // ⭐ Estrela: 10+ no total
+  if (minhas.length >= 10) badges.push('⭐ Estrela');
+
+  // 🏆 Lenda: nenhuma atrasada
+  const totalPendentes = document.querySelectorAll('.task-card.overdue').length;
+  if (totalPendentes === 0 && minhas.length > 0) badges.push('🏆 Lenda');
+
+  // 📸 Primeiro Post
+  if (minhas.length >= 1) badges.push('📸 Primeiro Post');
+
+  return badges;
+}
+
+function renderBadges() {
+  const el = document.getElementById('badges-area');
+  if (!el || !usuarioAtual) return;
+  const badges = calcularBadges(usuarioAtual.id);
+  if (badges.length === 0) {
+    el.style.display = 'none';
+    return;
+  }
+  el.style.display = 'flex';
+  el.innerHTML = badges.map(b => `<span style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:4px 12px;font-size:0.72em;font-weight:600;">${b}</span>`).join('');
 }
 
 /* ─── Modo Foco ─── */
