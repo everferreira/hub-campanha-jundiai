@@ -11,7 +11,7 @@
 - Ever Maria (Coordenação Municipal)
 - Tiana Cauton (Assessora)
 - Hoanny (Eventos)
-- Kawa (Redes Sociais — Vídeos)
+- Kwa (Redes Sociais — Vídeos)
 - Eva (Redes Sociais — Artes)
 
 ---
@@ -53,8 +53,8 @@ Divulgar com prioridade máxima os seguintes eventos:
 
 ---
 
-### 5. Produção de vídeos — Kawa
-- Kawa pode gravar os vídeos com Tiana
+### 5. Produção de vídeos — Kwa
+- Kwa pode gravar os vídeos com Tiana
 - **Tempo estimado:** 4 horas para entrega de cada vídeo
 
 ---
@@ -84,7 +84,7 @@ Divulgar com prioridade máxima os seguintes eventos:
 ---
 
 ### 10. Cobertura da visita — 18/08
-- **Kawa e Eva** devem acompanhar a agenda de **Erika, Sofia Favaro e Tiana** no dia 18/08
+- **Kwa e Eva** devem acompanhar a agenda de **Erika, Sofia Favaro e Tiana** no dia 18/08
 - Gravar as **três juntas** em todos os momentos da visita
 
 ---
@@ -94,9 +94,9 @@ Divulgar com prioridade máxima os seguintes eventos:
 
 ---
 
-### 12. Engajamento diário — Kawa
+### 12. Engajamento diário — Kwa
 - **Reforço no engajamento diário** das redes sociais
-- Responsável: Kawa
+- Responsável: Kwa
 - Ações: responder comentários, curtir e repostar postagens de **Erika Hilton** e **Sofia Favaro**
 
 ---
@@ -121,12 +121,12 @@ Divulgar com prioridade máxima os seguintes eventos:
 | # | Ação | Responsável | Prazo |
 |---|------|-------------|-------|
 | 1 | Incluir 22/08 no calendário de publicações | Ever Maria | Imediato |
-| 2 | Produzir conteúdo de prioridade máxima (16, 18, 22/08) | Eva + Kawa | Contínuo |
+| 2 | Produzir conteúdo de prioridade máxima (16, 18, 22/08) | Eva + Kwa | Contínuo |
 | 3 | Submeter artes estáticas à House of Hilton | Eva | Antes de publicar |
-| 4 | Gravar Reels prioritários (MPF, Parada, Quem é Erika, Sofia) | Kawa + Tiana | Conforme cronograma |
-| 5 | Reforçar engajamento diário | Kawa | Diário |
+| 4 | Gravar Reels prioritários (MPF, Parada, Quem é Erika, Sofia) | Kwa + Tiana | Conforme cronograma |
+| 5 | Reforçar engajamento diário | Kwa | Diário |
 | 6 | Acompanhar grupo de comunicação | Todos | Diário |
-| 7 | Planejar cobertura do dia 18/08 (Erika + Sofia + Tiana) | Kawa + Eva | Até 14/08 |
+| 7 | Planejar cobertura do dia 18/08 (Erika + Sofia + Tiana) | Kwa + Eva | Até 14/08 |
 
 ---
 

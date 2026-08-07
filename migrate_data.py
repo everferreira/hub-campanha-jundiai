@@ -77,7 +77,7 @@ for i, p in enumerate(producoes):
         'urgencia': p.get('urgencia', 'normal'),
         'lote': p.get('lote', ''),
         'status': 'pendente',
-        'hoh_status': 'approved' if p.get('responsavel') in ['kawa'] else 'pending',
+        'hoh_status': 'approved' if p.get('responsavel') in ['kwa'] else 'pending',
         'legenda_key': p.get('legenda_key', ''),
         'reels_key': p.get('reels_key', '')
     })

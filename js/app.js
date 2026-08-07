@@ -333,11 +333,11 @@ function renderBandeiraco(db) {
     { tarefa: 'Definir horário', prazo: '05/08', responsavel: 'Ever Maria', urgente: true },
     { tarefa: 'Material de campanha', prazo: '10/08', responsavel: 'Junior Arcanjo' },
     { tarefa: 'Equipe de apoio', prazo: '10/08', responsavel: 'Tiana Cauton' },
-    { tarefa: 'Evento Instagram/WhatsApp', prazo: '08/08', responsavel: 'Kawa' },
+    { tarefa: 'Evento Instagram/WhatsApp', prazo: '08/08', responsavel: 'Kwa' },
     { tarefa: 'Convocação apoiadores', prazo: '10/08', responsavel: 'Junior Arcanjo' },
     { tarefa: 'Caixa de som + microfone', prazo: '15/08', responsavel: 'Hoanny' },
-    { tarefa: 'Cobertura stories', prazo: '16/08', responsavel: 'Eva, Kawa' },
-    { tarefa: 'Pós-evento: fotos', prazo: '17/08', responsavel: 'Kawa' },
+    { tarefa: 'Cobertura stories', prazo: '16/08', responsavel: 'Eva, Kwa' },
+    { tarefa: 'Pós-evento: fotos', prazo: '17/08', responsavel: 'Kwa' },
   ];
   el.innerHTML = checklist(itens, 'band');
 }

@@ -77,7 +77,7 @@ hub-campanha-jundiai/
 |:-----:|------|----------|
 | **5** | Ever Maria, Tiana Cauton | Tudo: visão 360, finanças, eleitoral, parceiros, todas as tarefas |
 | **3** | Junior, Hoanny, João | Painéis específicos da função + parceiros |
-| **2** | Kawa, Eva | Só o painel de produção + engajamento + conteúdo |
+| **2** | Kwa, Eva | Só o painel de produção + engajamento + conteúdo |
 
 ### 3.3. Perfis e Seus Painéis
 
@@ -103,7 +103,7 @@ hub-campanha-jundiai/
 - Link direto pro Drive de Fotos
 - Engajamento diário (comentar Sofia)
 
-#### 🎬 Kawa (Nível 2) — "Painel de Vídeos"
+#### 🎬 Kwa (Nível 2) — "Painel de Vídeos"
 **O que vê:**
 - Cronômetro SLA (4h) — tracker visual de tempo desde a gravação
 - Central de Roteiros (5 scripts de Reels em modal)
@@ -170,7 +170,7 @@ hub-campanha-jundiai/
     { "id": "junior", "nome": "Junior Arcanjo", "funcao": "Mobilizador de Rua", "nivel": 3, "cor": "#f59e0b", "iniciais": "JA" },
     { "id": "hoanny", "nome": "Hoanny", "funcao": "Eventos", "nivel": 3, "cor": "#3b82f6", "iniciais": "HO" },
     { "id": "joao", "nome": "João", "funcao": "Financeiro", "nivel": 3, "cor": "#10b981", "iniciais": "JO" },
-    { "id": "kawa", "nome": "Kawa", "funcao": "Redes Sociais — Vídeos", "nivel": 2, "cor": "#06b6d4", "iniciais": "KA" },
+    { "id": "kwa", "nome": "Kwa", "funcao": "Redes Sociais — Vídeos", "nivel": 2, "cor": "#06b6d4", "iniciais": "KA" },
     { "id": "eva", "nome": "Eva", "funcao": "Redes Sociais — Artes", "nivel": 2, "cor": "#ec4899", "iniciais": "EV" }
   ],
 
@@ -209,7 +209,7 @@ hub-campanha-jundiai/
 
   "engajamento": [
     { "id": "e001", "tarefa": "Responder TODOS os comentários das postagens", "responsavel": "quem_postou" },
-    { "id": "e002", "tarefa": "Comentar 2 posts da Erika (@hilton_erika)", "responsavel": "kawa" },
+    { "id": "e002", "tarefa": "Comentar 2 posts da Erika (@hilton_erika)", "responsavel": "kwa" },
     { "id": "e003", "tarefa": "Comentar 2 posts da Sofia Favaro", "responsavel": "eva" },
     { "id": "e004", "tarefa": "Compartilhar posts oficiais (Erika+Sofia) nos stories", "responsavel": "ambos" },
     { "id": "e005", "tarefa": "Verificar engajamento e salvar stories em destaque", "responsavel": "ambos" }
@@ -249,12 +249,12 @@ hub-campanha-jundiai/
     { "tarefa": "Definir horário do bandeiraço", "prazo": "05/08", "responsavel": "Ever Maria", "urgente": true },
     { "tarefa": "Conseguir material de campanha", "prazo": "10/08", "responsavel": "Junior Arcanjo" },
     { "tarefa": "Montar equipe de apoio (5-10 pessoas)", "prazo": "10/08", "responsavel": "Tiana Cauton" },
-    { "tarefa": "Criar evento no Instagram e WhatsApp", "prazo": "08/08", "responsavel": "Kawa" },
+    { "tarefa": "Criar evento no Instagram e WhatsApp", "prazo": "08/08", "responsavel": "Kwa" },
     { "tarefa": "Disparar convite em massa", "prazo": "10/08", "responsavel": "Junior Arcanjo" },
     { "tarefa": "Combinar discurso/rota com equipe", "prazo": "14/08", "responsavel": "Ever Maria" },
     { "tarefa": "Levar caixa de som + microfone", "prazo": "15/08", "responsavel": "Hoanny" },
-    { "tarefa": "Cobertura stories (Eva + Kawa)", "prazo": "16/08", "responsavel": "Eva, Kawa" },
-    { "tarefa": "Pós-evento: fotos e relatório", "prazo": "17/08", "responsavel": "Kawa" }
+    { "tarefa": "Cobertura stories (Eva + Kwa)", "prazo": "16/08", "responsavel": "Eva, Kwa" },
+    { "tarefa": "Pós-evento: fotos e relatório", "prazo": "17/08", "responsavel": "Kwa" }
   ],
 
   "mobilizacao": {
@@ -381,8 +381,8 @@ hub-campanha-jundiai/
 - [ ] Link direto: Drive de Fotos
 - [ ] Engajamento diário (comentar Sofia)
 
-### 5.6. Módulo: Painel Kawa — Vídeos
-- [ ] Fila de produção (só tarefas do Kawa)
+### 5.6. Módulo: Painel Kwa — Vídeos
+- [ ] Fila de produção (só tarefas do Kwa)
 - [ ] Cronômetro SLA (4h) desde a última gravação
 - [ ] Central de Roteiros (5 scripts em modal rápido)
 - [ ] Checklist diário de engajamento
@@ -422,8 +422,8 @@ hub-campanha-jundiai/
 - [ ] Salvos em localStorage, visíveis a todos
 - [ ] Suporta formatação básica (negrito, emoji)
 
-### 5.14. Módulo: SLA Kawa — Cronômetro de 4h
-- [ ] Quando Kawa marca tarefa como "gravando", inicia cronômetro de 4h
+### 5.14. Módulo: SLA Kwa — Cronômetro de 4h
+- [ ] Quando Kwa marca tarefa como "gravando", inicia cronômetro de 4h
 - [ ] Barra de progresso visual (verde → amarelo → vermelho)
 - [ ] Alerta se passar das 4h
 - [ ] Reset quando tarefa é concluída
@@ -569,7 +569,7 @@ hub-campanha-jundiai/
 ### Fase 3 — Painéis Individuais
 - [ ] Visão 360 (Ever/Tiana)
 - [ ] Painel Eva (Artes)
-- [ ] Painel Kawa (Vídeos)
+- [ ] Painel Kwa (Vídeos)
 - [ ] Painel Hoanny (Eventos)
 - [ ] Painel João (Finanças)
 - [ ] Painel Junior (Mobilização)
@@ -853,7 +853,7 @@ const dados = await safeAsync(
 ```
 
 ### 12.13. Error Boundary — Cada Painel é Isolado
-O SPA tem múltiplos painéis (Visão 360, Eva, Kawa, etc.). Se UM falhar, os OUTROS devem continuar funcionando.
+O SPA tem múltiplos painéis (Visão 360, Eva, Kwa, etc.). Se UM falhar, os OUTROS devem continuar funcionando.
 
 ```js
 // Cada função de render é isolada em try/catch
@@ -879,7 +879,7 @@ function safeRender(fn, nomePainel, elemento) {
 // Uso no app.js:
 safeRender(() => renderVisao360(sessao), 'Visão 360', el);
 safeRender(() => renderPainelEva(sessao), 'Painel Eva', el);
-safeRender(() => renderPainelKawa(sessao), 'Painel Kawa', el);
+safeRender(() => renderPainelKawa(sessao), 'Painel Kwa', el);
 ```
 
 ### 12.14. Font Loading — Evitar Flash de Texto Invisível
