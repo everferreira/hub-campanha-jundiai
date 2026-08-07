@@ -70,26 +70,22 @@
     {
       "hora": "11:00-11:40",
       "atividade": "Visita PA Vila Progresso",
-      "local": "Verba destinada por Erika",
-      "destaque": false
+      "local": "Verba destinada por Erika"
     },
     {
       "hora": "12:00-13:00",
       "atividade": "Instituto Luís Braile",
-      "local": "Com Movimento Cardume",
-      "destaque": false
+      "local": "Com Movimento Cardume"
     },
     {
       "hora": "13:30-14:30",
-      "atividade": "Visita Centro TEA (Girassóis)",
-      "local": "Centro Integrado Girassóis",
-      "destaque": false
+      "atividade": "Centro TEA (Girassóis)",
+      "local": "Centro Integrado Girassóis"
     },
     {
       "hora": "15:00-16:30",
       "atividade": "Almoço",
-      "local": "",
-      "destaque": false
+      "local": ""
     },
     {
       "hora": "16:30-17:00",
@@ -99,7 +95,7 @@
     },
     {
       "hora": "17:30",
-      "atividade": "🤝 Encontro com Lideranças",
+      "atividade": "🤝 Encontro Lideranças",
       "local": "Bancários",
       "destaque": true
     },
@@ -120,5 +116,1168 @@
     "site_oficial": "https://erikahilton.com.br/",
     "camara": "https://www.camara.leg.br/deputados/220645",
     "wikipedia": "https://pt.wikipedia.org/wiki/Erika_Hilton"
-  }
+  },
+  "tarefas": [
+    {
+      "id": "prod_001",
+      "titulo": "Card convocação Bandeiraço 16/08",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "04/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Emergência",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "bandeiraco",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_002",
+      "titulo": "Reels convocação Bandeiraço 16/08",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "04/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Emergência",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": "bandeiraco"
+    },
+    {
+      "id": "prod_003",
+      "titulo": "Card anúncio visita Erika 18/08",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "05/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Emergência",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "anuncio_visita",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_004",
+      "titulo": "6 cards Agenda 18/08 (1 por atividade)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "05/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Emergência",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "agenda_18",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_005",
+      "titulo": "Reels Agenda Erika em Jundiaí",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "06/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Emergência",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": "agenda_visita"
+    },
+    {
+      "id": "prod_006",
+      "titulo": "Template stories '📍 Ao vivo de...'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "06/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Emergência",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "visita_cobertura",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_007",
+      "titulo": "Carrossel biográfico 'Quem é Erika'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "11/08",
+      "urgencia": "soon",
+      "lote": "🟡 Lote 2",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "quem_e_erika",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_008",
+      "titulo": "Card infográfico 'R$ 4,6M em Jundiaí'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "11/08",
+      "urgencia": "soon",
+      "lote": "🟡 Lote 2",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "emendas_total",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_009",
+      "titulo": "Card 'R$ 2M na Saúde' (oftalmo+TEA+CTA)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "11/08",
+      "urgencia": "soon",
+      "lote": "🟡 Lote 2",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "emendas_saude",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_010",
+      "titulo": "Card 'Melhor Deputada 2024/25'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "11/08",
+      "urgencia": "soon",
+      "lote": "🟡 Lote 2",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "melhor_deputada",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_011",
+      "titulo": "Card 'Presidente Comissão da Mulher'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "13/08",
+      "urgencia": "normal",
+      "lote": "🟢 Lote 3",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "comissao_mulher",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_012",
+      "titulo": "Card 'Erika na Parada LGBT+ Jundiaí'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "13/08",
+      "urgencia": "normal",
+      "lote": "🟢 Lote 3",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "parada_lgbt",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_013",
+      "titulo": "Card 'Meta 10.000 votos' (1.944→10.000)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "14/08",
+      "urgencia": "normal",
+      "lote": "🟢 Lote 3",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "meta_votos",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_014",
+      "titulo": "Reels 'Por que votar em Erika?'",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "14/08",
+      "urgencia": "normal",
+      "lote": "🟢 Lote 3",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": "por_que_votar"
+    },
+    {
+      "id": "prod_015",
+      "titulo": "Edição melhores momentos visita (fotos+vídeos)",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "19/08",
+      "urgencia": "soon",
+      "lote": "🔵 Pós-visita",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "melhores_momentos",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_016",
+      "titulo": "Cards 'Melhores momentos' (3-4 cards)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "19/08",
+      "urgencia": "soon",
+      "lote": "🔵 Pós-visita",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "melhores_momentos",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_017",
+      "titulo": "Reels com depoimentos da visita",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "21/08",
+      "urgencia": "normal",
+      "lote": "🔵 Pós-visita",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": "depoimentos_visita"
+    },
+    {
+      "id": "prod_018",
+      "titulo": "Cards 'Erika e as pautas de Jundiaí' (saúde, educação, direitos)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "24/08",
+      "urgencia": "normal",
+      "lote": "🟣 Semana 1",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "semana_pautas",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_019",
+      "titulo": "Cards 'Apoios locais' (lideranças, comerciantes)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "31/08",
+      "urgencia": "normal",
+      "lote": "🟣 Semana 2",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "semana_apoios",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_020",
+      "titulo": "Cards 'Prestação de contas' (resultados das emendas)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "07/09",
+      "urgencia": "normal",
+      "lote": "🟣 Semana 3",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "semana_prestacao",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_021",
+      "titulo": "Cards 'Caravanas e mobilização'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "13/09",
+      "urgencia": "normal",
+      "lote": "🟣 Semana 4",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "semana_caravanas",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_022",
+      "titulo": "Reels temáticos (1 por semana)",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "24/08, 31/08, 07/09, 13/09",
+      "urgencia": "normal",
+      "lote": "🟣 Semanal",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_023",
+      "titulo": "Gravação depoimentos apoiadores (testemunhais)",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "18/09",
+      "urgencia": "normal",
+      "lote": "⚫ Reta Final",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": "testemunhais"
+    },
+    {
+      "id": "prod_024",
+      "titulo": "Reels: Solicitação de Erika ao MPF",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "10/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Prioridade",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_025",
+      "titulo": "Reels: Parada LGBT+ de Jundiaí",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "10/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Prioridade",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "parada_lgbt",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_026",
+      "titulo": "Reels: Quem é Erika Hilton?",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "12/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Prioridade",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "quem_e_erika",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_027",
+      "titulo": "Reels: Quem é Sofia Favaro?",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "12/08",
+      "urgencia": "urgent",
+      "lote": "🔴 Prioridade",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_028",
+      "titulo": "Card convocação: Lançamento 22/08",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "15/08",
+      "urgencia": "soon",
+      "lote": "🚀 Lançamento 22/08",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_029",
+      "titulo": "Reels: Vem pro Lançamento! 22/08",
+      "tipo": "producao",
+      "responsavel": "kawa",
+      "prazo": "16/08",
+      "urgencia": "soon",
+      "lote": "🚀 Lançamento 22/08",
+      "status": "pendente",
+      "hoh_status": "approved",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_030",
+      "titulo": "Cobertura stories: Lançamento 22/08",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "22/08",
+      "urgencia": "normal",
+      "lote": "🚀 Lançamento 22/08",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_031",
+      "titulo": "Cards 'Motivos pra votar em Erika' (série)",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "25/09",
+      "urgencia": "normal",
+      "lote": "⚫ Reta Final",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "por_que_votar",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_032",
+      "titulo": "Card 'Amanhã é dia de votar!'",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "02/10",
+      "urgencia": "normal",
+      "lote": "⚫ Reta Final",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "amanha_votar",
+      "reels_key": ""
+    },
+    {
+      "id": "prod_033",
+      "titulo": "Card agradecimento pós-eleição",
+      "tipo": "producao",
+      "responsavel": "eva",
+      "prazo": "04/10",
+      "urgencia": "normal",
+      "lote": "⚫ Reta Final",
+      "status": "pendente",
+      "hoh_status": "pending",
+      "legenda_key": "agradecimento_pos",
+      "reels_key": ""
+    }
+  ],
+  "publicacoes": [
+    {
+      "id": "pub_001",
+      "data": "07/08",
+      "dia": "Sex",
+      "horario": "13h",
+      "tema": "🚩 Bandeiraço 16/08 — CONVOCAÇÃO",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_002",
+      "data": "07/08",
+      "dia": "Sex",
+      "horario": "15h",
+      "tema": "🎬 Reels: Vem pro Bandeiraço!",
+      "formato": "Reels",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_003",
+      "data": "08/08",
+      "dia": "Sáb",
+      "horario": "15h",
+      "tema": "📸 Quem é Erika Hilton? (carrossel)",
+      "formato": "Carrossel",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_004",
+      "data": "09/08",
+      "dia": "Dom",
+      "horario": "13h",
+      "tema": "🏆 Duas vezes melhor deputada do Brasil",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_005",
+      "data": "10/08",
+      "dia": "Seg",
+      "horario": "15h",
+      "tema": "⚧️ Presidente Comissão da Mulher",
+      "formato": "Post",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_006",
+      "data": "11/08",
+      "dia": "Ter",
+      "horario": "13h",
+      "tema": "🏳️‍🌈 Erika na Parada LGBT+ de Jundiaí",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_007",
+      "data": "12/08",
+      "dia": "Qua",
+      "horario": "15h",
+      "tema": "💰 R$ 4,6 milhões em Jundiaí",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_008",
+      "data": "13/08",
+      "dia": "Qui",
+      "horario": "13h",
+      "tema": "🏥 R$ 2 milhões na Saúde de Jundiaí",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_009",
+      "data": "13/08",
+      "dia": "Qui",
+      "horario": "15h",
+      "tema": "📅 Erika vem a Jundiaí! — ANÚNCIO",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_010",
+      "data": "14/08",
+      "dia": "Sex",
+      "horario": "13h",
+      "tema": "📋 Agenda 18/08 — cards individuais",
+      "formato": "Cards",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_011",
+      "data": "14/08",
+      "dia": "Sex",
+      "horario": "15h",
+      "tema": "🎬 Reels: Agenda da Erika em Jundiaí",
+      "formato": "Reels",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_012",
+      "data": "15/08",
+      "dia": "Sáb",
+      "horario": "13h",
+      "tema": "🎯 Meta: 10.000 votos em Jundiaí",
+      "formato": "Card",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_013",
+      "data": "15/08",
+      "dia": "Sáb",
+      "horario": "15h",
+      "tema": "🎬 Por que votar em Erika?",
+      "formato": "Reels",
+      "fase": "Pré-campanha",
+      "responsavel": [
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_014",
+      "data": "16/08",
+      "dia": "Dom",
+      "horario": "🔴 Ao vivo",
+      "tema": "🚩 Bandeiraço — abertura da campanha",
+      "formato": "Cobertura",
+      "fase": "Bandeiraço",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_015",
+      "data": "17/08",
+      "dia": "Seg",
+      "horario": "13h",
+      "tema": "⏰ Amanhã: Erika em Jundiaí!",
+      "formato": "Story+Post",
+      "fase": "Visita 18/08",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_016",
+      "data": "18/08",
+      "dia": "Ter",
+      "horario": "🔴 Ao vivo",
+      "tema": "🎯 VISITA DA ERIKA — cobertura total",
+      "formato": "Cobertura",
+      "fase": "Visita 18/08",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_017",
+      "data": "19/08",
+      "dia": "Qua",
+      "horario": "13h",
+      "tema": "🚀 22/08 — Lançamento Oficial! CONVOCAÇÃO",
+      "formato": "Card",
+      "fase": "Lançamento 22/08",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_018",
+      "data": "19/08",
+      "dia": "Qua",
+      "horario": "15h",
+      "tema": "📸 Melhores momentos da visita (fotos)",
+      "formato": "Cards",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_019",
+      "data": "20/08",
+      "dia": "Qui",
+      "horario": "15h",
+      "tema": "🎬 Reels: Vem pro lançamento! 22/08",
+      "formato": "Reels",
+      "fase": "Lançamento 22/08",
+      "responsavel": [
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_020",
+      "data": "21/08",
+      "dia": "Sex",
+      "horario": "13h",
+      "tema": "⏰ Amanhã: Lançamento da campanha!",
+      "formato": "Story+Post",
+      "fase": "Lançamento 22/08",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_021",
+      "data": "22/08",
+      "dia": "Sáb",
+      "horario": "🔴 Ao vivo",
+      "tema": "🚀 LANÇAMENTO OFICIAL — cobertura total",
+      "formato": "Cobertura",
+      "fase": "Lançamento 22/08",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_022",
+      "data": "20/08",
+      "dia": "Qui",
+      "horario": "15h",
+      "tema": "🎤 O que Erika disse na Coletiva",
+      "formato": "Card",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_023",
+      "data": "21/08",
+      "dia": "Sex",
+      "horario": "13h",
+      "tema": "🎬 Reels: Depoimentos da visita",
+      "formato": "Reels",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_024",
+      "data": "22/08",
+      "dia": "Sáb",
+      "horario": "15h",
+      "tema": "🤝 Encontro de lideranças — resumo",
+      "formato": "Card",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_025",
+      "data": "23/08",
+      "dia": "Dom",
+      "horario": "13h",
+      "tema": "📍 Erika + Jundiaí = parceria que dá certo",
+      "formato": "Post",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_026",
+      "data": "24/08",
+      "dia": "Seg",
+      "horario": "15h",
+      "tema": "🗓️ O que vem por aí na campanha",
+      "formato": "Card",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_027",
+      "data": "25/08",
+      "dia": "Ter",
+      "horario": "13h",
+      "tema": "🙏 Agradecimento pela receptividade",
+      "formato": "Post",
+      "fase": "Pós-visita",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_028",
+      "data": "26/08-01/09",
+      "dia": "Semana 1",
+      "horario": "13/15h",
+      "tema": "📍 Erika e as pautas de Jundiaí (saúde, educação, direitos)",
+      "formato": "3-4 posts",
+      "fase": "Campanha",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_029",
+      "data": "02-07/09",
+      "dia": "Semana 2",
+      "horario": "13/15h",
+      "tema": "💪 Apoios locais — lideranças e comerciantes",
+      "formato": "3-4 posts",
+      "fase": "Campanha",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_030",
+      "data": "08-14/09",
+      "dia": "Semana 3",
+      "horario": "13/15h",
+      "tema": "🔍 Prestação de contas — resultados das emendas",
+      "formato": "3-4 posts",
+      "fase": "Campanha",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_031",
+      "data": "15-20/09",
+      "dia": "Semana 4",
+      "horario": "13/15h",
+      "tema": "🚐 Caravanas e mobilização",
+      "formato": "3-4 posts",
+      "fase": "Campanha",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_032",
+      "data": "21-27/09",
+      "dia": "Semana 5",
+      "horario": "13/15h",
+      "tema": "🎤 Testemunhais — apoiadores gravam por que votam em Erika",
+      "formato": "Reels",
+      "fase": "Reta Final",
+      "responsavel": [
+        "kawa"
+      ]
+    },
+    {
+      "id": "pub_033",
+      "data": "28/09",
+      "dia": "Seg",
+      "horario": "15h",
+      "tema": "⏳ Faltam 6 dias — motivo #1",
+      "formato": "Card",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_034",
+      "data": "29/09",
+      "dia": "Ter",
+      "horario": "13h",
+      "tema": "⏳ Faltam 5 dias — motivo #2",
+      "formato": "Card",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_035",
+      "data": "30/09",
+      "dia": "Qua",
+      "horario": "15h",
+      "tema": "⏳ Faltam 4 dias — motivo #3",
+      "formato": "Card",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_036",
+      "data": "01/10",
+      "dia": "Qui",
+      "horario": "13h",
+      "tema": "⏳ Faltam 3 dias — motivo #4",
+      "formato": "Card",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_037",
+      "data": "02/10",
+      "dia": "Sex",
+      "horario": "15h",
+      "tema": "⏳ Faltam 2 dias — motivo #5",
+      "formato": "Card",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_038",
+      "data": "03/10",
+      "dia": "Sáb",
+      "horario": "13h",
+      "tema": "⏳ Amanhã é dia de votar!",
+      "formato": "Card",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva"
+      ]
+    },
+    {
+      "id": "pub_039",
+      "data": "04/10",
+      "dia": "Dom",
+      "horario": "🗳️",
+      "tema": "Votou? Compartilha! + Agradecimento",
+      "formato": "Story+Post",
+      "fase": "Reta Final",
+      "responsavel": [
+        "eva",
+        "kawa"
+      ]
+    }
+  ],
+  "engajamento": [
+    {
+      "id": "e001",
+      "tarefa": "Responder TODOS os comentários das postagens",
+      "responsavel": "quem_postou"
+    },
+    {
+      "id": "e002",
+      "tarefa": "Comentar 2 posts da Erika (@hilton_erika)",
+      "responsavel": "kawa"
+    },
+    {
+      "id": "e003",
+      "tarefa": "Comentar 2 posts da Sofia Favaro",
+      "responsavel": "eva"
+    },
+    {
+      "id": "e004",
+      "tarefa": "Compartilhar posts oficiais (Erika+Sofia) nos stories",
+      "responsavel": "ambos"
+    },
+    {
+      "id": "e005",
+      "tarefa": "Verificar engajamento e salvar stories em destaque",
+      "responsavel": "ambos"
+    }
+  ],
+  "eleitoral": {
+    "votos_2022": 1944,
+    "meta_2026": 10000,
+    "eleitores": 327491,
+    "zonas": [
+      {
+        "id": "065",
+        "nome": "Centro"
+      },
+      {
+        "id": "281",
+        "nome": "Vila Hortolândia"
+      },
+      {
+        "id": "424",
+        "nome": "São Camilo"
+      }
+    ],
+    "boulos_ref": 6375,
+    "emendas_total": 4639036,
+    "emendas_2026": 2700000
+  },
+  "checklist_bandeiraco": [
+    {
+      "tarefa": "Definir local do bandeiraço",
+      "prazo": "05/08",
+      "responsavel": "Ever Maria",
+      "urgente": true
+    },
+    {
+      "tarefa": "Definir horário do bandeiraço",
+      "prazo": "05/08",
+      "responsavel": "Ever Maria",
+      "urgente": true
+    },
+    {
+      "tarefa": "Conseguir material de campanha",
+      "prazo": "10/08",
+      "responsavel": "Junior Arcanjo"
+    },
+    {
+      "tarefa": "Montar equipe de apoio (5-10 pessoas)",
+      "prazo": "10/08",
+      "responsavel": "Tiana Cauton"
+    },
+    {
+      "tarefa": "Criar evento no Instagram e WhatsApp",
+      "prazo": "08/08",
+      "responsavel": "Kawa"
+    },
+    {
+      "tarefa": "Disparar convite em massa",
+      "prazo": "10/08",
+      "responsavel": "Junior Arcanjo"
+    },
+    {
+      "tarefa": "Combinar discurso/rota com equipe",
+      "prazo": "14/08",
+      "responsavel": "Ever Maria"
+    },
+    {
+      "tarefa": "Levar caixa de som + microfone",
+      "prazo": "15/08",
+      "responsavel": "Hoanny"
+    },
+    {
+      "tarefa": "Cobertura nos stories (Eva + Kawa)",
+      "prazo": "16/08",
+      "responsavel": "Eva, Kawa"
+    },
+    {
+      "tarefa": "Pós-evento: fotos e relatório",
+      "prazo": "17/08",
+      "responsavel": "Kawa"
+    }
+  ],
+  "mobilizacao": {
+    "confirmados": {
+      "atual": 42,
+      "meta": 100,
+      "label": "Confirmações"
+    },
+    "liderancas": {
+      "atual": 8,
+      "meta": 25,
+      "label": "Lideranças"
+    },
+    "bairros": {
+      "atual": 5,
+      "meta": 15,
+      "label": "Bairros"
+    },
+    "voluntarios": {
+      "atual": 12,
+      "meta": 30,
+      "label": "Voluntários"
+    }
+  },
+  "financas": {
+    "arrecadado": 0,
+    "previsto": 15000,
+    "gastos": [
+      {
+        "item": "Material gráfico (bandeiras, adesivos)",
+        "valor": 2500
+      },
+      {
+        "item": "Transporte equipe",
+        "valor": 1800
+      },
+      {
+        "item": "Alimentação dia da visita",
+        "valor": 1200
+      },
+      {
+        "item": "Caixa de som + microfone",
+        "valor": 800
+      },
+      {
+        "item": "Imprevistos",
+        "valor": 1000
+      }
+    ]
+  },
+  "parceiros": [
+    {
+      "nome": "Coletivo Cardume",
+      "descricao": "Movimento social parceiro. Articulou R$ 1M em emendas.",
+      "contato": "Henrique Parra"
+    },
+    {
+      "nome": "Henrique Parra",
+      "descricao": "Vereador (PSOL) — 5.939 votos"
+    },
+    {
+      "nome": "Dona Edna — Clube 28",
+      "descricao": "Espaço do Encontro Aberto em 18/08 (19h)",
+      "contato": "Contatar até 12/08"
+    }
+  ],
+  "conteudo_pronto": {
+    "legendas": {},
+    "hashtags": {
+      "geral": [
+        "#ErikaHilton",
+        "#Jundiaí",
+        "#PSOL",
+        "#Eleições2026"
+      ],
+      "atuacao": [
+        "#DeputadaFederal",
+        "#MelhorDeputada",
+        "#MulheresNaPolítica"
+      ],
+      "emendas": [
+        "#Emendas",
+        "#SaúdePública",
+        "#Recursos"
+      ],
+      "lgbtqia": [
+        "#Orgulho",
+        "#ParadaLGBT",
+        "#DireitosHumanos",
+        "#LGBTQIA+"
+      ],
+      "eleicao": [
+        "#VotaErika",
+        "#JundiaíDecide",
+        "#VotoConsciente"
+      ],
+      "mulher": [
+        "#ComissãoDaMulher",
+        "#DireitosDasMulheres"
+      ],
+      "visita": [
+        "#ErikaEmJundiaí",
+        "#AgendaErika"
+      ]
+    },
+    "scripts_reels": {}
+  },
+  "equipe": [
+    {
+      "id": "ever",
+      "nome": "Ever Maria",
+      "funcao": "Coordenadora Municipal",
+      "nivel": 5
+    },
+    {
+      "id": "tiana",
+      "nome": "Tiana Cauton",
+      "funcao": "Assessora",
+      "nivel": 5
+    },
+    {
+      "id": "junior",
+      "nome": "Junior Arcanjo",
+      "funcao": "Mobilizador de Rua",
+      "nivel": 3
+    },
+    {
+      "id": "hoanny",
+      "nome": "Hoanny",
+      "funcao": "Eventos",
+      "nivel": 3
+    },
+    {
+      "id": "joao",
+      "nome": "João",
+      "funcao": "Financeiro",
+      "nivel": 3
+    },
+    {
+      "id": "kawa",
+      "nome": "Kawa",
+      "funcao": "Redes Sociais — Vídeos",
+      "nivel": 2
+    },
+    {
+      "id": "eva",
+      "nome": "Eva",
+      "funcao": "Redes Sociais — Artes",
+      "nivel": 2
+    }
+  ]
 }
