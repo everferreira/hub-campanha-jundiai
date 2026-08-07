@@ -1,0 +1,124 @@
+{
+  "metadados": {
+    "versao": "2.0",
+    "ultima_atualizacao": "2026-08-07T16:00:00-03:00",
+    "timezone": "America/Sao_Paulo"
+  },
+  "campanha": {
+    "nome": "Erika Hilton 2026 — Jundiaí",
+    "email": "refundarjundiai@gmail.com",
+    "github": "refundarjundiai",
+    "hub_url": "https://refundarjundiai.github.io/hub-campanha-jundiai/",
+    "senha_geral": "erika2026",
+    "eleicao": "2026-10-04",
+    "datas_importantes": [
+      {
+        "data": "2026-08-16",
+        "evento": "Bandeiraço",
+        "icone": "🚩"
+      },
+      {
+        "data": "2026-08-18",
+        "evento": "Visita Erika a Jundiaí",
+        "icone": "🎯"
+      },
+      {
+        "data": "2026-08-22",
+        "evento": "Lançamento Oficial",
+        "icone": "🚀"
+      },
+      {
+        "data": "2026-10-04",
+        "evento": "1º Turno — Eleição",
+        "icone": "🗳️"
+      }
+    ]
+  },
+  "noticias": [
+    {
+      "titulo": "Erika Hilton destina R$ 2 milhões para Saúde de Jundiaí",
+      "fonte": "Tribuna de Jundiaí",
+      "descricao": "Emendas articuladas pelo Coletivo Cardume e por Tiana Cauton.",
+      "url": "https://tribunadejundiai.com.br/politica/erika-hilton-emendas-para-jundiai"
+    },
+    {
+      "titulo": "Erika Hilton é eleita presidente da Comissão da Mulher na Câmara",
+      "fonte": "CNN Brasil",
+      "descricao": "Primeira mulher trans a presidir a Comissão de Defesa dos Direitos da Mulher.",
+      "url": "https://pt.wikipedia.org/wiki/Erika_Hilton"
+    },
+    {
+      "titulo": "R$ 4,6 milhões em emendas de Erika em Jundiaí",
+      "fonte": "Portal da Transparência",
+      "descricao": "Erika Hilton é a deputada que mais destinou recursos para Jundiaí.",
+      "url": "https://deolhoemvoce.com.br/cidades/3525904/jundiai-sp"
+    },
+    {
+      "titulo": "Alvo de ataques transfóbicos, Erika tem 26 propostas sobre mulheres",
+      "fonte": "Adiadorim",
+      "descricao": "PL 665/2026 institui Política Nacional de Prevenção ao Transfeminicídio.",
+      "url": "https://adiadorim.org/noticias/2026/03/alvo-de-ataques-transfobicos-erika-hilton-tem-26-propostas-sobre-mulheres"
+    },
+    {
+      "titulo": "Jundiaí celebra 20 anos da Parada LGBT+ com presença de Erika Hilton",
+      "fonte": "Instagram",
+      "descricao": "Deputada foi convidada especial da 20ª Parada do Orgulho LGBT+ de Jundiaí.",
+      "url": "https://www.instagram.com/p/DPKYd5SCejz"
+    }
+  ],
+  "agenda_visita": [
+    {
+      "hora": "11:00-11:40",
+      "atividade": "Visita PA Vila Progresso",
+      "local": "Verba destinada por Erika",
+      "destaque": false
+    },
+    {
+      "hora": "12:00-13:00",
+      "atividade": "Instituto Luís Braile",
+      "local": "Com Movimento Cardume",
+      "destaque": false
+    },
+    {
+      "hora": "13:30-14:30",
+      "atividade": "Visita Centro TEA (Girassóis)",
+      "local": "Centro Integrado Girassóis",
+      "destaque": false
+    },
+    {
+      "hora": "15:00-16:30",
+      "atividade": "Almoço",
+      "local": "",
+      "destaque": false
+    },
+    {
+      "hora": "16:30-17:00",
+      "atividade": "🎤 Coletiva de Imprensa",
+      "local": "",
+      "destaque": true
+    },
+    {
+      "hora": "17:30",
+      "atividade": "🤝 Encontro com Lideranças",
+      "local": "Bancários",
+      "destaque": true
+    },
+    {
+      "hora": "19:00",
+      "atividade": "🎉 Encontro Aberto",
+      "local": "Clube 28 de Setembro",
+      "destaque": true
+    }
+  ],
+  "links": {
+    "drive_atas": "https://drive.google.com/drive/folders/1TiZdbyXbuhBjBPr8ZFoP7Xmfe1s3aWuB",
+    "drive_fotos": "https://drive.google.com/drive/folders/1mH9jxdkCWrK_KYHwZCIFv-flMedirOFR",
+    "notion": "https://notion.so/3ae6bd5dbb788131ba9ddc2c6d0c1d59",
+    "planilha": "https://docs.google.com/spreadsheets/d/1Y60DrMPeepBqAfeuhQQK8WA14dzdXMagaoMFMJGYIMo",
+    "insta_oficial": "https://instagram.com/hilton_erika",
+    "insta_local": "https://instagram.com/erikahiltonjundiai",
+    "site_oficial": "https://erikahilton.com.br/",
+    "camara": "https://www.camara.leg.br/deputados/220645",
+    "wikipedia": "https://pt.wikipedia.org/wiki/Erika_Hilton"
+  }
+}
